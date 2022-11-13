@@ -26,6 +26,10 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
+<<<<<<< HEAD
+=======
+        self.path = ""
+>>>>>>> 8b060d3 (Init dev)
         self.start = time.time()
         self.data = {
             "uname": uname,
@@ -57,6 +61,13 @@ class Main(Ui_MainWindow):
                                        value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div'
                                              r'/input[2]').click()
 
+<<<<<<< HEAD
+=======
+    def setupEverything(self, MainWindow):
+        self.setupUi(MainWindow)
+
+
+>>>>>>> 8b060d3 (Init dev)
     def main(self, uname: str, passwd: str, filepath: str):
         logging.info("Getting all problems")
         get_problems(session=login_session)
@@ -71,7 +82,11 @@ class Main(Ui_MainWindow):
         logging.info("Getting codes from each record")
 
         for i in records:
+<<<<<<< HEAD
             self.get_code(login_session, "http://oiclass.com" + i, self.path)
+=======
+            self.get_code("http://oiclass.com" + i)
+>>>>>>> 8b060d3 (Init dev)
 
         logging.info("Generate snapshots")
         for i in snapshot_reqs:
@@ -213,6 +228,10 @@ if __name__ == '__main__':
     app = QApplication([])
     window = QMainWindow()
     main = Main()
+<<<<<<< HEAD
     main.setupUi(window)
+=======
+    main.setupEveryThing(window)
+>>>>>>> 8b060d3 (Init dev)
     window.show()
     sys.exit(app.exec())
