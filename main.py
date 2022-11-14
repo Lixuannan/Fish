@@ -82,12 +82,15 @@ class Main(Ui_MainWindow):
         self.data["password"] = self.password.text()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
         self.login_driver.get("http://oiclass.com/login/")
-        self.login_driver.find_element(by="name", value="uname") \
+        self.login_driver.find_element(by="xpath",
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[1]/div/label/input') \
             .send_keys(self.data["uname"])
-        self.login_driver.find_element(by="name", value="password") \
+        self.login_driver.find_element(by="xpath",
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[2]/div/label/input') \
             .send_keys(self.data["password"])
         self.login_driver.find_element(by="xpath",
-                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div').click()
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div/input[2]')\
+            .click()
         self.info("正在获得所有AC的题目")
         self.get_problems()
 
@@ -262,19 +265,19 @@ class Main(Ui_MainWindow):
 
     def info(self, msg):
         logging.info(msg)
-        self.log.append("[info]" + msg)
+        self.log.append("[信息] " + msg)
 
     def warning(self, msg):
         logging.warning(msg)
-        self.log.append("[warning]" + msg)
+        self.log.append("[警告] " + msg)
 
     def error(self, msg):
         logging.error(msg)
-        self.log.append(msg)
+        self.log.append("[错误] " + msg)
 
     def critical(self, msg):
         logging.critical(msg)
-        self.log.append("[critical]" + msg)
+        self.log.append("[最重要信息] " + msg)
 
 
 if __name__ == '__main__':
