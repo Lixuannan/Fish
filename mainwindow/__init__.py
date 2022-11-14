@@ -236,13 +236,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.skip_problems)
 
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(u"pushButton")
-        sizePolicy1.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy1)
-        self.pushButton.setFont(font1)
+        self.start_button = QPushButton(self.centralwidget)
+        self.start_button.setObjectName(u"start_button")
+        sizePolicy1.setHeightForWidth(self.start_button.sizePolicy().hasHeightForWidth())
+        self.start_button.setSizePolicy(sizePolicy1)
+        self.start_button.setFont(font1)
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addWidget(self.start_button)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -295,7 +295,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
         self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
+        self.start_button.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
         self.process_persent.setText("")
     # retranslateUi
 

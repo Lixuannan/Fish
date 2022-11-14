@@ -1,21 +1,16 @@
+import logging
 import os.path
 import platform
 import sys
 import time
-import logging
 
 import requests
 import selenium.webdriver
 from PIL import Image
-from mainwindow import Ui_MainWindow
-from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
-                            Qt)
-from PySide6.QtGui import (QCursor,
-                           QFont)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
-                               QPushButton, QSizePolicy, QTextBrowser,
-                               QVBoxLayout, QWidget, QMainWindow, QFileDialog)
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
+
+from mainwindow import Ui_MainWindow
 
 
 class SnapshotReq:
@@ -55,7 +50,19 @@ class Main(Ui_MainWindow):
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
-        self
+        self.browse_path.clicked.connect(self.get_file_path)
+        self.start_button.clicked.connect(self.main)
+        self.push_to_remote.clicked.connect(self.set_enable())
+
+    def set_enable(self):
+        if self.push_to_remote.isChecked():
+            self.remote_url.setEnabled(False)
+            self.git_uname.setEnabled(True)
+            self.token.setEnabled(True)
+        else:
+            self.remote_url.setDisabled(True)
+            self.git_uname.setDisabled(True)
+            self.token.setDisabled(True)
 
     def main(self):
         self.data["uname"] = self.uname.text()
@@ -107,7 +114,7 @@ class Main(Ui_MainWindow):
         for i in range(len(self.path)):
             if i % 10 == 0:
                 self.path
-        self.label_3.setText(self.path)
+        self.save_path.setText(self.path)
 
     def generate_md(self):
         head = "# All the answer I write from [oiclass](http://oiclass.com)\n# " \
@@ -138,7 +145,6 @@ class Main(Ui_MainWindow):
         self.info(f"Snapshot: {filename} was generated")
 
     def get_record(self, pName: str):
-        driver = self.login_driver
         session = self.login_session
         self.info(f"Getting records for {pName} now !")
         problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
@@ -164,7 +170,7 @@ class Main(Ui_MainWindow):
             self.info(f"Record url: http://oiclass.com{a[0]['href']}")
         else:
             self.warning("No records fond, Trying retry by old way")
-            self.retry_by_old_way(driver, session, idx)
+            self.retry_by_old_way(idx)
 
     def get_code(self, record):
         session = self.login_session
@@ -201,7 +207,7 @@ class Main(Ui_MainWindow):
             self.error(f"Problem {pName} was not be submit before, please check: http://oiclass.com/p/{pName}/")
             return 0
         self.info(f"Try to submit problem {pName} in normal way")
-        code = self.get_code(session, "http://oiclass.com" + record)
+        code = self.get_code("http://oiclass.com" + record)
         try:
             driver.get("http://oiclass.com/p/" + pName + "/submit/")
             js = r'var x = document.getElementsByClassNam' \
@@ -233,17 +239,15 @@ class Main(Ui_MainWindow):
         logging.error(msg)
         self.log.append(msg)
 
-
     def critical(self, msg):
         logging.critical(msg)
-        self.textBrowser.append("[critical]" + msg)
+        self.log.append("[critical]" + msg)
 
 
 if __name__ == '__main__':
     app = QApplication([])
     window = QMainWindow()
     main = Main()
-    main.setupUi(window)
     main.setupEverything(window)
     window.show()
     sys.exit(app.exec())
