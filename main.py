@@ -3,6 +3,7 @@ import os.path
 import platform
 import sys
 import time
+import zipfile
 import faulthandler  # for debug
 
 import requests
@@ -55,7 +56,16 @@ class Main(Ui_MainWindow):
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path=f"phantomjs-mac/bin/phantomjs")
+        if not os.path.exists("phantomjs/bin/phantomjs"):
+            with open("phantomjs.zip", "wb") as f:
+                f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
+                        .content)
+            file = zipfile.ZipFile(file="phantomjs.zip")
+            file.extractall()
+            os.popen("mv phantomjs-2.1.1-macosx/ phantomjs/ && chmod 777 phantomjs/bin/phantomjs")
+            sys.exit(0)
+
+        self.login_driver = selenium.webdriver.PhantomJS(executable_path="phantomjs/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
