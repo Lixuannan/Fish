@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 import selenium.webdriver
 from PIL import Image
-from mainwindow import Ui_MainWindow
+from .mainwindow import Ui_MainWindow
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             Qt)
 from PySide6.QtGui import (QCursor,
@@ -26,14 +26,11 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
-<<<<<<< HEAD
-=======
         self.path = ""
->>>>>>> 8b060d3 (Init dev)
         self.start = time.time()
         self.data = {
-            "uname": uname,
-            "password": passwd,
+            "uname": "",
+            "password": "",
         }
         self.records = []
         self.contents = []
@@ -58,40 +55,33 @@ class Main(Ui_MainWindow):
         self.login_driver.find_element(by="name", value="password") \
             .send_keys(passwd)
         self.login_driver.find_element(by="xpath",
-                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div'
-                                             r'/input[2]').click()
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div')
 
-<<<<<<< HEAD
-=======
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
 
-
->>>>>>> 8b060d3 (Init dev)
-    def main(self, uname: str, passwd: str, filepath: str):
+    def main(self):
+        self.data["uname"] = self.lineEdit.text()
+        self.data["passwd"] = self.lineEdit_2.text()
         logging.info("Getting all problems")
         get_problems(session=login_session)
 
-        logging.info(f"All problems:\n\t\t{ac_problems}\nTotal: {len(ac_problems)}")
+        logging.info(f"All problems:\n\t\t{self.ac_problems}\nTotal: {len(self.ac_problems)}")
         logging.info("Getting records")
 
         for i in self.ac_problems:
             self.get_record(pName=i)
 
-        logging.info(f"All records: {records}\nTotal: {len(records)}")
+        logging.info(f"All records: {self.records}\nTotal: {len(self.records)}")
         logging.info("Getting codes from each record")
 
-        for i in records:
-<<<<<<< HEAD
-            self.get_code(login_session, "http://oiclass.com" + i, self.path)
-=======
+        for i in self.records:
             self.get_code("http://oiclass.com" + i)
->>>>>>> 8b060d3 (Init dev)
 
         logging.info("Generate snapshots")
-        for i in snapshot_reqs:
-            login_driver.get(i.url)
-            capture_full_screen(login_driver, i.filename)
+        for i in self.snapshot_reqs:
+            self.login_driver.get(i.url)
+            capture_full_screen(self.login_driver, i.filename)
         self.all_files = []
         logging.info("Generating MarkDown file")
         for i in os.walk(filepath):
@@ -228,10 +218,7 @@ if __name__ == '__main__':
     app = QApplication([])
     window = QMainWindow()
     main = Main()
-<<<<<<< HEAD
     main.setupUi(window)
-=======
     main.setupEveryThing(window)
->>>>>>> 8b060d3 (Init dev)
     window.show()
     sys.exit(app.exec())
