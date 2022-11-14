@@ -3,6 +3,7 @@ import os.path
 import platform
 import sys
 import time
+import faulthandler  # for debug
 
 import requests
 import threading
@@ -12,6 +13,11 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 
 from mainwindow import Ui_MainWindow
+
+
+# for debug
+PYTHONFAULTHANDLER = 1
+faulthandler.enable()
 
 
 class SnapshotReq:
@@ -81,11 +87,11 @@ class Main(Ui_MainWindow):
         self.login_driver.find_element(by="name", value="password") \
             .send_keys(self.data["password"])
         self.login_driver.find_element(by="xpath",
-                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div')
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div').click()
         self.info("正在获得所有AC的题目")
         self.get_problems()
 
-        self.info(f"所有AC的题目：\n\t\t{self.ac_problems}\n共: {len(self.ac_problems)}项")
+        self.info(f"所有AC的题目：\n{self.ac_problems}\n共: {len(self.ac_problems)}项")
         self.info("正在获得所有测评记录")
 
         for i in self.ac_problems:
@@ -111,7 +117,7 @@ class Main(Ui_MainWindow):
             self.critical(f"在 {self.end - self.start}秒中失败")
         self.generate_md()
         git_log = ""
-        self.info(f"正在讲所有文件拖送到仓库： {self.remote_url}中")
+        self.info(f"正在将所有文件推送到仓库： {self.remote_url}中")
         ##################
         # NEED DEV LATER #
         ##################
@@ -185,7 +191,7 @@ class Main(Ui_MainWindow):
 
     def get_code(self, record):
         session = self.login_session
-        self.info(f"正在为题目 {record} 生成代码")
+        self.info(f"正在为测评记录 {record} 生成代码")
         b = []
         code = ""
         record_page = session.get(url=record, headers=self.headers).text
@@ -234,9 +240,25 @@ class Main(Ui_MainWindow):
         page = session.get(url=f"http://oiclass.com/user/{self.uid}").text
         soup = BeautifulSoup(markup=page, features="lxml")
         problems = soup.find_all(name="a")
-        for j in problems:
-            if "/p/" in j["href"]:
-                self.ac_problems.append(j.text)
+        all_files = []
+        for j in os.walk(self.path):
+            all_files.append(j[2])
+        if all_files:
+            all_files = all_files[0]
+        if self.skip_problems.isChecked():
+            for j in problems:
+                if "/p/" in j["href"]:
+                    p = False
+                    for k in all_files:
+                        if k == j["href"].split("/")[2] + ".cpp" or k == j["href"].split("/")[2] + ".png":
+                            p = True
+                            break
+                    if not p:
+                        self.ac_problems.append(j.text)
+        else:
+            for j in problems:
+                if "/p/" in j["href"]:
+                    self.ac_problems.append(j.text)
 
     def info(self, msg):
         logging.info(msg)
