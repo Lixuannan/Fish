@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QTextBrowser,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QHBoxLayout, QLabel,
+    QLineEdit, QMainWindow, QProgressBar, QPushButton,
+    QSizePolicy, QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -26,15 +26,17 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayoutWidget = QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(10, 10, 781, 581))
-        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label = QLabel(self.horizontalLayoutWidget)
+        self.verticalLayout_6 = QVBoxLayout()
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -42,93 +44,205 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
         font = QFont()
-        font.setPointSize(20)
+        font.setPointSize(18)
         self.label.setFont(font)
 
-        self.verticalLayout.addWidget(self.label)
+        self.horizontalLayout_3.addWidget(self.label)
 
-        self.lineEdit = QLineEdit(self.horizontalLayoutWidget)
-        self.lineEdit.setObjectName(u"lineEdit")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        self.uname = QLineEdit(self.centralwidget)
+        self.uname.setObjectName(u"uname")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
-        self.lineEdit.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.uname.sizePolicy().hasHeightForWidth())
+        self.uname.setSizePolicy(sizePolicy1)
 
-        self.verticalLayout.addWidget(self.lineEdit)
+        self.horizontalLayout_3.addWidget(self.uname)
 
-        self.label_2 = QLabel(self.horizontalLayoutWidget)
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_3)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label_2 = QLabel(self.centralwidget)
         self.label_2.setObjectName(u"label_2")
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
         self.label_2.setSizePolicy(sizePolicy)
         self.label_2.setFont(font)
+        self.label_2.setText(u"\u5bc6\u7801\uff1a")
 
-        self.verticalLayout.addWidget(self.label_2)
+        self.horizontalLayout_2.addWidget(self.label_2)
 
-        self.lineEdit_2 = QLineEdit(self.horizontalLayoutWidget)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-        sizePolicy1.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
-        self.lineEdit_2.setSizePolicy(sizePolicy1)
-        self.lineEdit_2.setEchoMode(QLineEdit.Password)
+        self.password = QLineEdit(self.centralwidget)
+        self.password.setObjectName(u"password")
+        sizePolicy1.setHeightForWidth(self.password.sizePolicy().hasHeightForWidth())
+        self.password.setSizePolicy(sizePolicy1)
+        self.password.setEchoMode(QLineEdit.Password)
 
-        self.verticalLayout.addWidget(self.lineEdit_2)
+        self.horizontalLayout_2.addWidget(self.password)
 
-        self.label_3 = QLabel(self.horizontalLayoutWidget)
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_2)
+
+
+        self.verticalLayout.addLayout(self.verticalLayout_6)
+
+        self.verticalLayout_3 = QVBoxLayout()
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.label_3 = QLabel(self.centralwidget)
         self.label_3.setObjectName(u"label_3")
         sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
         self.label_3.setSizePolicy(sizePolicy)
         self.label_3.setFont(font)
 
-        self.verticalLayout.addWidget(self.label_3)
+        self.horizontalLayout_4.addWidget(self.label_3)
 
-        self.label_4 = QLabel(self.horizontalLayoutWidget)
+        self.browse_path = QPushButton(self.centralwidget)
+        self.browse_path.setObjectName(u"browse_path")
+        sizePolicy1.setHeightForWidth(self.browse_path.sizePolicy().hasHeightForWidth())
+        self.browse_path.setSizePolicy(sizePolicy1)
+        font1 = QFont()
+        font1.setPointSize(13)
+        self.browse_path.setFont(font1)
+
+        self.horizontalLayout_4.addWidget(self.browse_path)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+
+        self.save_path = QLineEdit(self.centralwidget)
+        self.save_path.setObjectName(u"save_path")
+        sizePolicy1.setHeightForWidth(self.save_path.sizePolicy().hasHeightForWidth())
+        self.save_path.setSizePolicy(sizePolicy1)
+
+        self.verticalLayout_3.addWidget(self.save_path)
+
+
+        self.verticalLayout.addLayout(self.verticalLayout_3)
+
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.push_to_remote = QCheckBox(self.centralwidget)
+        self.push_to_remote.setObjectName(u"push_to_remote")
+        font2 = QFont()
+        font2.setPointSize(15)
+        self.push_to_remote.setFont(font2)
+
+        self.verticalLayout_4.addWidget(self.push_to_remote)
+
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        self.label_4.setEnabled(False)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy2)
+        self.label_4.setFont(font2)
 
-        self.verticalLayout.addWidget(self.label_4)
+        self.horizontalLayout_5.addWidget(self.label_4)
 
-        self.pushButton_2 = QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy3)
-        font1 = QFont()
-        font1.setPointSize(17)
-        self.pushButton_2.setFont(font1)
+        self.remote_url = QLineEdit(self.centralwidget)
+        self.remote_url.setObjectName(u"remote_url")
+        self.remote_url.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.remote_url.sizePolicy().hasHeightForWidth())
+        self.remote_url.setSizePolicy(sizePolicy1)
 
-        self.verticalLayout.addWidget(self.pushButton_2)
+        self.horizontalLayout_5.addWidget(self.remote_url)
 
-        self.pushButton = QPushButton(self.horizontalLayoutWidget)
-        self.pushButton.setObjectName(u"pushButton")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy4)
-        font2 = QFont()
-        font2.setPointSize(18)
-        self.pushButton.setFont(font2)
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_5)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.label_6 = QLabel(self.centralwidget)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setEnabled(False)
+        sizePolicy2.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
+        self.label_6.setSizePolicy(sizePolicy2)
+        self.label_6.setFont(font2)
+
+        self.horizontalLayout_7.addWidget(self.label_6)
+
+        self.git_uname = QLineEdit(self.centralwidget)
+        self.git_uname.setObjectName(u"git_uname")
+        self.git_uname.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.git_uname.sizePolicy().hasHeightForWidth())
+        self.git_uname.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_7.addWidget(self.git_uname)
+
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_7)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.label_7 = QLabel(self.centralwidget)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setEnabled(False)
+        sizePolicy2.setHeightForWidth(self.label_7.sizePolicy().hasHeightForWidth())
+        self.label_7.setSizePolicy(sizePolicy2)
+        self.label_7.setFont(font2)
+
+        self.horizontalLayout_8.addWidget(self.label_7)
+
+        self.token = QLineEdit(self.centralwidget)
+        self.token.setObjectName(u"token")
+        self.token.setEnabled(False)
+        sizePolicy1.setHeightForWidth(self.token.sizePolicy().hasHeightForWidth())
+        self.token.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_8.addWidget(self.token)
+
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_8)
+
+
+        self.verticalLayout.addLayout(self.verticalLayout_4)
+
+        self.skip_problems = QCheckBox(self.centralwidget)
+        self.skip_problems.setObjectName(u"skip_problems")
+        sizePolicy1.setHeightForWidth(self.skip_problems.sizePolicy().hasHeightForWidth())
+        self.skip_problems.setSizePolicy(sizePolicy1)
+        self.skip_problems.setFont(font2)
+
+        self.verticalLayout.addWidget(self.skip_problems)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout)
 
-        self.textBrowser = QTextBrowser(self.horizontalLayoutWidget)
-        self.textBrowser.setObjectName(u"textBrowser")
+        self.log = QTextBrowser(self.centralwidget)
+        self.log.setObjectName(u"log")
         font3 = QFont()
         font3.setPointSize(15)
         font3.setStyleStrategy(QFont.PreferAntialias)
-        self.textBrowser.setFont(font3)
-        self.textBrowser.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
+        self.log.setFont(font3)
+        self.log.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
 
-        self.horizontalLayout.addWidget(self.textBrowser)
+        self.horizontalLayout.addWidget(self.log)
+
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
+
+        self.horizontalLayout_9 = QHBoxLayout()
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.process_persent = QLabel(self.centralwidget)
+        self.process_persent.setObjectName(u"process_persent")
+
+        self.horizontalLayout_9.addWidget(self.process_persent)
+
+        self.progressBar = QProgressBar(self.centralwidget)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setValue(0)
+
+        self.horizontalLayout_9.addWidget(self.progressBar)
+
+
+        self.verticalLayout_2.addLayout(self.horizontalLayout_9)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -140,10 +254,13 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801\uff1a", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u4f4d\u7f6e\uff1a", None))
-        self.label_4.setText("")
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"\u6d4f\u89c8", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
+        self.browse_path.setText(QCoreApplication.translate("MainWindow", u"\u6d4f\u89c8", None))
+        self.push_to_remote.setText(QCoreApplication.translate("MainWindow", u"\u63a8\u9001\u5230\u8fdc\u7aef", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u4ed3\u5e93\u5730\u5740\uff1a", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
+        self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
+        self.process_persent.setText("")
     # retranslateUi
 

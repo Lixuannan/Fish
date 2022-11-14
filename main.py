@@ -102,7 +102,9 @@ class Main(Ui_MainWindow):
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
-
+        for i in range(len(self.path)):
+            if i % 10 == 0:
+                self.path
         self.label_3.setText(self.path)
 
     def generate_md(self):
@@ -219,15 +221,15 @@ class Main(Ui_MainWindow):
 
     def info(self, msg):
         logging.info(msg)
-        self.textBrowser.setText("[info]" + msg)
+        self.textBrowser.append("[info]" + msg)
 
     def warning(self, msg):
         logging.warning(msg)
-        self.textBrowser.setText("[warning]" + msg)
+        self.textBrowser.append("[warning]" + msg)
 
     def critical(self, msg):
         logging.critical(msg)
-        self.textBrowser.setText("[critical]" + msg)
+        self.textBrowser.append("[critical]" + msg)
 
 
 if __name__ == '__main__':
