@@ -8,16 +8,12 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QProgressBar, QPushButton,
-    QSizePolicy, QTextBrowser, QVBoxLayout, QWidget)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, Qt)
+from PySide6.QtGui import (QCursor,
+                           QFont)
+from PySide6.QtWidgets import (QCheckBox, QHBoxLayout, QLabel,
+                               QLineEdit, QProgressBar, QPushButton,
+                               QSizePolicy, QTextBrowser, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -84,6 +80,30 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_2)
 
+        self.horizontalLayout_11 = QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.label_8 = QLabel(self.centralwidget)
+        self.label_8.setObjectName(u"label_8")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy2)
+        self.label_8.setFont(font)
+
+        self.horizontalLayout_11.addWidget(self.label_8)
+
+        self.uid_edit = QLineEdit(self.centralwidget)
+        self.uid_edit.setObjectName(u"uid_edit")
+        sizePolicy1.setHeightForWidth(self.uid_edit.sizePolicy().hasHeightForWidth())
+        self.uid_edit.setSizePolicy(sizePolicy1)
+        self.uid_edit.setInputMethodHints(Qt.ImhNone)
+
+        self.horizontalLayout_11.addWidget(self.uid_edit)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_11)
+
 
         self.verticalLayout.addLayout(self.verticalLayout_6)
 
@@ -103,6 +123,7 @@ class Ui_MainWindow(object):
         self.oj_url.setObjectName(u"oj_url")
         sizePolicy1.setHeightForWidth(self.oj_url.sizePolicy().hasHeightForWidth())
         self.oj_url.setSizePolicy(sizePolicy1)
+        self.oj_url.setInputMethodHints(Qt.ImhUrlCharactersOnly)
 
         self.horizontalLayout_6.addWidget(self.oj_url)
 
@@ -160,9 +181,6 @@ class Ui_MainWindow(object):
         self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setEnabled(True)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy2)
         self.label_4.setFont(font1)
@@ -174,6 +192,7 @@ class Ui_MainWindow(object):
         self.remote_url.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.remote_url.sizePolicy().hasHeightForWidth())
         self.remote_url.setSizePolicy(sizePolicy1)
+        self.remote_url.setInputMethodHints(Qt.ImhUrlCharactersOnly)
 
         self.horizontalLayout_5.addWidget(self.remote_url)
 
@@ -238,6 +257,7 @@ class Ui_MainWindow(object):
 
         self.start_button = QPushButton(self.centralwidget)
         self.start_button.setObjectName(u"start_button")
+        self.start_button.setEnabled(True)
         sizePolicy1.setHeightForWidth(self.start_button.sizePolicy().hasHeightForWidth())
         self.start_button.setSizePolicy(sizePolicy1)
         self.start_button.setFont(font1)
@@ -286,11 +306,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"UID\uff1a", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"OJ\u7f51\u5740\uff1a", None))
-        self.oj_url.setText(QCoreApplication.translate("MainWindow", u"http://oiclass.com/", None))
+        self.oj_url.setText(QCoreApplication.translate("MainWindow", u"http://oiclass.com", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u4f4d\u7f6e\uff1a", None))
         self.browse_path.setText(QCoreApplication.translate("MainWindow", u"\u6d4f\u89c8", None))
-        self.push_to_remote.setText(QCoreApplication.translate("MainWindow", u"\u63a8\u9001\u5230\u8fdc\u7aef", None))
+        self.push_to_remote.setText(QCoreApplication.translate("MainWindow", u"\u63a8\u9001\u5230\u8fdc\u7a0bgit\u4ed3\u5e93", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u4ed3\u5e93\u5730\u5740\uff1a", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))

@@ -5,6 +5,7 @@ import sys
 import time
 
 import requests
+import threading
 import selenium.webdriver
 from PIL import Image
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
@@ -24,6 +25,7 @@ class Main(Ui_MainWindow):
         self.path = ""
         self.start = 0.0
         self.end = 0.0
+        self.uid = 8241
         self.git_url = ""
         self.git_username = ""
         self.git_password = ""
@@ -46,12 +48,12 @@ class Main(Ui_MainWindow):
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path="/Users/meizhenchen/phantomjs/bin/phantomjs")
+        self.login_driver = selenium.webdriver.PhantomJS(executable_path="./phantomjs-mac/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
         self.browse_path.clicked.connect(self.get_file_path)
-        self.start_button.clicked.connect(self.main)
+        self.start_button.clicked.connect(lambda: threading.Thread(target=self.main).start())
         self.push_to_remote.stateChanged.connect(self.set_state)
 
     def set_state(self):
@@ -66,6 +68,10 @@ class Main(Ui_MainWindow):
 
     def main(self):
         self.start = time.time()
+        if self.uname.text() == "" or self.save_path.text() == "" \
+                or self.password.text() == "" or self.uid_edit.text() == "":
+            self.log.append("[error]需要参数")
+            return 1
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
@@ -76,39 +82,43 @@ class Main(Ui_MainWindow):
             .send_keys(self.data["password"])
         self.login_driver.find_element(by="xpath",
                                        value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div')
-        self.info("Getting all problems")
+        self.info("正在获得所有AC的题目")
         self.get_problems()
 
-        self.info(f"All problems:\n\t\t{self.ac_problems}\nTotal: {len(self.ac_problems)}")
-        self.info("Getting records")
+        self.info(f"所有AC的题目：\n\t\t{self.ac_problems}\n共: {len(self.ac_problems)}项")
+        self.info("正在获得所有测评记录")
 
         for i in self.ac_problems:
             self.get_record(pName=i)
 
-        self.info(f"All records: {self.records}\nTotal: {len(self.records)}")
-        self.info("Getting codes from each record")
+        self.info(f"所有测评记录： {self.records}\nTotal: {len(self.records)}")
+        self.info("正在从所有测评记录中提取AC代码")
 
         for i in self.records:
             self.get_code("http://oiclass.com" + i)
 
-        self.info("Generate snapshots")
+        self.info("正在获得题目的截图")
         for i in self.snapshot_reqs:
             self.login_driver.get(i.url)
             self.capture_full_screen(filename=i.filename)
-        self.info("Generating MarkDown file")
+        self.info("正在生成README.md文件")
         for i in os.walk(self.path):
             self.all_files.append(i[2])
-        self.all_files = self.all_files[0]
+        if self.all_files:
+            self.all_files = self.all_files[0]
+        else:
+            self.error(f"{self.path} 中没有任何文件，失败")
+            self.critical(f"在 {self.end - self.start}秒中失败")
         self.generate_md()
         git_log = ""
-        self.info("Push to https://github.com/lixuannan/oiclass-answers.git")
-        for i in os.popen("zsh push.sh"):
-            git_log += i
-        self.info(f"Git logs:\n{git_log}")
-        self.info("Applying to https://codingcow.eu.org")
+        self.info(f"正在讲所有文件拖送到仓库： {self.remote_url}中")
+        ##################
+        # NEED DEV LATER #
+        ##################
+        self.info(f"Git 日志:\n{git_log}")
         # apply_to_blog()
         self.end = time.time()
-        self.critical(f"Done in {self.end - self.start}s")
+        self.critical(f"在 {self.end - self.start}秒中失败")
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
@@ -126,14 +136,14 @@ class Main(Ui_MainWindow):
         file.write(head)
         for j in self.all_files:
             if ".cpp" in j:
-                with open(f"{self.path}{j}", "rt") as fi:
+                with open(f"{self.path}/{j}", "rt") as fi:
                     self.info(f"Reading file {j}")
                     # file.write(f"## {str(j).split('.')[0]}:\n![](https://github.com/Lixuannan/oiclass-answers/"
                     #            f"raw/main/{str(j).split('.')[0]}.png)\n```cpp\n\n{fi.read()}\n```\n")
-                    file.write(f"## {str(j).split('.')[0]}:\n![]({self.path}{j})\n```cpp\n\n{fi.read()}\n```\n")
+                    file.write(f"## {str(j).split('.')[0]}:\n![]({self.path}/{j})\n```cpp\n\n{fi.read()}\n```\n")
 
         file.close()
-        self.info("Done with generate MarkDown")
+        self.info("完成 README.md 文件生成")
 
     def capture_full_screen(self, filename: str):
         driver = self.login_driver
@@ -143,46 +153,46 @@ class Main(Ui_MainWindow):
         image = Image.open(filename)
         region = image.crop((80, 37, image.width - 380, image.height - 240))
         region.save(filename)
-        self.info(f"Snapshot: {filename} was generated")
+        self.info(f"题目截图: {filename} 完成")
 
     def get_record(self, pName: str):
         session = self.login_session
-        self.info(f"Getting records for {pName} now !")
+        self.info(f"为 {pName} 获取测评记录")
         problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
         self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
-                                              f"{self.path}{pName}.png"))
+                                              f"{self.path}/{pName}.png"))
         soup = BeautifulSoup(features="lxml", markup=problem_page)
         idx = soup.find_all(name="span", class_="bp4-tag bp4-large bp4-minimal problem__tag-item")
         for j in idx:
             if "ID" in j.text:
                 idx = j.text.split(" ")[1]
                 break
-        self.info(f"Index: {idx}")
+        self.info(f"题目PID: {idx}")
         record = ""
         try:
             record = session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
         except requests.exceptions.ConnectionError:
             self.error(
-                "Connect error when connect to " + f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1")
+                "无法连接到 " + f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1")
         soup = BeautifulSoup(markup=record, features="lxml")
         a = soup.find_all(name="a", class_="record-status--text pass")
         if a:
             self.records.append(a[0]["href"])
-            self.info(f"Record url: http://oiclass.com{a[0]['href']}")
+            self.info(f"测评记录: http://oiclass.com{a[0]['href']}")
         else:
-            self.warning("No records fond, Trying retry by old way")
+            self.warning("无法以本模式获得测评记录, 尝试另一种模式")
             self.retry_by_old_way(idx)
 
     def get_code(self, record):
         session = self.login_session
-        self.info(f"Getting codes from record: {record}")
+        self.info(f"正在为题目 {record} 生成代码")
         b = []
         code = ""
         record_page = session.get(url=record, headers=self.headers).text
         if not ("Oops" in record_page):
             code = BeautifulSoup(record_page, "lxml").find("code").contents[0].text
         else:
-            self.error("Can't access the record page " + record)
+            self.error("无法访问页面：" + record)
         if BeautifulSoup(record_page, "lxml"):
             b = BeautifulSoup(record_page, "lxml").find_all("b")
         for j in b:
@@ -190,7 +200,7 @@ class Main(Ui_MainWindow):
                 b = j.text
                 break
         if code:
-            with open(self.path + b + ".cpp", "wt") as file:
+            with open(self.path + "/" + b + ".cpp", "wt") as file:
                 file.write(f"// Created in {time.asctime(time.localtime(time.time()))}\n"
                            f"// System: {platform.platform()}\n// Python Version: {platform.python_version()}\n{code}")
         return code
@@ -205,9 +215,9 @@ class Main(Ui_MainWindow):
                 record = j["href"]
                 break
         if type(record) != str:
-            self.error(f"Problem {pName} was not be submit before, please check: http://oiclass.com/p/{pName}/")
+            self.error(f"问题 {pName} 从来都没有被提交过，详情: http://oiclass.com/p/{pName}/")
             return 0
-        self.info(f"Try to submit problem {pName} in normal way")
+        self.info(f"尝试以提交题目： {pName} ")
         code = self.get_code("http://oiclass.com" + record)
         try:
             driver.get("http://oiclass.com/p/" + pName + "/submit/")
@@ -221,7 +231,7 @@ class Main(Ui_MainWindow):
 
     def get_problems(self):
         session = self.login_session
-        page = session.get(url="http://oiclass.com/user/8241").text
+        page = session.get(url=f"http://oiclass.com/user/{self.uid}").text
         soup = BeautifulSoup(markup=page, features="lxml")
         problems = soup.find_all(name="a")
         for j in problems:
@@ -246,8 +256,10 @@ class Main(Ui_MainWindow):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     app = QApplication([])
     window = QMainWindow()
+    window.setObjectName("HydroTool")
     main = Main()
     main.setupEverything(window)
     window.show()
