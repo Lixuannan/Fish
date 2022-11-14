@@ -29,6 +29,9 @@ class Main(Ui_MainWindow):
         self.path = ""
         self.start = time.time()
         self.end = 0.0
+        self.git_url = ""
+        self.git_username = ""
+        self.git_password = ""
         self.data = {
             "uname": "",
             "password": "",
@@ -52,12 +55,11 @@ class Main(Ui_MainWindow):
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
-        self.pushButton.clicked.connect(self.main)
-        self.pushButton_2.clicked.connect(self.get_file_path)
+        self
 
     def main(self):
-        self.data["uname"] = self.lineEdit.text()
-        self.data["password"] = self.lineEdit_2.text()
+        self.data["uname"] = self.uname.text()
+        self.data["password"] = self.password.text()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
         self.login_driver.get("http://oiclass.com/login/")
         self.login_driver.find_element(by="name", value="uname") \
@@ -98,7 +100,7 @@ class Main(Ui_MainWindow):
         self.info("Applying to https://codingcow.eu.org")
         # apply_to_blog()
         self.end = time.time()
-        self.critical(f"Done in {end - start}s")
+        self.critical(f"Done in {self.end - self.start}s")
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
@@ -162,14 +164,14 @@ class Main(Ui_MainWindow):
             self.info(f"Record url: http://oiclass.com{a[0]['href']}")
         else:
             self.warning("No records fond, Trying retry by old way")
-            retry_by_old_way(driver, session, idx)
+            self.retry_by_old_way(driver, session, idx)
 
     def get_code(self, record):
         session = self.login_session
         self.info(f"Getting codes from record: {record}")
         b = []
         code = ""
-        record_page = session.get(url=record, headers=headers).text
+        record_page = session.get(url=record, headers=self.headers).text
         if not ("Oops" in record_page):
             code = BeautifulSoup(record_page, "lxml").find("code").contents[0].text
         else:
@@ -199,7 +201,7 @@ class Main(Ui_MainWindow):
             self.error(f"Problem {pName} was not be submit before, please check: http://oiclass.com/p/{pName}/")
             return 0
         self.info(f"Try to submit problem {pName} in normal way")
-        code = get_code(session, "http://oiclass.com" + record)
+        code = self.get_code(session, "http://oiclass.com" + record)
         try:
             driver.get("http://oiclass.com/p/" + pName + "/submit/")
             js = r'var x = document.getElementsByClassNam' \
@@ -221,11 +223,16 @@ class Main(Ui_MainWindow):
 
     def info(self, msg):
         logging.info(msg)
-        self.textBrowser.append("[info]" + msg)
+        self.log.append("[info]" + msg)
 
     def warning(self, msg):
         logging.warning(msg)
-        self.textBrowser.append("[warning]" + msg)
+        self.log.append("[warning]" + msg)
+
+    def error(self, msg):
+        logging.error(msg)
+        self.log.append(msg)
+
 
     def critical(self, msg):
         logging.critical(msg)

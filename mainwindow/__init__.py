@@ -87,6 +87,28 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.verticalLayout_6)
 
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.label_5 = QLabel(self.centralwidget)
+        self.label_5.setObjectName(u"label_5")
+        sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
+        self.label_5.setSizePolicy(sizePolicy)
+        font1 = QFont()
+        font1.setPointSize(15)
+        self.label_5.setFont(font1)
+
+        self.horizontalLayout_6.addWidget(self.label_5)
+
+        self.oj_url = QLineEdit(self.centralwidget)
+        self.oj_url.setObjectName(u"oj_url")
+        sizePolicy1.setHeightForWidth(self.oj_url.sizePolicy().hasHeightForWidth())
+        self.oj_url.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_6.addWidget(self.oj_url)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
+
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.horizontalLayout_4 = QHBoxLayout()
@@ -103,9 +125,9 @@ class Ui_MainWindow(object):
         self.browse_path.setObjectName(u"browse_path")
         sizePolicy1.setHeightForWidth(self.browse_path.sizePolicy().hasHeightForWidth())
         self.browse_path.setSizePolicy(sizePolicy1)
-        font1 = QFont()
-        font1.setPointSize(13)
-        self.browse_path.setFont(font1)
+        font2 = QFont()
+        font2.setPointSize(13)
+        self.browse_path.setFont(font2)
 
         self.horizontalLayout_4.addWidget(self.browse_path)
 
@@ -126,9 +148,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.push_to_remote = QCheckBox(self.centralwidget)
         self.push_to_remote.setObjectName(u"push_to_remote")
-        font2 = QFont()
-        font2.setPointSize(15)
-        self.push_to_remote.setFont(font2)
+        sizePolicy1.setHeightForWidth(self.push_to_remote.sizePolicy().hasHeightForWidth())
+        self.push_to_remote.setSizePolicy(sizePolicy1)
+        self.push_to_remote.setFont(font1)
+        self.push_to_remote.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.verticalLayout_4.addWidget(self.push_to_remote)
 
@@ -142,7 +165,7 @@ class Ui_MainWindow(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy2)
-        self.label_4.setFont(font2)
+        self.label_4.setFont(font1)
 
         self.horizontalLayout_5.addWidget(self.label_4)
 
@@ -164,7 +187,7 @@ class Ui_MainWindow(object):
         self.label_6.setEnabled(False)
         sizePolicy2.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
         self.label_6.setSizePolicy(sizePolicy2)
-        self.label_6.setFont(font2)
+        self.label_6.setFont(font1)
 
         self.horizontalLayout_7.addWidget(self.label_6)
 
@@ -186,7 +209,7 @@ class Ui_MainWindow(object):
         self.label_7.setEnabled(False)
         sizePolicy2.setHeightForWidth(self.label_7.sizePolicy().hasHeightForWidth())
         self.label_7.setSizePolicy(sizePolicy2)
-        self.label_7.setFont(font2)
+        self.label_7.setFont(font1)
 
         self.horizontalLayout_8.addWidget(self.label_7)
 
@@ -208,9 +231,18 @@ class Ui_MainWindow(object):
         self.skip_problems.setObjectName(u"skip_problems")
         sizePolicy1.setHeightForWidth(self.skip_problems.sizePolicy().hasHeightForWidth())
         self.skip_problems.setSizePolicy(sizePolicy1)
-        self.skip_problems.setFont(font2)
+        self.skip_problems.setFont(font1)
+        self.skip_problems.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.verticalLayout.addWidget(self.skip_problems)
+
+        self.pushButton = QPushButton(self.centralwidget)
+        self.pushButton.setObjectName(u"pushButton")
+        sizePolicy1.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy1)
+        self.pushButton.setFont(font1)
+
+        self.verticalLayout.addWidget(self.pushButton)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -254,6 +286,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"OJ\u7f51\u5740\uff1a", None))
+        self.oj_url.setText(QCoreApplication.translate("MainWindow", u"http://oiclass.com/", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u4f4d\u7f6e\uff1a", None))
         self.browse_path.setText(QCoreApplication.translate("MainWindow", u"\u6d4f\u89c8", None))
         self.push_to_remote.setText(QCoreApplication.translate("MainWindow", u"\u63a8\u9001\u5230\u8fdc\u7aef", None))
@@ -261,6 +295,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
         self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
         self.process_persent.setText("")
     # retranslateUi
 
