@@ -28,6 +28,7 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
+        print(os.getcwd())
         self.path = ""
         self.start = 0.0
         self.end = 0.0
@@ -54,7 +55,7 @@ class Main(Ui_MainWindow):
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path="./phantomjs-mac/bin/phantomjs")
+        self.login_driver = selenium.webdriver.PhantomJS(executable_path=f"phantomjs-mac/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)

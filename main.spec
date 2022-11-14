@@ -8,7 +8,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[("phantomjs-mac", "phantomjs-mac")],
+    datas=[("phantomjs-mac/", "phantomjs-mac/")],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
