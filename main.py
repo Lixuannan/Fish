@@ -2,6 +2,7 @@ import os.path
 import platform
 import sys
 import time
+import logging
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
@@ -26,19 +27,18 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
-<<<<<<< HEAD
-=======
         self.path = ""
->>>>>>> 8b060d3 (Init dev)
         self.start = time.time()
+        self.end = 0.0
         self.data = {
-            "uname": uname,
-            "password": passwd,
+            "uname": "",
+            "password": "",
         }
         self.records = []
         self.contents = []
         self.ac_problems = []
         self.snapshot_reqs = []
+        self.all_files = []
         self.thr_pool = ThreadPoolExecutor(max_workers=os.cpu_count() * 2)
         self.headers = {
             "Connection": "keep-alive",
@@ -49,67 +49,62 @@ class Main(Ui_MainWindow):
         }
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
-        self.login_session.post("http://oiclass.com/login", headers=headers, data=data)
         # login oiclass.com in PhantomJS
         self.login_driver = selenium.webdriver.PhantomJS(executable_path="/Users/meizhenchen/phantomjs/bin/phantomjs")
-        self.login_driver.get("http://oiclass.com/login/")
-        self.login_driver.find_element(by="name", value="uname") \
-            .send_keys(uname)
-        self.login_driver.find_element(by="name", value="password") \
-            .send_keys(passwd)
-        self.login_driver.find_element(by="xpath",
-                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div'
-                                             r'/input[2]').click()
 
-<<<<<<< HEAD
-=======
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
+        self.pushButton.clicked.connect(self.main)
+        self.pushButton_2.clicked.connect(self.get_file_path)
 
+    def main(self):
+        self.data["uname"] = self.lineEdit.text()
+        self.data["password"] = self.lineEdit_2.text()
+        self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
+        self.login_driver.get("http://oiclass.com/login/")
+        self.login_driver.find_element(by="name", value="uname") \
+            .send_keys(self.data["uname"])
+        self.login_driver.find_element(by="name", value="password") \
+            .send_keys(self.data["password"])
+        self.login_driver.find_element(by="xpath",
+                                       value=r'//*[@id="panel"]/div[4]/div/div/div/form/div[5]/div/div')
+        self.info("Getting all problems")
+        self.get_problems()
 
->>>>>>> 8b060d3 (Init dev)
-    def main(self, uname: str, passwd: str, filepath: str):
-        logging.info("Getting all problems")
-        get_problems(session=login_session)
-
-        logging.info(f"All problems:\n\t\t{ac_problems}\nTotal: {len(ac_problems)}")
-        logging.info("Getting records")
+        self.info(f"All problems:\n\t\t{self.ac_problems}\nTotal: {len(self.ac_problems)}")
+        self.info("Getting records")
 
         for i in self.ac_problems:
             self.get_record(pName=i)
 
-        logging.info(f"All records: {records}\nTotal: {len(records)}")
-        logging.info("Getting codes from each record")
+        self.info(f"All records: {self.records}\nTotal: {len(self.records)}")
+        self.info("Getting codes from each record")
 
-        for i in records:
-<<<<<<< HEAD
-            self.get_code(login_session, "http://oiclass.com" + i, self.path)
-=======
+        for i in self.records:
             self.get_code("http://oiclass.com" + i)
->>>>>>> 8b060d3 (Init dev)
 
-        logging.info("Generate snapshots")
-        for i in snapshot_reqs:
-            login_driver.get(i.url)
-            capture_full_screen(login_driver, i.filename)
-        self.all_files = []
-        logging.info("Generating MarkDown file")
-        for i in os.walk(filepath):
+        self.info("Generate snapshots")
+        for i in self.snapshot_reqs:
+            self.login_driver.get(i.url)
+            self.capture_full_screen(filename=i.filename)
+        self.info("Generating MarkDown file")
+        for i in os.walk(self.path):
             self.all_files.append(i[2])
         self.all_files = self.all_files[0]
         self.generate_md()
         git_log = ""
-        logging.info("Push to https://github.com/lixuannan/oiclass-answers.git")
+        self.info("Push to https://github.com/lixuannan/oiclass-answers.git")
         for i in os.popen("zsh push.sh"):
             git_log += i
-        logging.info(f"Git logs:\n{git_log}")
-        logging.info("Applying to https://codingcow.eu.org")
+        self.info(f"Git logs:\n{git_log}")
+        self.info("Applying to https://codingcow.eu.org")
         # apply_to_blog()
         self.end = time.time()
-        logging.critical(f"Done in {end - start}s")
+        self.critical(f"Done in {end - start}s")
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
+
         self.label_3.setText(self.path)
 
     def generate_md(self):
@@ -117,17 +112,18 @@ class Main(Ui_MainWindow):
                "[Oiclass](http://oiclass.com)上的所有我写的题解\n"
         file = open(f"{self.path}README.md", "wt")
         # file.write(f"---\ntitle: 题解\ndate: 2022-11-12 12:13:02\ntag: [\"Oiclass.com\"]\n"
-        #            f"---\n{head}")
+        #            f"---\n")
+        file.write(head)
         for j in self.all_files:
             if ".cpp" in j:
                 with open(f"{self.path}{j}", "rt") as fi:
-                    logging.info(f"Reading file {j}")
+                    self.info(f"Reading file {j}")
                     # file.write(f"## {str(j).split('.')[0]}:\n![](https://github.com/Lixuannan/oiclass-answers/"
                     #            f"raw/main/{str(j).split('.')[0]}.png)\n```cpp\n\n{fi.read()}\n```\n")
                     file.write(f"## {str(j).split('.')[0]}:\n![]({self.path}{j})\n```cpp\n\n{fi.read()}\n```\n")
 
         file.close()
-        logging.info("Done with generate MarkDown")
+        self.info("Done with generate MarkDown")
 
     def capture_full_screen(self, filename: str):
         driver = self.login_driver
@@ -137,12 +133,12 @@ class Main(Ui_MainWindow):
         image = Image.open(filename)
         region = image.crop((80, 37, image.width - 380, image.height - 240))
         region.save(filename)
-        logging.info(f"Snapshot: {filename} was generated")
+        self.info(f"Snapshot: {filename} was generated")
 
     def get_record(self, pName: str):
         driver = self.login_driver
         session = self.login_session
-        logging.info(f"Getting records for {pName} now !")
+        self.info(f"Getting records for {pName} now !")
         problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
         self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
                                               f"{self.path}{pName}.png"))
@@ -152,32 +148,32 @@ class Main(Ui_MainWindow):
             if "ID" in j.text:
                 idx = j.text.split(" ")[1]
                 break
-        logging.info(f"Index: {idx}")
+        self.info(f"Index: {idx}")
         record = ""
         try:
             record = session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
         except requests.exceptions.ConnectionError:
-            logging.error(
+            self.error(
                 "Connect error when connect to " + f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1")
         soup = BeautifulSoup(markup=record, features="lxml")
         a = soup.find_all(name="a", class_="record-status--text pass")
         if a:
             self.records.append(a[0]["href"])
-            logging.info(f"Record url: http://oiclass.com{a[0]['href']}")
+            self.info(f"Record url: http://oiclass.com{a[0]['href']}")
         else:
-            logging.warning("No records fond, Trying retry by old way")
+            self.warning("No records fond, Trying retry by old way")
             retry_by_old_way(driver, session, idx)
 
     def get_code(self, record):
         session = self.login_session
-        logging.info(f"Getting codes from record: {record}")
+        self.info(f"Getting codes from record: {record}")
         b = []
         code = ""
         record_page = session.get(url=record, headers=headers).text
         if not ("Oops" in record_page):
             code = BeautifulSoup(record_page, "lxml").find("code").contents[0].text
         else:
-            logging.error("Can't access the record page " + record)
+            self.error("Can't access the record page " + record)
         if BeautifulSoup(record_page, "lxml"):
             b = BeautifulSoup(record_page, "lxml").find_all("b")
         for j in b:
@@ -200,9 +196,9 @@ class Main(Ui_MainWindow):
                 record = j["href"]
                 break
         if type(record) != str:
-            logging.error(f"Problem {pName} was not be submit before, please check: http://oiclass.com/p/{pName}/")
+            self.error(f"Problem {pName} was not be submit before, please check: http://oiclass.com/p/{pName}/")
             return 0
-        logging.info(f"Try to submit problem {pName} in normal way")
+        self.info(f"Try to submit problem {pName} in normal way")
         code = get_code(session, "http://oiclass.com" + record)
         try:
             driver.get("http://oiclass.com/p/" + pName + "/submit/")
@@ -223,15 +219,24 @@ class Main(Ui_MainWindow):
             if "/p/" in j["href"]:
                 self.ac_problems.append(j.text)
 
+    def info(self, msg):
+        logging.info(msg)
+        self.textBrowser.setText("[info]" + msg)
+
+    def warning(self, msg):
+        logging.warning(msg)
+        self.textBrowser.setText("[warning]" + msg)
+
+    def critical(self, msg):
+        logging.critical(msg)
+        self.textBrowser.setText("[critical]" + msg)
+
 
 if __name__ == '__main__':
     app = QApplication([])
     window = QMainWindow()
     main = Main()
-<<<<<<< HEAD
     main.setupUi(window)
-=======
-    main.setupEveryThing(window)
->>>>>>> 8b060d3 (Init dev)
+    main.setupEverything(window)
     window.show()
     sys.exit(app.exec())
