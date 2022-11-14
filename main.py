@@ -22,7 +22,7 @@ class SnapshotReq:
 class Main(Ui_MainWindow):
     def __init__(self):
         self.path = ""
-        self.start = time.time()
+        self.start = 0.0
         self.end = 0.0
         self.git_url = ""
         self.git_username = ""
@@ -52,19 +52,20 @@ class Main(Ui_MainWindow):
         self.setupUi(MainWindow)
         self.browse_path.clicked.connect(self.get_file_path)
         self.start_button.clicked.connect(self.main)
-        self.push_to_remote.clicked.connect(self.set_enable())
+        self.push_to_remote.stateChanged.connect(self.set_state)
 
-    def set_enable(self):
+    def set_state(self):
         if self.push_to_remote.isChecked():
-            self.remote_url.setEnabled(False)
+            self.remote_url.setEnabled(True)
             self.git_uname.setEnabled(True)
             self.token.setEnabled(True)
         else:
-            self.remote_url.setDisabled(True)
-            self.git_uname.setDisabled(True)
-            self.token.setDisabled(True)
+            self.remote_url.setEnabled(False)
+            self.git_uname.setEnabled(False)
+            self.token.setEnabled(False)
 
     def main(self):
+        self.start = time.time()
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
@@ -119,7 +120,7 @@ class Main(Ui_MainWindow):
     def generate_md(self):
         head = "# All the answer I write from [oiclass](http://oiclass.com)\n# " \
                "[Oiclass](http://oiclass.com)上的所有我写的题解\n"
-        file = open(f"{self.path}README.md", "wt")
+        file = open(f"{self.path}/README.md", "wt")
         # file.write(f"---\ntitle: 题解\ndate: 2022-11-12 12:13:02\ntag: [\"Oiclass.com\"]\n"
         #            f"---\n")
         file.write(head)
