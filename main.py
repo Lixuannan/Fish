@@ -3,7 +3,6 @@ import platform
 import sys
 import time
 import logging
-from concurrent.futures import ThreadPoolExecutor
 
 import requests
 import selenium.webdriver
@@ -39,7 +38,6 @@ class Main(Ui_MainWindow):
         self.ac_problems = []
         self.snapshot_reqs = []
         self.all_files = []
-        self.thr_pool = ThreadPoolExecutor(max_workers=os.cpu_count() * 2)
         self.headers = {
             "Connection": "keep-alive",
             "Host": "oiclass.com",
