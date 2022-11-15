@@ -10,6 +10,7 @@ import git.exc
 import requests
 import selenium.webdriver
 from PIL import Image
+from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 from git import *
@@ -33,6 +34,8 @@ class Main(Ui_MainWindow):
         self.git_obj = None
         self.remote_obj = None
         self.repo = None
+        self.progress = 0
+        self.total_progress = 0
         self.path = ""
         self.start = 0.0
         self.end = 0.0
@@ -56,9 +59,6 @@ class Main(Ui_MainWindow):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
-        if not os.path.isdir(f"{os.getcwd()}/.HydroTool"):
-            os.mkdir(f"{os.getcwd()}/.HydroTool")
-        # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         self.chrome_option = selenium.webdriver.ChromeOptions()
         self.chrome_option.add_argument("--headless")
@@ -111,6 +111,11 @@ class Main(Ui_MainWindow):
         self.get_problems()
 
         self.info(f"所有AC的题目：\n{self.ac_problems}\n共: {len(self.ac_problems)}项")
+        if not self.do_not_save_snapshots.isChecked():
+            self.total_progress = len(self.ac_problems) * 3
+        else:
+            self.total_progress = len(self.ac_problems) * 2
+        self.progress += 1
         self.info("正在获得所有测评记录")
 
         for i in self.ac_problems:
@@ -139,6 +144,11 @@ class Main(Ui_MainWindow):
             self.push2remote()
         self.end = time.time()
         self.critical(f"在 {self.end - self.start}秒中失败")
+
+    def update_progress(self):
+        signal = Signal()
+        self.progressBar.setValue((self.progress * 100 // self.total_progress) % 101)
+        signal.em
 
     def check_git(self) -> bool:
         command_log = ""
@@ -194,6 +204,8 @@ class Main(Ui_MainWindow):
     def capture_full_screen(self):
         driver = self.login_driver
         for i in self.snapshot_reqs:
+            self.progress += 1
+            self.update_progress()
             driver.get(i.url)
             width = driver.execute_script("return document.documentElement.scrollWidth")
             height = driver.execute_script("return document.documentElement.scrollHeight")
@@ -206,6 +218,8 @@ class Main(Ui_MainWindow):
             self.info(f"题目截图: {i.filename} 完成")
 
     def get_record(self, pName: str):
+        self.progress += 1
+        self.update_progress()
         session = self.login_session
         self.info(f"为 {pName} 获取测评记录")
         problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
@@ -234,6 +248,8 @@ class Main(Ui_MainWindow):
             self.retry_by_old_way(idx)
 
     def get_code(self, record):
+        self.progress += 1
+        self.update_progress()
         session = self.login_session
         self.info(f"正在为测评记录 {record} 生成代码")
         b = []
