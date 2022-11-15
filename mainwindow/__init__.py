@@ -259,6 +259,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.skip_problems)
 
+        self.do_not_save_snapshots = QCheckBox(self.centralwidget)
+        self.do_not_save_snapshots.setObjectName(u"do_not_save_snapshots")
+        sizePolicy1.setHeightForWidth(self.do_not_save_snapshots.sizePolicy().hasHeightForWidth())
+        self.do_not_save_snapshots.setSizePolicy(sizePolicy1)
+        self.do_not_save_snapshots.setFont(font1)
+
+        self.verticalLayout.addWidget(self.do_not_save_snapshots)
+
         self.start_button = QPushButton(self.centralwidget)
         self.start_button.setObjectName(u"start_button")
         self.start_button.setEnabled(True)
@@ -315,6 +323,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
         self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
+        self.do_not_save_snapshots.setText(QCoreApplication.translate("MainWindow", u"\u4e0d\u4fdd\u5b58\u9898\u76ee\u56fe\u7247\u4ee5\u52a0\u901f", None))
         self.start_button.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
     # retranslateUi
 

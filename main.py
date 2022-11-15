@@ -1,12 +1,9 @@
 import faulthandler  # for debug
 import logging
-import multiprocessing
+import threading
 import os.path
 import platform
-import threading
 import time
-import traceback
-import zipfile
 import sys
 
 import git.exc
@@ -63,21 +60,10 @@ class Main(Ui_MainWindow):
             os.mkdir(f"{os.getcwd()}/.HydroTool")
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
-        # login oiclass.com in PhantomJS
-        if not os.path.exists(f"{os.getcwd()}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs"):
-            with open(f"{os.getcwd()}/phantomjs.zip", "wb") as f:
-                f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
-                        .content)
-            file = zipfile.ZipFile(file=f"{os.getcwd()}/phantomjs.zip")
-            file.extractall(path=f"{os.getcwd()}/.HydroTool/")
-            os.popen(f"chmod 777 {os.getcwd()}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs")
-            os.remove(f"{os.getcwd()}/phantomjs.zip")
-            p = sys.executable
-            os.execl(p, p, *sys.argv)
-            sys.exit()
         self.chrome_option = selenium.webdriver.ChromeOptions()
         self.chrome_option.add_argument("--headless")
         self.chrome_option.add_argument("--disable-gpu")
+        self.chrome_option.page_load_strategy = "eager"
         self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
         self.login_driver = selenium.webdriver\
             .Chrome(options=self.chrome_option)
@@ -136,8 +122,9 @@ class Main(Ui_MainWindow):
         for i in self.records:
             self.get_code("http://oiclass.com" + i)
 
-        self.info("正在获得题目的截图")
-        multiprocessing.Process(target=self.capture_full_screen())
+        if not self.do_not_save_snapshots.isChecked():
+            self.info("正在获得题目的截图")
+            threading.Thread(target=self.capture_full_screen).start()
         self.info("正在生成README.md文件")
         for i in os.walk(self.path):
             self.all_files.append(i[2])
@@ -206,9 +193,11 @@ class Main(Ui_MainWindow):
 
     def capture_full_screen(self):
         driver = self.login_driver
-        driver.maximize_window()
         for i in self.snapshot_reqs:
             driver.get(i.url)
+            width = driver.execute_script("return document.documentElement.scrollWidth")
+            height = driver.execute_script("return document.documentElement.scrollHeight")
+            driver.set_window_size(width, height)
             with open(i.filename, "wb") as file:
                 file.write(driver.get_screenshot_as_png())
             image = Image.open(i.filename)

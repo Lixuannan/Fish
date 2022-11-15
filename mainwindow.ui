@@ -381,6 +381,24 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="do_not_save_snapshots">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>不保存题目图片以加速</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="start_button">
           <property name="enabled">
            <bool>true</bool>
