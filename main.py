@@ -1,24 +1,23 @@
+import faulthandler  # for debug
 import logging
+import multiprocessing
 import os.path
 import platform
-import traceback
+import threading
 import time
+import traceback
 import zipfile
 import sys
-import faulthandler  # for debug
 
 import git.exc
 import requests
-import threading
-import multiprocessing
 import selenium.webdriver
 from PIL import Image
-from git import *
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
+from git import *
 
 from mainwindow import Ui_MainWindow
-
 
 # for debug
 PYTHONFAULTHANDLER = 1
