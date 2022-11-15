@@ -6,10 +6,13 @@ import time
 import zipfile
 import faulthandler  # for debug
 
+import git.exc
 import requests
 import threading
+import multiprocessing
 import selenium.webdriver
 from PIL import Image
+from git import *
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 
@@ -29,6 +32,9 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
+        self.git_obj = None
+        self.remote_obj = None
+        self.repo = None
         print(os.getcwd())
         self.path = ""
         self.start = 0.0
@@ -53,19 +59,24 @@ class Main(Ui_MainWindow):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
+        if not os.path.isdir(".HydroTool"):
+            os.mkdir(".HydroTool")
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        if not os.path.exists("phantomjs/bin/phantomjs"):
+        if not os.path.exists(".HydroTool/phantomjs/bin/phantomjs"):
             with open("phantomjs.zip", "wb") as f:
                 f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
                         .content)
             file = zipfile.ZipFile(file="phantomjs.zip")
             file.extractall()
-            os.popen("mv phantomjs-2.1.1-macosx/ phantomjs/ && chmod 777 phantomjs/bin/phantomjs")
-            sys.exit(0)
+            os.popen("mv phantomjs-2.1.1-macosx/ .HydroTool/phantomjs/ && chmod 777 .HydroTool/phantomjs/bin/phantomjs")
+            os.remove("phantomjs.zip")
+            p = sys.executable
+            os.execl(p, p, *sys.argv)
+            sys.exit()
 
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path="phantomjs/bin/phantomjs")
+        self.login_driver = selenium.webdriver.PhantomJS(executable_path=".HydroTool/phantomjs/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
@@ -87,7 +98,11 @@ class Main(Ui_MainWindow):
         self.start = time.time()
         if self.uname.text() == "" or self.save_path.text() == "" \
                 or self.password.text() == "" or self.uid_edit.text() == "":
-            self.log.append("[error]需要参数")
+            self.error("需要参数")
+            return 1
+        if self.push_to_remote.isChecked() and (self.remote_url.text() == "" or
+           self.git_uname.text() == "" or self.token.text() == ""):
+            self.error("需要参数")
             return 1
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
@@ -118,9 +133,7 @@ class Main(Ui_MainWindow):
             self.get_code("http://oiclass.com" + i)
 
         self.info("正在获得题目的截图")
-        for i in self.snapshot_reqs:
-            self.login_driver.get(i.url)
-            self.capture_full_screen(filename=i.filename)
+        multiprocessing.Process(target=self.capture_full_screen())
         self.info("正在生成README.md文件")
         for i in os.walk(self.path):
             self.all_files.append(i[2])
@@ -130,15 +143,26 @@ class Main(Ui_MainWindow):
             self.error(f"{self.path} 中没有任何文件，失败")
             self.critical(f"在 {self.end - self.start}秒中失败")
         self.generate_md()
-        git_log = ""
-        self.info(f"正在将所有文件推送到仓库： {self.remote_url}中")
-        ##################
-        # NEED DEV LATER #
-        ##################
-        self.info(f"Git 日志:\n{git_log}")
-        # apply_to_blog()
+        if self.push_to_remote.isChecked():
+            self.info(f"正在将所有文件推送到仓库： {self.remote_url.text()}中")
+            self.push2remote()
         self.end = time.time()
         self.critical(f"在 {self.end - self.start}秒中失败")
+
+    def push2remote(self):
+        try:
+            self.repo = Repo(path=self.path)
+        except git.exc.InvalidGitRepositoryError:
+            self.repo = Repo.init(path=self.path)
+
+        if not self.repo.remote():
+            self.repo.create_remote(name="origin", url=self.remote_url.text())
+        self.git_obj = self.repo.git
+        self.remote_obj = self.repo.remotes[0]
+        self.git_obj.add(".")
+        self.git_obj.commit("-m", "update by HydroTool")
+        self.remote_obj.push("main")
+
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
@@ -148,12 +172,12 @@ class Main(Ui_MainWindow):
         self.save_path.setText(self.path)
 
     def generate_md(self):
-        head = "# All the answer I write from [oiclass](http://oiclass.com)\n# " \
+        md_header = "# All the answer I write from [oiclass](http://oiclass.com)\n# " \
                "[Oiclass](http://oiclass.com)上的所有我写的题解\n"
         file = open(f"{self.path}/README.md", "wt")
         # file.write(f"---\ntitle: 题解\ndate: 2022-11-12 12:13:02\ntag: [\"Oiclass.com\"]\n"
         #            f"---\n")
-        file.write(head)
+        file.write(md_header)
         for j in self.all_files:
             if ".cpp" in j:
                 with open(f"{self.path}/{j}", "rt") as fi:
@@ -165,15 +189,17 @@ class Main(Ui_MainWindow):
         file.close()
         self.info("完成 README.md 文件生成")
 
-    def capture_full_screen(self, filename: str):
+    def capture_full_screen(self):
         driver = self.login_driver
         driver.maximize_window()
-        with open(filename, "wb") as file:
-            file.write(driver.get_screenshot_as_png())
-        image = Image.open(filename)
-        region = image.crop((80, 37, image.width - 380, image.height - 240))
-        region.save(filename)
-        self.info(f"题目截图: {filename} 完成")
+        for i in self.snapshot_reqs:
+            driver.get(i.url)
+            with open(i.filename, "wb") as file:
+                file.write(driver.get_screenshot_as_png())
+            image = Image.open(i.filename)
+            region = image.crop((80, 37, image.width - 380, image.height - 240))
+            region.save(i.filename)
+            self.info(f"题目截图: {i.filename} 完成")
 
     def get_record(self, pName: str):
         session = self.login_session
