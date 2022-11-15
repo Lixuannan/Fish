@@ -2,6 +2,7 @@ import logging
 import os.path
 import platform
 import sys
+import stat
 import time
 import zipfile
 import faulthandler  # for debug
@@ -32,10 +33,10 @@ class SnapshotReq:
 
 class Main(Ui_MainWindow):
     def __init__(self):
+        print(os.path.dirname(sys.argv[0]))
         self.git_obj = None
         self.remote_obj = None
         self.repo = None
-        print(os.getcwd())
         self.path = ""
         self.start = 0.0
         self.end = 0.0
@@ -59,24 +60,27 @@ class Main(Ui_MainWindow):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
-        if not os.path.isdir(".HydroTool"):
-            os.mkdir(".HydroTool")
+        if not os.path.isdir(f"{os.path.dirname(sys.argv[0])}/.HydroTool"):
+            os.mkdir(f"{os.path.dirname(sys.argv[0])}/.HydroTool")
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        if not os.path.exists(".HydroTool/phantomjs/bin/phantomjs"):
-            with open("phantomjs.zip", "wb") as f:
+        if not os.path.exists(f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs"):
+            with open(f"{os.path.dirname(sys.argv[0])}/phantomjs.zip", "wb") as f:
                 f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
                         .content)
-            file = zipfile.ZipFile(file="phantomjs.zip")
+            file = zipfile.ZipFile(file=f"{os.path.dirname(sys.argv[0])}/phantomjs.zip")
             file.extractall()
-            os.popen("mv phantomjs-2.1.1-macosx/ .HydroTool/phantomjs/ && chmod 777 .HydroTool/phantomjs/bin/phantomjs")
-            os.remove("phantomjs.zip")
+            os.rename(f"{os.path.dirname(sys.argv[0])}/phantomjs-2.1.1-macosx/",
+                      f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac")
+            os.popen(f"chmod 777 {os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs")
+            os.remove(f"{os.path.dirname(sys.argv[0])}/phantomjs.zip")
             p = sys.executable
             os.execl(p, p, *sys.argv)
             sys.exit()
 
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path=".HydroTool/phantomjs/bin/phantomjs")
+        self.login_driver = selenium.webdriver\
+            .PhantomJS(executable_path=f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
@@ -332,7 +336,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     app = QApplication([])
     window = QMainWindow()
-    window.setObjectName("HydroTool")
     main = Main()
     main.setupEverything(window)
     window.show()
