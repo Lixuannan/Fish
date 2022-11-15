@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/meizhenchen/Desktop/Project/HydroTool/main.py", line 342, in <module>
+    sys.exit(app.exec())
+SystemExit: 0
