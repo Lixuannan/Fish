@@ -1,4 +1,4 @@
-import faulthandler  # for debug
+import faulthandler
 import logging
 import threading
 import os.path
@@ -16,7 +16,7 @@ from git import *
 
 from mainwindow import Ui_MainWindow
 
-# for debug
+
 PYTHONFAULTHANDLER = 1
 faulthandler.enable()
 
