@@ -286,11 +286,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_9 = QHBoxLayout()
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.process_persent = QLabel(self.centralwidget)
-        self.process_persent.setObjectName(u"process_persent")
-
-        self.horizontalLayout_9.addWidget(self.process_persent)
-
         self.progressBar = QProgressBar(self.centralwidget)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setValue(0)
@@ -321,6 +316,5 @@ class Ui_MainWindow(object):
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
         self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
         self.start_button.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
-        self.process_persent.setText("")
     # retranslateUi
 

@@ -421,13 +421,6 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_9">
       <item>
-       <widget class="QLabel" name="process_persent">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QProgressBar" name="progressBar">
         <property name="value">
          <number>0</number>
