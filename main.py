@@ -149,7 +149,19 @@ class Main(Ui_MainWindow):
         self.end = time.time()
         self.critical(f"在 {self.end - self.start}秒中失败")
 
+    def check_git(self) -> bool:
+        command_log = ""
+        for i in os.popen("git"):
+            command_log += i
+        if "command not found" in command_log:
+            return False
+        return True
+
     def push2remote(self):
+        if not self.check_git():
+            self.info("系统并未安装git，正在尝试安装")
+            for i in os.popen("brew install git"):
+                self.info(i)
         try:
             self.repo = Repo(path=self.path)
         except git.exc.InvalidGitRepositoryError:
@@ -162,7 +174,6 @@ class Main(Ui_MainWindow):
         self.git_obj.add(".")
         self.git_obj.commit("-m", "update by HydroTool")
         self.remote_obj.push("main")
-
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
