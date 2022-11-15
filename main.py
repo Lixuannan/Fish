@@ -1,10 +1,10 @@
 import logging
 import os.path
 import platform
-import sys
-import stat
+import traceback
 import time
 import zipfile
+import sys
 import faulthandler  # for debug
 
 import git.exc
@@ -65,22 +65,21 @@ class Main(Ui_MainWindow):
         # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
-        if not os.path.exists(f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs"):
+        if not os.path.exists(f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs"):
             with open(f"{os.path.dirname(sys.argv[0])}/phantomjs.zip", "wb") as f:
                 f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
                         .content)
             file = zipfile.ZipFile(file=f"{os.path.dirname(sys.argv[0])}/phantomjs.zip")
-            file.extractall()
-            os.rename(f"{os.path.dirname(sys.argv[0])}/phantomjs-2.1.1-macosx/",
-                      f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac")
-            os.popen(f"chmod 777 {os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs")
+            file.extractall(path=f"{os.path.dirname(sys.argv[0])}/.HydroTool/")
+            os.popen(f"chmod 777 {os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs")
             os.remove(f"{os.path.dirname(sys.argv[0])}/phantomjs.zip")
             p = sys.executable
             os.execl(p, p, *sys.argv)
             sys.exit()
 
         self.login_driver = selenium.webdriver\
-            .PhantomJS(executable_path=f"{os.path.dirname(sys.argv[0])}/.HydroTool/phantomjs-mac/bin/phantomjs")
+            .PhantomJS(executable_path=f"{os.path.dirname(sys.argv[0])}/"
+                                       f".HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs")
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
@@ -333,10 +332,15 @@ class Main(Ui_MainWindow):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    app = QApplication([])
-    window = QMainWindow()
-    main = Main()
-    main.setupEverything(window)
-    window.show()
-    sys.exit(app.exec())
+    try:
+        logging.basicConfig(level=logging.INFO)
+        app = QApplication([])
+        window = QMainWindow()
+        main = Main()
+        main.setupEverything(window)
+        window.show()
+        sys.exit(app.exec())
+    except:
+        error_file = open("error.txt", "wt")
+        error_file.write(traceback.format_exc())
+        error_file.close()
