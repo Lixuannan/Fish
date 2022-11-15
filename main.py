@@ -76,8 +76,11 @@ class Main(Ui_MainWindow):
             os.execl(p, p, *sys.argv)
             sys.exit()
         self.chrome_option = selenium.webdriver.ChromeOptions()
+        self.chrome_option.add_argument("--headless")
+        self.chrome_option.add_argument("--disable-gpu")
+        self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
         self.login_driver = selenium.webdriver\
-            .Chrome(executable_path=)
+            .Chrome(options=self.chrome_option)
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
@@ -333,10 +336,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     app = QApplication([])
     window = QMainWindow()
-    print(1)
     main = Main()
-    print(2)
     main.setupEverything(window)
-    print(3)
     window.show()
     sys.exit(app.exec())
