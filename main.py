@@ -56,9 +56,6 @@ class Main(Ui_MainWindow):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
-        if not os.path.isdir(f"{os.getcwd()}/.HydroTool"):
-            os.mkdir(f"{os.getcwd()}/.HydroTool")
-        # login oiclass.com in requests session
         self.login_session = requests.sessions.Session()
         self.chrome_option = selenium.webdriver.ChromeOptions()
         self.chrome_option.add_argument("--headless")
