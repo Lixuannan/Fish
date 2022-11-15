@@ -65,7 +65,6 @@ class Main(Ui_MainWindow):
         self.login_session = requests.sessions.Session()
         # login oiclass.com in PhantomJS
         if not os.path.exists(f"{os.getcwd()}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs"):
-            print(234)
             with open(f"{os.getcwd()}/phantomjs.zip", "wb") as f:
                 f.write(requests.get("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip")
                         .content)
@@ -76,8 +75,9 @@ class Main(Ui_MainWindow):
             p = sys.executable
             os.execl(p, p, *sys.argv)
             sys.exit()
-        print(23456789)
-        self.login_driver = selenium.webdriver.PhantomJS(executable_path=f"{os.getcwd()}/.HydroTool/phantomjs-2.1.1-macosx/bin/phantomjs")
+        self.chrome_option = selenium.webdriver.ChromeOptions()
+        self.login_driver = selenium.webdriver\
+            .Chrome(executable_path=)
 
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
