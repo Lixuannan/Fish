@@ -6,14 +6,12 @@ import platform
 import time
 import sys
 
-import git.exc
 import requests
+import pygit2
 import selenium.webdriver
-from PIL import Image
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
-from git import *
 from qt_material import apply_stylesheet
 
 from mainwindow import Ui_MainWindow
@@ -35,6 +33,7 @@ class Main(Ui_MainWindow, QObject):
 
     def __init__(self):
         super(Main, self).__init__()
+        self.git_config = None
         self.main_thr = None
         print(os.getcwd())
         self.git_obj = None
@@ -143,7 +142,9 @@ class Main(Ui_MainWindow, QObject):
 
         if not self.do_not_save_snapshots.isChecked():
             self.info("正在获得题目的截图")
-            threading.Thread(target=self.capture_full_screen).start()
+            thr = threading.Thread(target=self.capture_full_screen)
+            thr.start()
+            thr.join()
         self.info("正在生成README.md文件")
         for i in os.walk(self.path):
             self.all_files.append(i[2])
@@ -154,13 +155,12 @@ class Main(Ui_MainWindow, QObject):
             self.critical(f"在 {self.end - self.start}秒中失败")
         self.generate_md()
         if self.push_to_remote.isChecked():
-            self.info(f"正在将所有文件推送到仓库： {self.remote_url.text()}中")
+            self.info(f"正在将所有文件推送到仓库: {self.remote_url.text()} 中")
             self.push2remote()
-        if self.skip_problems.isChecked():
-            self.end = time.time()
-            self.progress = self.total_progress
-            self.update_signal.emit()
-            self.critical(f"在 {self.end - self.start} 秒中成功")
+        self.end = time.time()
+        self.progress = self.total_progress
+        self.update_signal.emit()
+        self.critical(f"在 {self.end - self.start} 秒中成功")
 
     def update_progress(self):
         self.update_signal.emit()
@@ -184,18 +184,9 @@ class Main(Ui_MainWindow, QObject):
             self.info("系统并未安装git，正在尝试安装")
             for i in os.popen("brew install git"):
                 self.info(i)
-        try:
-            self.repo = Repo(path=self.path)
-        except git.exc.InvalidGitRepositoryError:
-            self.repo = Repo.init(path=self.path)
-
-        if not self.repo.remote():
-            self.repo.create_remote(name="origin", url=self.remote_url.text())
-        self.git_obj = self.repo.git
-        self.remote_obj = self.repo.remotes[0]
-        self.git_obj.add(".")
-        self.git_obj.commit("-m", "update by HydroTool")
-        self.remote_obj.push("main")
+        ############
+        # NEED DEV #
+        ############
 
     def get_file_path(self):
         self.path = QFileDialog.getExistingDirectory()
@@ -233,9 +224,6 @@ class Main(Ui_MainWindow, QObject):
             driver.set_window_size(width, height)
             with open(i.filename, "wb") as file:
                 file.write(driver.get_screenshot_as_png())
-            image = Image.open(i.filename)
-            region = image.crop((80, 37, image.width - 380, image.height - 240))
-            region.save(i.filename)
             self.info(f"题目截图: {i.filename} 完成")
 
     def get_record(self, pName: str):
