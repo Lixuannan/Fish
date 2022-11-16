@@ -10,7 +10,7 @@ import git.exc
 import requests
 import selenium.webdriver
 from PIL import Image
-from PySide6.QtCore import QThread, Signal
+from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 from git import *
@@ -29,8 +29,12 @@ class SnapshotReq:
         self.filename = filename
 
 
-class Main(Ui_MainWindow):
+class Main(Ui_MainWindow, QObject):
+    update_signal = Signal()
+    add_log = Signal()
+
     def __init__(self):
+        super(Main, self).__init__()
         print(os.getcwd())
         self.git_obj = None
         self.remote_obj = None
@@ -41,6 +45,7 @@ class Main(Ui_MainWindow):
         self.start = 0.0
         self.end = 0.0
         self.uid = 8241
+        self.log_str = ""
         self.git_url = ""
         self.git_username = ""
         self.git_password = ""
@@ -74,6 +79,8 @@ class Main(Ui_MainWindow):
         self.browse_path.clicked.connect(self.get_file_path)
         self.start_button.clicked.connect(lambda: threading.Thread(target=self.main).start())
         self.push_to_remote.stateChanged.connect(self.set_state)
+        self.update_signal.connect(lambda: self.progressBar.setValue(self.progress * 100 // self.total_progress))
+        self.add_log.connect(lambda: self.log.append(self.log_str))
 
     def set_state(self):
         if self.push_to_remote.isChecked():
@@ -86,6 +93,8 @@ class Main(Ui_MainWindow):
             self.token.setEnabled(False)
 
     def main(self):
+        self.start_button.setText("取消")
+        self.start_button.clicked.connect(self.cancel)
         self.start = time.time()
         if self.uname.text() == "" or self.save_path.text() == "" \
                 or self.password.text() == "" or self.uid_edit.text() == "":
@@ -143,23 +152,26 @@ class Main(Ui_MainWindow):
         if self.push_to_remote.isChecked():
             self.info(f"正在将所有文件推送到仓库： {self.remote_url.text()}中")
             self.push2remote()
-        self.end = time.time()
-        self.critical(f"在 {self.end - self.start}秒中失败")
+        if self.skip_problems.isChecked():
+            self.end = time.time()
+            self.progress = self.total_progress
+            self.update_signal.emit()
+            self.critical(f"在 {self.end - self.start} 秒中成功")
 
     def update_progress(self):
-        signal = Signal()
-        self.progressBar.setValue((self.progress * 100 // self.total_progress) % 101)
-        ##################
-        # NEED DEV       #
-        ##################
+        self.update_signal.emit()
 
-    def check_git(self) -> bool:
+    @staticmethod
+    def check_git() -> bool:
         command_log = ""
         for i in os.popen("git"):
             command_log += i
         if "command not found" in command_log:
             return False
         return True
+
+    def cancel(self):
+        ...
 
     def push2remote(self):
         if not self.check_git():
@@ -325,19 +337,23 @@ class Main(Ui_MainWindow):
 
     def info(self, msg):
         logging.info(msg)
-        self.log.append("[信息] " + msg)
+        self.log_str = "[信息] " + msg
+        self.add_log.emit()
 
     def warning(self, msg):
         logging.warning(msg)
-        self.log.append("[警告] " + msg)
+        self.log_str = "[警告] " + msg
+        self.add_log.emit()
 
     def error(self, msg):
         logging.error(msg)
-        self.log.append("[错误] " + msg)
+        self.log_str = "[错误] " + msg
+        self.add_log.emit()
 
     def critical(self, msg):
         logging.critical(msg)
-        self.log.append("[最重要信息] " + msg)
+        self.log_str = "[最重要信息] " + msg
+        self.add_log.emit()
 
 
 if __name__ == '__main__':
