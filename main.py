@@ -14,6 +14,7 @@ from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 from git import *
+from qt_material import apply_stylesheet
 
 from mainwindow import Ui_MainWindow
 
@@ -148,7 +149,9 @@ class Main(Ui_MainWindow):
     def update_progress(self):
         signal = Signal()
         self.progressBar.setValue((self.progress * 100 // self.total_progress) % 101)
-        signal.em
+        ##################
+        # NEED DEV       #
+        ##################
 
     def check_git(self) -> bool:
         command_log = ""
@@ -343,5 +346,6 @@ if __name__ == '__main__':
     window = QMainWindow()
     main = Main()
     main.setupEverything(window)
+    apply_stylesheet(app, theme='dark_blue.xml')
     window.show()
     sys.exit(app.exec())
