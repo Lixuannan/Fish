@@ -35,6 +35,7 @@ class Main(Ui_MainWindow, QObject):
 
     def __init__(self):
         super(Main, self).__init__()
+        self.main_thr = None
         print(os.getcwd())
         self.git_obj = None
         self.remote_obj = None
@@ -77,10 +78,13 @@ class Main(Ui_MainWindow, QObject):
     def setupEverything(self, MainWindow):
         self.setupUi(MainWindow)
         self.browse_path.clicked.connect(self.get_file_path)
-        self.start_button.clicked.connect(lambda: threading.Thread(target=self.main).start())
+        self.start_button.clicked.connect(self.create_main)
         self.push_to_remote.stateChanged.connect(self.set_state)
         self.update_signal.connect(lambda: self.progressBar.setValue(self.progress * 100 // self.total_progress))
         self.add_log.connect(lambda: self.log.append(self.log_str))
+
+    def create_main(self):
+        self.main_thr = threading.Thread(target=self.main).start()
 
     def set_state(self):
         if self.push_to_remote.isChecked():
@@ -93,8 +97,6 @@ class Main(Ui_MainWindow, QObject):
             self.token.setEnabled(False)
 
     def main(self):
-        self.start_button.setText("取消")
-        self.start_button.clicked.connect(self.cancel)
         self.start = time.time()
         if self.uname.text() == "" or self.save_path.text() == "" \
                 or self.password.text() == "" or self.uid_edit.text() == "":
@@ -104,6 +106,8 @@ class Main(Ui_MainWindow, QObject):
            self.git_uname.text() == "" or self.token.text() == ""):
             self.error("需要参数")
             return 1
+        self.start_button.setText("取消")
+        self.start_button.clicked.connect(self.cancel)
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
@@ -171,7 +175,9 @@ class Main(Ui_MainWindow, QObject):
         return True
 
     def cancel(self):
-        ...
+        threading.Thread._Thread__stop(self.main_thr)
+        self.start_button.setText("开始")
+        self.start_button.clicked.connect(self.create_main)
 
     def push2remote(self):
         if not self.check_git():
