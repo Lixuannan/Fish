@@ -225,6 +225,26 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_7)
 
+        self.horizontalLayout_10 = QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_9 = QLabel(self.centralwidget)
+        self.label_9.setObjectName(u"label_9")
+        sizePolicy.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy)
+        self.label_9.setFont(font1)
+
+        self.horizontalLayout_10.addWidget(self.label_9)
+
+        self.email_edit = QLineEdit(self.centralwidget)
+        self.email_edit.setObjectName(u"email_edit")
+        sizePolicy1.setHeightForWidth(self.email_edit.sizePolicy().hasHeightForWidth())
+        self.email_edit.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_10.addWidget(self.email_edit)
+
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_10)
+
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.label_7 = QLabel(self.centralwidget)
@@ -238,9 +258,14 @@ class Ui_MainWindow(object):
 
         self.token = QLineEdit(self.centralwidget)
         self.token.setObjectName(u"token")
-        self.token.setEnabled(False)
+        self.token.setEnabled(True)
         sizePolicy1.setHeightForWidth(self.token.sizePolicy().hasHeightForWidth())
         self.token.setSizePolicy(sizePolicy1)
+        font3 = QFont()
+        font3.setPointSize(13)
+        font3.setStyleStrategy(QFont.PreferAntialias)
+        self.token.setFont(font3)
+        self.token.setEchoMode(QLineEdit.Password)
 
         self.horizontalLayout_8.addWidget(self.token)
 
@@ -281,10 +306,10 @@ class Ui_MainWindow(object):
 
         self.log = QTextBrowser(self.centralwidget)
         self.log.setObjectName(u"log")
-        font3 = QFont()
-        font3.setPointSize(15)
-        font3.setStyleStrategy(QFont.PreferAntialias)
-        self.log.setFont(font3)
+        font4 = QFont()
+        font4.setPointSize(15)
+        font4.setStyleStrategy(QFont.PreferAntialias)
+        self.log.setFont(font4)
         self.log.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
 
         self.horizontalLayout.addWidget(self.log)
@@ -321,6 +346,7 @@ class Ui_MainWindow(object):
         self.push_to_remote.setText(QCoreApplication.translate("MainWindow", u"\u63a8\u9001\u5230\u8fdc\u7a0bgit\u4ed3\u5e93", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u4ed3\u5e93\u5730\u5740\uff1a", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u90ae\u7bb1\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u7801(token)\uff1a", None))
         self.skip_problems.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8fc7\u5df2\u6709\u9898\u76ee", None))
         self.do_not_save_snapshots.setText(QCoreApplication.translate("MainWindow", u"\u4e0d\u4fdd\u5b58\u9898\u76ee\u56fe\u7247\u4ee5\u52a0\u901f", None))

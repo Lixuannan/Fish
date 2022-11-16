@@ -1,4 +1,7 @@
-# HydroTool
-# Hydro工具箱
-## A tool make you use HydroJS better than ever
-## 一个让HydroJS变得前所未有的好用的工具
+# Fish
+
+# 鱼
+
+## Let you work just like Fish in Hydro
+
+## 让你工作得如鱼得水
