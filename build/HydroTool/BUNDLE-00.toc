@@ -1,3 +1,0 @@
-([('HydroTool',
-   '/Users/meizhenchen/Desktop/Project/HydroTool/dist/HydroTool',
-   'EXECUTABLE')],)

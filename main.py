@@ -7,7 +7,6 @@ import time
 import sys
 
 import requests
-import pygit2
 import selenium.webdriver
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
@@ -31,7 +30,8 @@ class Main(Ui_MainWindow, QObject):
     update_signal = Signal()
     add_log = Signal()
 
-    def __init__(self):
+    def __init__(self, Mainwindow):
+        self.setupUi(Mainwindow)
         super(Main, self).__init__()
         self.git_config = None
         self.main_thr = None
@@ -73,8 +73,7 @@ class Main(Ui_MainWindow, QObject):
         self.login_driver = selenium.webdriver\
             .Chrome(options=self.chrome_option)
 
-    def setupEverything(self, MainWindow):
-        self.setupUi(MainWindow)
+    def setupSignal(self):
         self.browse_path.clicked.connect(self.get_file_path)
         self.start_button.clicked.connect(self.create_main)
         self.push_to_remote.stateChanged.connect(self.set_state)
@@ -89,10 +88,12 @@ class Main(Ui_MainWindow, QObject):
             self.remote_url.setEnabled(True)
             self.git_uname.setEnabled(True)
             self.token.setEnabled(True)
+            self.email_edit.setEnabled(True)
         else:
             self.remote_url.setEnabled(False)
             self.git_uname.setEnabled(False)
             self.token.setEnabled(False)
+            self.email_edit.setEnabled(False)
 
     def main(self):
         self.start = time.time()
@@ -353,8 +354,8 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     app = QApplication([])
     window = QMainWindow()
-    main = Main()
-    main.setupEverything(window)
-    apply_stylesheet(app, theme='dark_blue.xml')
+    main = Main(window)
+    main.setupSignal()
+    apply_stylesheet(app, theme='light_blue.xml')
     window.show()
     sys.exit(app.exec())
