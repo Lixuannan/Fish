@@ -356,6 +356,6 @@ if __name__ == '__main__':
     window = QMainWindow()
     main = Main(window)
     main.setupSignal()
-    apply_stylesheet(app, theme='light_blue.xml')
+    apply_stylesheet(app, theme='dark_blue.xml')
     window.show()
     sys.exit(app.exec())
