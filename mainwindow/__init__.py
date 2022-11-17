@@ -173,6 +173,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.push_to_remote = QCheckBox(self.centralwidget)
         self.push_to_remote.setObjectName(u"push_to_remote")
+        self.push_to_remote.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.push_to_remote.sizePolicy().hasHeightForWidth())
         self.push_to_remote.setSizePolicy(sizePolicy1)
         self.push_to_remote.setFont(font1)
@@ -237,6 +238,7 @@ class Ui_MainWindow(object):
 
         self.email_edit = QLineEdit(self.centralwidget)
         self.email_edit.setObjectName(u"email_edit")
+        self.email_edit.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.email_edit.sizePolicy().hasHeightForWidth())
         self.email_edit.setSizePolicy(sizePolicy1)
 
@@ -258,7 +260,7 @@ class Ui_MainWindow(object):
 
         self.token = QLineEdit(self.centralwidget)
         self.token.setObjectName(u"token")
-        self.token.setEnabled(True)
+        self.token.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.token.sizePolicy().hasHeightForWidth())
         self.token.setSizePolicy(sizePolicy1)
         font3 = QFont()
@@ -336,7 +338,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"HydroTool", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Fish", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u7528\u6237\u540d\uff1a", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"UID\uff1a", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"OJ\u7f51\u5740\uff1a", None))

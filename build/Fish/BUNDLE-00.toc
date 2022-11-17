@@ -1,0 +1,1 @@
+([('Fish', '/Users/meizhenchen/Desktop/Project/Fish/dist/Fish', 'EXECUTABLE')],)

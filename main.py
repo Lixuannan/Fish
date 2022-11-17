@@ -7,6 +7,8 @@ import time
 import sys
 
 import requests
+import pygit2
+import _cffi_backend
 import selenium.webdriver
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
@@ -35,7 +37,6 @@ class Main(Ui_MainWindow, QObject):
         super(Main, self).__init__()
         self.git_config = None
         self.main_thr = None
-        print(os.getcwd())
         self.git_obj = None
         self.remote_obj = None
         self.repo = None
@@ -65,13 +66,9 @@ class Main(Ui_MainWindow, QObject):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
-        self.login_session = requests.sessions.Session()
-        self.chrome_option = selenium.webdriver.ChromeOptions()
-        self.chrome_option.add_argument("--headless")
-        self.chrome_option.page_load_strategy = "eager"
-        self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
-        self.login_driver = selenium.webdriver\
-            .Chrome(options=self.chrome_option)
+        self.login_session = None
+        self.chrome_option = None
+        self.login_driver = None
 
     def setupSignal(self):
         self.browse_path.clicked.connect(self.get_file_path)
@@ -109,6 +106,14 @@ class Main(Ui_MainWindow, QObject):
         self.start_button.clicked.connect(self.cancel)
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
+        self.chrome_option = selenium.webdriver.ChromeOptions()
+        self.chrome_option.add_argument("--headless")
+        self.chrome_option.add_argument("--disable-gpu")
+        self.chrome_option.page_load_strategy = "eager"
+        self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
+        self.login_driver = selenium.webdriver\
+            .Chrome(options=self.chrome_option)
+        self.login_session = requests.sessions.Session()
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
         self.login_driver.get("http://oiclass.com/login/")
         self.login_driver.find_element(by="xpath",
@@ -160,6 +165,7 @@ class Main(Ui_MainWindow, QObject):
         self.end = time.time()
         self.progress = self.total_progress
         self.update_signal.emit()
+        self.login_driver.close()
         self.critical(f"在 {self.end - self.start} 秒中成功")
 
     def update_progress(self):
@@ -351,11 +357,19 @@ class Main(Ui_MainWindow, QObject):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
     app = QApplication([])
     window = QMainWindow()
+    start_init = time.time()
     main = Main(window)
-    main.setupSignal()
+    start_add_theme = time.time()
+    print(start_add_theme - start_init)
     apply_stylesheet(app, theme='dark_blue.xml')
+    start_setup = time.time()
+    print(start_setup - start_add_theme)
+    main.setupSignal()
     window.show()
-    sys.exit(app.exec())
+    print(time.time() - start_setup)
+    logging.basicConfig(level=logging.INFO)
+    print(time.time() - start_init)
+    exit_code = app.exec()
+    sys.exit(exit_code)
