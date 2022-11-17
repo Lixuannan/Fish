@@ -7,6 +7,7 @@ import time
 import sys
 
 import requests
+import pygit2
 import selenium.webdriver
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
