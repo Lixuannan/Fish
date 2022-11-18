@@ -20,7 +20,7 @@
 
 #### Common Hydro-based OJ: [Oiclass.com](http://www.oiclass.com), [Vijos](https://vijos.org/), [hydro-.ac](https://hydro.ac)
 
-#### Implementation Principle
+### Implementation Principle
 
 ##### 1, frame:
 
@@ -43,5 +43,12 @@
     Algorithm: Crawling data and manipulating web pages through Selenium and Request, passing the data into BeautifulSoup for analysis and cleaning, and then going back to Requests and Selenium for further action (submit to OJ, get detailed data, etc.)
 
     UI: Use a textarea to output logs and set the operations and parameters on the left
+
+### Run：
+
+```shell
+pip3 install -r requirements.txt
+python3 main.py
+```
 
 ##### Welcome everyone to submit PR *LOVE*

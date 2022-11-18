@@ -18,7 +18,7 @@
 
 #### 常见的基于 Hydro 的 OJ：[Oiclass.com](http://www.oiclass.com), [Vijos](https://vijos.org/), [Hydro.ac](https://hydro.ac)
 
-#### 实现原理
+### 实现原理
 
 ##### 1，框架:
 
@@ -41,5 +41,12 @@
     算法：通过 Selenium 和 Request 进行数据的爬取和网页的操纵，然后将数据传入 BeautifulSoup 中分析清洗，然后回到 Requests 和 Selenium 进行进一步操作（提交到OJ、获取详细数据 etc.）
 
     UI：用一个 textarea 输出日志，在左边进行操作及参数的设定
+
+### 运行：
+
+```shell
+pip3 install -r requirements.txt
+python3 main.py
+```
 
 ##### 欢迎大家积极提交 PR *笔芯*
