@@ -1,8 +1,0 @@
-/build/
-/dist/
-/mac-dmg/
-/test/
-.gitignore
-.idea
-.DS_Store
-chromedriver
