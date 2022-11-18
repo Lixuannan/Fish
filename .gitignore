@@ -2,4 +2,6 @@
 /dist/
 /mac-dmg/
 /test/
+.gitignore
+.idea
 chromedriver
