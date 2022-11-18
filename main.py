@@ -18,23 +18,30 @@ from qt_material import apply_stylesheet
 from mainwindow import Ui_MainWindow
 
 
+# 用来 DEBUG 的配置
 PYTHONFAULTHANDLER = 1
 faulthandler.enable()
 
 
+# 定义一个用来存储截取需求的类
 class SnapshotReq:
     def __init__(self, url: str, filename: str):
         self.url = url
         self.filename = filename
 
 
+# 主类
 class Main(Ui_MainWindow, QObject):
+    # 定义信号，分别是更新进度条和添加日志
     update_signal = Signal()
     add_log = Signal()
 
     def __init__(self, Mainwindow):
+        # 将窗口实现
         self.setupUi(Mainwindow)
+        # 实现 QObject 类
         super(Main, self).__init__()
+        # 定义一大堆变量，基本顾名思义
         self.git_config = None
         self.main_thr = None
         self.git_obj = None
@@ -50,6 +57,7 @@ class Main(Ui_MainWindow, QObject):
         self.git_url = ""
         self.git_username = ""
         self.git_password = ""
+        # 在 request.session 中登录 HydroOJ 使用的 post 表单
         self.data = {
             "uname": "",
             "password": "",
@@ -70,6 +78,7 @@ class Main(Ui_MainWindow, QObject):
         self.chrome_option = None
         self.login_driver = None
 
+    # 将信号连接到槽
     def setupSignal(self):
         self.browse_path.clicked.connect(self.get_file_path)
         self.start_button.clicked.connect(self.create_main)
@@ -77,9 +86,11 @@ class Main(Ui_MainWindow, QObject):
         self.update_signal.connect(lambda: self.progressBar.setValue(self.progress * 100 // self.total_progress))
         self.add_log.connect(lambda: self.log.append(self.log_str))
 
+    # 创建主算法线程
     def create_main(self):
         self.main_thr = threading.Thread(target=self.main).start()
 
+    # 当推送到仓库被选中时解锁部分输入框
     def set_state(self):
         if self.push_to_remote.isChecked():
             self.remote_url.setEnabled(True)
@@ -92,8 +103,10 @@ class Main(Ui_MainWindow, QObject):
             self.token.setEnabled(False)
             self.email_edit.setEnabled(False)
 
+    # 主函数
     def main(self):
         self.start = time.time()
+        # 判断参数是否齐全，不齐全就报错返回
         if self.uname.text() == "" or self.save_path.text() == "" \
                 or self.password.text() == "" or self.uid_edit.text() == "":
             self.error("需要参数")
@@ -102,18 +115,22 @@ class Main(Ui_MainWindow, QObject):
            self.git_uname.text() == "" or self.token.text() == ""):
             self.error("需要参数")
             return 1
+        # 更改"开始"按钮的文字和按钮的信号所传递到的槽
         self.start_button.setText("取消")
         self.start_button.clicked.connect(self.cancel)
+        # 从 UI 获得用户名、密码等数据
         self.data["uname"] = self.uname.text()
         self.data["password"] = self.password.text()
+        # 将 ChromeOptions 及 Chrome 实例化，为正式启动做准备
         self.chrome_option = selenium.webdriver.ChromeOptions()
-        self.chrome_option.add_argument("--headless")
-        self.chrome_option.add_argument("--disable-gpu")
-        self.chrome_option.page_load_strategy = "eager"
-        self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
+        self.chrome_option.add_argument("--headless")  # 不显示界面，仅实现浏览器功能
+        self.chrome_option.add_argument("--disable-gpu")  # 避免报错（google 官方说的）
+        self.chrome_option.page_load_strategy = "eager"  # 将加载模式设置为"能用就好"而不是要等到加载完所有资源后才进行操作，节省时间
+        self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])  # 不告诉网站"我是模拟器"
         self.login_driver = selenium.webdriver\
             .Chrome(options=self.chrome_option)
         self.login_session = requests.sessions.Session()
+        # 简单登陆一下 session 和 driver
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
         self.login_driver.get("http://oiclass.com/login/")
         self.login_driver.find_element(by="xpath",
@@ -168,9 +185,12 @@ class Main(Ui_MainWindow, QObject):
         self.login_driver.close()
         self.critical(f"在 {self.end - self.start} 秒中成功")
 
+    # 更新进度条
     def update_progress(self):
+        # 向槽："update_signal" 发送信号
         self.update_signal.emit()
 
+    # 检查系统是否安装了 git
     @staticmethod
     def check_git() -> bool:
         command_log = ""
@@ -180,11 +200,13 @@ class Main(Ui_MainWindow, QObject):
             return False
         return True
 
+    # 取消，但是实际上好像是强制停止，额~~~~~~~
     def cancel(self):
         self.start_button.setText("开始")
         self.start_button.clicked.connect(self.create_main)
         sys.exit(0)
 
+    # 推送到远程代码仓库，还没实现
     def push2remote(self):
         if not self.check_git():
             self.info("系统并未安装git，正在尝试安装")
@@ -201,9 +223,10 @@ class Main(Ui_MainWindow, QObject):
                 self.path
         self.save_path.setText(self.path)
 
+    # 生成 md 文件，方便保存后的查阅
     def generate_md(self):
-        md_header = "# All the answer I write from [oiclass](http://oiclass.com)\n# " \
-               "[Oiclass](http://oiclass.com)上的所有我写的题解\n"
+        md_header = f"# All the answer I write from [{self.oj_url.text()}]({self.oj_url.text()})\n# " \
+               f"[{self.oj_url.text()}]({self.oj_url.text()})上的所有我写的题解\n"
         file = open(f"{self.path}/README.md", "wt")
         # file.write(f"---\ntitle: 题解\ndate: 2022-11-12 12:13:02\ntag: [\"Oiclass.com\"]\n"
         #            f"---\n")
@@ -219,24 +242,30 @@ class Main(Ui_MainWindow, QObject):
         file.close()
         self.info("完成 README.md 文件生成")
 
+    # 截图
     def capture_full_screen(self):
         driver = self.login_driver
         for i in self.snapshot_reqs:
             self.progress += 1
             self.update_progress()
             driver.get(i.url)
+            # 通过 JS 获得页面的宽高
             width = driver.execute_script("return document.documentElement.scrollWidth")
             height = driver.execute_script("return document.documentElement.scrollHeight")
+            # 设置虚拟浏览器的宽高，方便接全屏
             driver.set_window_size(width, height)
             with open(i.filename, "wb") as file:
+                # 截屏并保存在 "i.filename" 中
                 file.write(driver.get_screenshot_as_png())
             self.info(f"题目截图: {i.filename} 完成")
 
+    # 获得测评记录
     def get_record(self, pName: str):
         self.progress += 1
         self.update_progress()
         session = self.login_session
         self.info(f"为 {pName} 获取测评记录")
+        # 爬评测记录界面
         problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
         self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
                                               f"{self.path}/{pName}.png"))
@@ -244,10 +273,12 @@ class Main(Ui_MainWindow, QObject):
         idx = soup.find_all(name="span", class_="bp4-tag bp4-large bp4-minimal problem__tag-item")
         for j in idx:
             if "ID" in j.text:
+                # 获取题目的 PID （PID：详见 Hydro 官方的描述）
                 idx = j.text.split(" ")[1]
                 break
         self.info(f"题目PID: {idx}")
         record = ""
+        # 爬取测评记录
         try:
             record = session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
         except requests.exceptions.ConnectionError:
@@ -256,21 +287,26 @@ class Main(Ui_MainWindow, QObject):
         soup = BeautifulSoup(markup=record, features="lxml")
         a = soup.find_all(name="a", class_="record-status--text pass")
         if a:
+            # 保存最近的一次 AC 记录的 URL
             self.records.append(a[0]["href"])
             self.info(f"测评记录: http://oiclass.com{a[0]['href']}")
         else:
             self.warning("无法以本模式获得测评记录, 尝试另一种模式")
             self.retry_by_old_way(idx)
 
+    # 从测评记录中获得代码
     def get_code(self, record):
+        # 更新进度条
         self.progress += 1
         self.update_progress()
         session = self.login_session
         self.info(f"正在为测评记录 {record} 生成代码")
         b = []
         code = ""
+        # 爬页面
         record_page = session.get(url=record, headers=self.headers).text
         if not ("Oops" in record_page):
+            # 如果 OJ 报错了，就退出
             code = BeautifulSoup(record_page, "lxml").find("code").contents[0].text
         else:
             self.error("无法访问页面：" + record)
@@ -286,6 +322,7 @@ class Main(Ui_MainWindow, QObject):
                            f"// System: {platform.platform()}\n// Python Version: {platform.python_version()}\n{code}")
         return code
 
+    # 老方法：用题目页面显示出的记录进行代码的保存，这种方法可能导致存储的是你的一次提交时抄的题解（doge）
     def retry_by_old_way(self, pName):
         session = self.login_session
         driver = self.login_driver
@@ -310,31 +347,40 @@ class Main(Ui_MainWindow, QObject):
         except:
             ...
 
+    # 获取所有 AC 过的题目
     def get_problems(self):
+        # 复制一份局部的 driver 避免全局变量导致数据错乱
         session = self.login_session
+        # 爬取个人简页页面
         page = session.get(url=f"http://oiclass.com/user/{self.uid}").text
         soup = BeautifulSoup(markup=page, features="lxml")
-        problems = soup.find_all(name="a")
+        problems = soup.find_all(name="a")  # 筛选所有 a 标签（不知道什么是 a 标签的去学前端）
+        # 获得目录下所有保存过的题目
         all_files = []
         for j in os.walk(self.path):
             all_files.append(j[2])
         if all_files:
             all_files = all_files[0]
+        # 如果勾选了跳过已提交以加速选项
         if self.skip_problems.isChecked():
             for j in problems:
                 if "/p/" in j["href"]:
                     p = False
                     for k in all_files:
+                        # 如果题目已经存在
                         if k == j["href"].split("/")[2] + ".cpp" or k == j["href"].split("/")[2] + ".png":
                             p = True
-                            break
+                            break  # 退出循环，不把题号加入所有题号中
                     if not p:
+                        # 如果循环了一遍后找不到，那么说明这是新的题目，加入所有题号中
                         self.ac_problems.append(j.text)
         else:
+            # 正常操作，将所有题号加入到列表中
             for j in problems:
                 if "/p/" in j["href"]:
                     self.ac_problems.append(j.text)
 
+    # 一大堆日志，随便写的，请吐槽
     def info(self, msg):
         logging.info(msg)
         self.log_str = "[信息] " + msg
@@ -357,22 +403,14 @@ class Main(Ui_MainWindow, QObject):
 
 
 if __name__ == '__main__':
-    start = time.time()
     app = QApplication([])
     window = QMainWindow()
-    start_init = time.time()
     main = Main(window)
-    start_add_theme = time.time()
-    print(start_add_theme - start_init)
-    apply_stylesheet(app, theme='dark_blue.xml')
-    start_setup = time.time()
-    print(start_setup - start_add_theme)
+    apply_stylesheet(app, theme='dark_blue.xml')  # 设置主题
     main.setupSignal()
     window.show()
-    print(time.time() - start_setup)
     logging.basicConfig(level=logging.INFO)
-    print(time.time() - start)
-    exit_code = app.exec()
+    exit_code = app.exec()  # 运行
     sys.exit(exit_code)
 
 
