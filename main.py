@@ -357,6 +357,7 @@ class Main(Ui_MainWindow, QObject):
 
 
 if __name__ == '__main__':
+    start = time.time()
     app = QApplication([])
     window = QMainWindow()
     start_init = time.time()
@@ -370,6 +371,6 @@ if __name__ == '__main__':
     window.show()
     print(time.time() - start_setup)
     logging.basicConfig(level=logging.INFO)
-    print(time.time() - start_init)
+    print(time.time() - start)
     exit_code = app.exec()
     sys.exit(exit_code)

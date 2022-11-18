@@ -7,7 +7,6 @@ charset="UTF-8";
 	"zlib" [label="<f0> Extension| <f1> zlib",shape="record"];
 	"importlib.readers" [label="<f0> SourceModule| <f1> importlib.readers",shape="record"];
 	"importlib" [label="<f0> Package| <f1> importlib",shape="record"];
-	"importlib.machinery" [label="<f0> SourceModule| <f1> importlib.machinery",shape="record"];
 	"importlib._bootstrap_external" [label="<f0> SourceModule| <f1> importlib._bootstrap_external",shape="record"];
 	"importlib.metadata" [label="<f0> Package| <f1> importlib.metadata",shape="record"];
 	"typing" [label="<f0> SourceModule| <f1> typing",shape="record"];
@@ -46,8 +45,8 @@ charset="UTF-8";
 	"ast" [label="<f0> SourceModule| <f1> ast",shape="record"];
 	"_ast" [label="<f0> BuiltinModule| <f1> _ast",shape="record"];
 	"copy" [label="<f0> SourceModule| <f1> copy",shape="record"];
-	"'org.python'" [label="<f0> MissingModule| <f1> 'org.python'",shape="record"];
 	"org" [label="<f0> MissingModule| <f1> org",shape="record"];
+	"'org.python'" [label="<f0> MissingModule| <f1> 'org.python'",shape="record"];
 	"_compat_pickle" [label="<f0> SourceModule| <f1> _compat_pickle",shape="record"];
 	"struct" [label="<f0> SourceModule| <f1> struct",shape="record"];
 	"_struct" [label="<f0> Extension| <f1> _struct",shape="record"];
@@ -79,6 +78,7 @@ charset="UTF-8";
 	"bz2" [label="<f0> SourceModule| <f1> bz2",shape="record"];
 	"_bz2" [label="<f0> Extension| <f1> _bz2",shape="record"];
 	"importlib._abc" [label="<f0> SourceModule| <f1> importlib._abc",shape="record"];
+	"importlib.machinery" [label="<f0> SourceModule| <f1> importlib.machinery",shape="record"];
 	"contextlib" [label="<f0> SourceModule| <f1> contextlib",shape="record"];
 	"importlib.metadata._itertools" [label="<f0> SourceModule| <f1> importlib.metadata._itertools",shape="record"];
 	"importlib.metadata._functools" [label="<f0> SourceModule| <f1> importlib.metadata._functools",shape="record"];
@@ -656,24 +656,55 @@ charset="UTF-8";
 	"java" [label="<f0> MissingModule| <f1> java",shape="record"];
 	"plistlib" [label="<f0> SourceModule| <f1> plistlib",shape="record"];
 	"faulthandler" [label="<f0> BuiltinModule| <f1> faulthandler",shape="record"];
+	"os" [label="<f0> SourceModule| <f1> os",shape="record"];
+	"ntpath" [label="<f0> SourceModule| <f1> ntpath",shape="record"];
+	"io" [label="<f0> SourceModule| <f1> io",shape="record"];
+	"warnings" [label="<f0> SourceModule| <f1> warnings",shape="record"];
+	"tracemalloc" [label="<f0> SourceModule| <f1> tracemalloc",shape="record"];
+	"_tracemalloc" [label="<f0> BuiltinModule| <f1> _tracemalloc",shape="record"];
+	"tokenize" [label="<f0> SourceModule| <f1> tokenize",shape="record"];
+	"_tokenize" [label="<f0> BuiltinModule| <f1> _tokenize",shape="record"];
+	"collections.abc" [label="<f0> SourceModule| <f1> collections.abc",shape="record"];
+	"collections" [label="<f0> Package| <f1> collections",shape="record"];
+	"types" [label="<f0> SourceModule| <f1> types",shape="record"];
+	"linecache" [label="<f0> SourceModule| <f1> linecache",shape="record"];
 	"_weakrefset" [label="<f0> SourceModule| <f1> _weakrefset",shape="record"];
+	"genericpath" [label="<f0> SourceModule| <f1> genericpath",shape="record"];
+	"reprlib" [label="<f0> SourceModule| <f1> reprlib",shape="record"];
+	"keyword" [label="<f0> SourceModule| <f1> keyword",shape="record"];
+	"sre_compile" [label="<f0> SourceModule| <f1> sre_compile",shape="record"];
+	"sre_parse" [label="<f0> SourceModule| <f1> sre_parse",shape="record"];
+	"abc" [label="<f0> SourceModule| <f1> abc",shape="record"];
+	"_py_abc" [label="<f0> SourceModule| <f1> _py_abc",shape="record"];
+	"_abc" [label="<f0> BuiltinModule| <f1> _abc",shape="record"];
+	"functools" [label="<f0> SourceModule| <f1> functools",shape="record"];
+	"_functools" [label="<f0> BuiltinModule| <f1> _functools",shape="record"];
+	"weakref" [label="<f0> SourceModule| <f1> weakref",shape="record"];
+	"locale" [label="<f0> SourceModule| <f1> locale",shape="record"];
+	"_locale" [label="<f0> BuiltinModule| <f1> _locale",shape="record"];
+	"_collections_abc" [label="<f0> SourceModule| <f1> _collections_abc",shape="record"];
 	"re._parser" [label="<f0> SourceModule| <f1> re._parser",shape="record"];
 	"re._constants" [label="<f0> SourceModule| <f1> re._constants",shape="record"];
 	"re._compiler" [label="<f0> SourceModule| <f1> re._compiler",shape="record"];
 	"re._casefix" [label="<f0> SourceModule| <f1> re._casefix",shape="record"];
 	"re" [label="<f0> Package| <f1> re",shape="record"];
-	"collections.abc" [label="<f0> SourceModule| <f1> collections.abc",shape="record"];
-	"collections" [label="<f0> Package| <f1> collections",shape="record"];
+	"fnmatch" [label="<f0> SourceModule| <f1> fnmatch",shape="record"];
+	"pathlib" [label="<f0> SourceModule| <f1> pathlib",shape="record"];
+	"copyreg" [label="<f0> SourceModule| <f1> copyreg",shape="record"];
+	"urllib.robotparser" [label="<f0> SourceModule| <f1> urllib.robotparser",shape="record"];
+	"urllib.response" [label="<f0> SourceModule| <f1> urllib.response",shape="record"];
+	"urllib.request" [label="<f0> SourceModule| <f1> urllib.request",shape="record"];
+	"_scproxy" [label="<f0> Extension| <f1> _scproxy",shape="record"];
+	"getpass" [label="<f0> SourceModule| <f1> getpass",shape="record"];
+	"nturl2path" [label="<f0> SourceModule| <f1> nturl2path",shape="record"];
+	"ftplib" [label="<f0> SourceModule| <f1> ftplib",shape="record"];
+	"_ssl" [label="<f0> Extension| <f1> _ssl",shape="record"];
+	"urllib.parse" [label="<f0> SourceModule| <f1> urllib.parse",shape="record"];
+	"urllib.error" [label="<f0> SourceModule| <f1> urllib.error",shape="record"];
+	"urllib" [label="<f0> Package| <f1> urllib",shape="record"];
+	"token" [label="<f0> SourceModule| <f1> token",shape="record"];
 	"stat" [label="<f0> SourceModule| <f1> stat",shape="record"];
 	"_stat" [label="<f0> BuiltinModule| <f1> _stat",shape="record"];
-	"sre_constants" [label="<f0> SourceModule| <f1> sre_constants",shape="record"];
-	"functools" [label="<f0> SourceModule| <f1> functools",shape="record"];
-	"_functools" [label="<f0> BuiltinModule| <f1> _functools",shape="record"];
-	"locale" [label="<f0> SourceModule| <f1> locale",shape="record"];
-	"_locale" [label="<f0> BuiltinModule| <f1> _locale",shape="record"];
-	"os" [label="<f0> SourceModule| <f1> os",shape="record"];
-	"genericpath" [label="<f0> SourceModule| <f1> genericpath",shape="record"];
-	"fnmatch" [label="<f0> SourceModule| <f1> fnmatch",shape="record"];
 	"encodings.zlib_codec" [label="<f0> SourceModule| <f1> encodings.zlib_codec",shape="record"];
 	"encodings.uu_codec" [label="<f0> SourceModule| <f1> encodings.uu_codec",shape="record"];
 	"encodings.utf_8_sig" [label="<f0> SourceModule| <f1> encodings.utf_8_sig",shape="record"];
@@ -803,49 +834,18 @@ charset="UTF-8";
 	"encodings.ascii" [label="<f0> SourceModule| <f1> encodings.ascii",shape="record"];
 	"encodings.aliases" [label="<f0> SourceModule| <f1> encodings.aliases",shape="record"];
 	"encodings" [label="<f0> Package| <f1> encodings",shape="record"];
-	"linecache" [label="<f0> SourceModule| <f1> linecache",shape="record"];
-	"reprlib" [label="<f0> SourceModule| <f1> reprlib",shape="record"];
-	"traceback" [label="<f0> SourceModule| <f1> traceback",shape="record"];
-	"abc" [label="<f0> SourceModule| <f1> abc",shape="record"];
-	"_py_abc" [label="<f0> SourceModule| <f1> _py_abc",shape="record"];
-	"_abc" [label="<f0> BuiltinModule| <f1> _abc",shape="record"];
-	"tokenize" [label="<f0> SourceModule| <f1> tokenize",shape="record"];
-	"_tokenize" [label="<f0> BuiltinModule| <f1> _tokenize",shape="record"];
-	"io" [label="<f0> SourceModule| <f1> io",shape="record"];
-	"keyword" [label="<f0> SourceModule| <f1> keyword",shape="record"];
-	"ntpath" [label="<f0> SourceModule| <f1> ntpath",shape="record"];
-	"token" [label="<f0> SourceModule| <f1> token",shape="record"];
-	"warnings" [label="<f0> SourceModule| <f1> warnings",shape="record"];
-	"tracemalloc" [label="<f0> SourceModule| <f1> tracemalloc",shape="record"];
-	"_tracemalloc" [label="<f0> BuiltinModule| <f1> _tracemalloc",shape="record"];
-	"sre_compile" [label="<f0> SourceModule| <f1> sre_compile",shape="record"];
-	"sre_parse" [label="<f0> SourceModule| <f1> sre_parse",shape="record"];
-	"copyreg" [label="<f0> SourceModule| <f1> copyreg",shape="record"];
-	"weakref" [label="<f0> SourceModule| <f1> weakref",shape="record"];
+	"operator" [label="<f0> SourceModule| <f1> operator",shape="record"];
+	"sre_constants" [label="<f0> SourceModule| <f1> sre_constants",shape="record"];
+	"enum" [label="<f0> SourceModule| <f1> enum",shape="record"];
 	"heapq" [label="<f0> SourceModule| <f1> heapq",shape="record"];
 	"_heapq" [label="<f0> Extension| <f1> _heapq",shape="record"];
-	"pathlib" [label="<f0> SourceModule| <f1> pathlib",shape="record"];
-	"types" [label="<f0> SourceModule| <f1> types",shape="record"];
-	"urllib.robotparser" [label="<f0> SourceModule| <f1> urllib.robotparser",shape="record"];
-	"urllib.response" [label="<f0> SourceModule| <f1> urllib.response",shape="record"];
-	"urllib.request" [label="<f0> SourceModule| <f1> urllib.request",shape="record"];
-	"_scproxy" [label="<f0> Extension| <f1> _scproxy",shape="record"];
-	"getpass" [label="<f0> SourceModule| <f1> getpass",shape="record"];
-	"nturl2path" [label="<f0> SourceModule| <f1> nturl2path",shape="record"];
-	"ftplib" [label="<f0> SourceModule| <f1> ftplib",shape="record"];
-	"_ssl" [label="<f0> Extension| <f1> _ssl",shape="record"];
-	"urllib.parse" [label="<f0> SourceModule| <f1> urllib.parse",shape="record"];
-	"urllib.error" [label="<f0> SourceModule| <f1> urllib.error",shape="record"];
-	"urllib" [label="<f0> Package| <f1> urllib",shape="record"];
-	"enum" [label="<f0> SourceModule| <f1> enum",shape="record"];
-	"_collections_abc" [label="<f0> SourceModule| <f1> _collections_abc",shape="record"];
-	"operator" [label="<f0> SourceModule| <f1> operator",shape="record"];
+	"traceback" [label="<f0> SourceModule| <f1> traceback",shape="record"];
 	"_sre" [label="<f0> BuiltinModule| <f1> _sre",shape="record"];
-	"_posixsubprocess" [label="<f0> Extension| <f1> _posixsubprocess",shape="record"];
 	"datetime" [label="<f0> SourceModule| <f1> datetime",shape="record"];
 	"_strptime" [label="<f0> SourceModule| <f1> _strptime",shape="record"];
 	"_datetime" [label="<f0> Extension| <f1> _datetime",shape="record"];
 	"_pickle" [label="<f0> Extension| <f1> _pickle",shape="record"];
+	"_posixsubprocess" [label="<f0> Extension| <f1> _posixsubprocess",shape="record"];
 	"posixpath" [label="<f0> SourceModule| <f1> posixpath",shape="record"];
 	"posix" [label="<f0> BuiltinModule| <f1> posix",shape="record"];
 	"resource" [label="<f0> Extension| <f1> resource",shape="record"];
@@ -853,91 +853,6 @@ charset="UTF-8";
 	"_codecs" [label="<f0> BuiltinModule| <f1> _codecs",shape="record"];
 	"time" [label="<f0> BuiltinModule| <f1> time",shape="record"];
 	"gc" [label="<f0> BuiltinModule| <f1> gc",shape="record"];
-	subgraph "cluster_selenium.webdriver.firefox" {
-		label="selenium.webdriver.firefox";
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.firefox_profile" [style="dotted"];
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.options" [style="dotted"];
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.webdriver" [style="dotted"];
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.remote_connection" [style="dotted"];
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.firefox_binary" [style="dotted"];
-		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.service" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.support" {
-		label="selenium.webdriver.support";
-		"selenium.webdriver.support" -> "selenium.webdriver.support.relative_locator" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver" {
-		label="selenium.webdriver";
-		"selenium.webdriver" -> "selenium.webdriver.chrome" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.common" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.edge" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.firefox" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.ie" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.remote" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.safari" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.webkitgtk" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.wpewebkit" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.chromium" [style="dotted"];
-		"selenium.webdriver" -> "selenium.webdriver.support" [style="dotted"];
-	}
-	subgraph "cluster_idna" {
-		label="idna";
-		"idna" -> "idna.package_data" [style="dotted"];
-		"idna" -> "idna.idnadata" [style="dotted"];
-		"idna" -> "idna.core" [style="dotted"];
-		"idna" -> "idna.intranges" [style="dotted"];
-		"idna" -> "idna.uts46data" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.chrome" {
-		label="selenium.webdriver.chrome";
-		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.options" [style="dotted"];
-		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.webdriver" [style="dotted"];
-		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.service" [style="dotted"];
-	}
-	subgraph "cluster_urllib" {
-		label="urllib";
-		"urllib" -> "urllib.urlencode" [style="dotted"];
-		"urllib" -> "urllib.urlopen" [style="dotted"];
-		"urllib" -> "urllib.error" [style="dotted"];
-		"urllib" -> "urllib.parse" [style="dotted"];
-		"urllib" -> "urllib.request" [style="dotted"];
-		"urllib" -> "urllib.response" [style="dotted"];
-		"urllib" -> "urllib.robotparser" [style="dotted"];
-		"urllib" -> "urllib2" [style="dotted"];
-	}
-	subgraph "cluster_importlib.resources" {
-		label="importlib.resources";
-		"importlib.resources" -> "importlib.resources._common" [style="dotted"];
-		"importlib.resources" -> "importlib.resources._legacy" [style="dotted"];
-		"importlib.resources" -> "importlib.resources.abc" [style="dotted"];
-		"importlib.resources" -> "importlib.resources.readers" [style="dotted"];
-		"importlib.resources" -> "importlib.resources._adapters" [style="dotted"];
-		"importlib.resources" -> "importlib.resources._itertools" [style="dotted"];
-	}
-	subgraph "cluster_PySide6" {
-		label="PySide6";
-		"PySide6" -> "PySide6.QtNetwork" [style="dotted"];
-		"PySide6" -> "PySide6.QtCore" [style="dotted"];
-		"PySide6" -> "PySide6.QtWidgets" [style="dotted"];
-		"PySide6" -> "PySide6.QtGui" [style="dotted"];
-		"PySide6" -> "PySide6.QtDBus" [style="dotted"];
-		"PySide6" -> "PySide6.QtUiTools" [style="dotted"];
-		"PySide6" -> "PySide6.QtOpenGL" [style="dotted"];
-		"PySide6" -> "PySide6.QtOpenGLWidgets" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.common.actions" {
-		label="selenium.webdriver.common.actions";
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.interaction" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.action_builder" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.wheel_input" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.input_device" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.key_actions" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.key_input" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.pointer_actions" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.pointer_input" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.wheel_actions" [style="dotted"];
-		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.mouse_button" [style="dotted"];
-	}
 	subgraph "cluster_pygit2" {
 		label="pygit2";
 		"pygit2" -> "pygit2._pygit2" [style="dotted"];
@@ -958,44 +873,26 @@ charset="UTF-8";
 		"pygit2" -> "pygit2.refspec" [style="dotted"];
 		"pygit2" -> "pygit2._libgit2" [style="dotted"];
 	}
-	subgraph "cluster_unittest" {
-		label="unittest";
-		"unittest" -> "unittest.util" [style="dotted"];
-		"unittest" -> "unittest.result" [style="dotted"];
-		"unittest" -> "unittest.case" [style="dotted"];
-		"unittest" -> "unittest.suite" [style="dotted"];
-		"unittest" -> "unittest.loader" [style="dotted"];
-		"unittest" -> "unittest.runner" [style="dotted"];
-		"unittest" -> "unittest.main" [style="dotted"];
-		"unittest" -> "unittest.signals" [style="dotted"];
-		"unittest" -> "unittest.async_case" [style="dotted"];
-		"unittest" -> "unittest._log" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.wpewebkit" {
+		label="selenium.webdriver.wpewebkit";
+		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.options" [style="dotted"];
+		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.webdriver" [style="dotted"];
+		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.service" [style="dotted"];
 	}
-	subgraph "cluster_xml.sax" {
-		label="xml.sax";
-		"xml.sax" -> "xml.sax.handler" [style="dotted"];
-		"xml.sax" -> "xml.sax.xmlreader" [style="dotted"];
-		"xml.sax" -> "xml.sax.saxutils" [style="dotted"];
-		"xml.sax" -> "xml.sax._exceptions" [style="dotted"];
-		"xml.sax" -> "xml.sax.expatreader" [style="dotted"];
+	subgraph "cluster_importlib" {
+		label="importlib";
+		"importlib" -> "importlib._bootstrap" [style="dotted"];
+		"importlib" -> "importlib._bootstrap_external" [style="dotted"];
+		"importlib" -> "importlib.readers" [style="dotted"];
+		"importlib" -> "importlib.metadata" [style="dotted"];
+		"importlib" -> "importlib.abc" [style="dotted"];
+		"importlib" -> "importlib.machinery" [style="dotted"];
+		"importlib" -> "importlib._abc" [style="dotted"];
+		"importlib" -> "importlib.resources" [style="dotted"];
+		"importlib" -> "importlib.util" [style="dotted"];
 	}
-	subgraph "cluster_collections" {
-		label="collections";
-		"collections" -> "collections.Mapping" [style="dotted"];
-		"collections" -> "collections.MutableMapping" [style="dotted"];
-		"collections" -> "collections.Callable" [style="dotted"];
-		"collections" -> "collections.MutableSet" [style="dotted"];
-		"collections" -> "collections.abc" [style="dotted"];
-	}
-	subgraph "cluster_ctypes" {
-		label="ctypes";
-		"ctypes" -> "ctypes._endian" [style="dotted"];
-	}
-	subgraph "cluster_selenium" {
-		label="selenium";
-		"selenium" -> "selenium.webdriver" [style="dotted"];
-		"selenium" -> "selenium.types" [style="dotted"];
-		"selenium" -> "selenium.common" [style="dotted"];
+	subgraph "cluster_urllib3.packages.six.moves" {
+		label="urllib3.packages.six.moves";
 	}
 	subgraph "cluster_bs4.builder" {
 		label="bs4.builder";
@@ -1003,106 +900,97 @@ charset="UTF-8";
 		"bs4.builder" -> "bs4.builder._html5lib" [style="dotted"];
 		"bs4.builder" -> "bs4.builder._lxml" [style="dotted"];
 	}
-	subgraph "cluster_selenium.webdriver.common.html5" {
-		label="selenium.webdriver.common.html5";
-		"selenium.webdriver.common.html5" -> "selenium.webdriver.common.html5.application_cache" [style="dotted"];
-	}
-	subgraph "cluster_shiboken6" {
-		label="shiboken6";
-		"shiboken6" -> "shiboken6.Shiboken" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.common" {
-		label="selenium.webdriver.common";
-		"selenium.webdriver.common" -> "selenium.webdriver.common.utils" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.action_chains" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.desired_capabilities" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.keys" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.proxy" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.service" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.selenium_manager" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.options" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.by" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.print_page_options" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.timeouts" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.virtual_authenticator" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.alert" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.html5" [style="dotted"];
-		"selenium.webdriver.common" -> "selenium.webdriver.common.actions" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.edge" {
-		label="selenium.webdriver.edge";
-		"selenium.webdriver.edge" -> "selenium.webdriver.edge.options" [style="dotted"];
-		"selenium.webdriver.edge" -> "selenium.webdriver.edge.webdriver" [style="dotted"];
-		"selenium.webdriver.edge" -> "selenium.webdriver.edge.service" [style="dotted"];
-	}
-	subgraph "cluster_certifi" {
-		label="certifi";
-		"certifi" -> "certifi.core" [style="dotted"];
-	}
-	subgraph "cluster_xml.dom" {
-		label="xml.dom";
-		"xml.dom" -> "xml.dom.domreg" [style="dotted"];
-		"xml.dom" -> "xml.dom.xmlbuilder" [style="dotted"];
-		"xml.dom" -> "xml.dom.minidom" [style="dotted"];
-		"xml.dom" -> "xml.dom.pulldom" [style="dotted"];
-		"xml.dom" -> "xml.dom.minicompat" [style="dotted"];
-		"xml.dom" -> "xml.dom.expatbuilder" [style="dotted"];
-		"xml.dom" -> "xml.dom.NodeFilter" [style="dotted"];
-	}
 	subgraph "cluster_urllib3.packages" {
 		label="urllib3.packages";
 		"urllib3.packages" -> "urllib3.packages.six" [style="dotted"];
 		"urllib3.packages" -> "urllib3.packages.backports" [style="dotted"];
 	}
-	subgraph "cluster_multiprocessing" {
-		label="multiprocessing";
-		"multiprocessing" -> "multiprocessing.process" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.util" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.AuthenticationError" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.BufferTooShort" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.resource_sharer" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.connection" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.get_start_method" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.set_start_method" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.resource_tracker" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.spawn" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.forkserver" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.reduction" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.get_context" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.TimeoutError" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.pool" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.shared_memory" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.context" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.popen_spawn_win32" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.popen_fork" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.popen_spawn_posix" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.managers" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.synchronize" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.queues" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.sharedctypes" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.popen_forkserver" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.heap" [style="dotted"];
-		"multiprocessing" -> "multiprocessing.dummy" [style="dotted"];
+	subgraph "cluster_markupsafe" {
+		label="markupsafe";
+		"markupsafe" -> "markupsafe._speedups" [style="dotted"];
+		"markupsafe" -> "markupsafe._native" [style="dotted"];
 	}
-	subgraph "cluster_bs4" {
-		label="bs4";
-		"bs4" -> "bs4.builder" [style="dotted"];
-		"bs4" -> "bs4.dammit" [style="dotted"];
-		"bs4" -> "bs4.element" [style="dotted"];
-		"bs4" -> "bs4.formatter" [style="dotted"];
+	subgraph "cluster_qt_material.resources" {
+		label="qt_material.resources";
+		"qt_material.resources" -> "qt_material.resources.generate" [style="dotted"];
 	}
-	subgraph "cluster_lxml.isoschematron" {
-		label="lxml.isoschematron";
+	subgraph "cluster_certifi" {
+		label="certifi";
+		"certifi" -> "certifi.core" [style="dotted"];
 	}
-	subgraph "cluster_pydoc_data" {
-		label="pydoc_data";
-		"pydoc_data" -> "pydoc_data.topics" [style="dotted"];
+	subgraph "cluster_multiprocessing.dummy" {
+		label="multiprocessing.dummy";
+		"multiprocessing.dummy" -> "multiprocessing.dummy.connection" [style="dotted"];
 	}
-	subgraph "cluster_selenium.webdriver.ie" {
-		label="selenium.webdriver.ie";
-		"selenium.webdriver.ie" -> "selenium.webdriver.ie.options" [style="dotted"];
-		"selenium.webdriver.ie" -> "selenium.webdriver.ie.webdriver" [style="dotted"];
-		"selenium.webdriver.ie" -> "selenium.webdriver.ie.service" [style="dotted"];
+	subgraph "cluster_PySide6" {
+		label="PySide6";
+		"PySide6" -> "PySide6.QtNetwork" [style="dotted"];
+		"PySide6" -> "PySide6.QtCore" [style="dotted"];
+		"PySide6" -> "PySide6.QtWidgets" [style="dotted"];
+		"PySide6" -> "PySide6.QtGui" [style="dotted"];
+		"PySide6" -> "PySide6.QtDBus" [style="dotted"];
+		"PySide6" -> "PySide6.QtUiTools" [style="dotted"];
+		"PySide6" -> "PySide6.QtOpenGL" [style="dotted"];
+		"PySide6" -> "PySide6.QtOpenGLWidgets" [style="dotted"];
+	}
+	subgraph "cluster_concurrent" {
+		label="concurrent";
+		"concurrent" -> "concurrent.futures" [style="dotted"];
+	}
+	subgraph "cluster_lxml" {
+		label="lxml";
+		"lxml" -> "lxml.etree" [style="dotted"];
+		"lxml" -> "lxml.ElementInclude" [style="dotted"];
+		"lxml" -> "lxml._elementpath" [style="dotted"];
+		"lxml" -> "lxml.builder" [style="dotted"];
+		"lxml" -> "lxml.cssselect" [style="dotted"];
+		"lxml" -> "lxml.doctestcompare" [style="dotted"];
+		"lxml" -> "lxml.html" [style="dotted"];
+		"lxml" -> "lxml.includes" [style="dotted"];
+		"lxml" -> "lxml.isoschematron" [style="dotted"];
+		"lxml" -> "lxml.objectify" [style="dotted"];
+		"lxml" -> "lxml.pyclasslookup" [style="dotted"];
+		"lxml" -> "lxml.sax" [style="dotted"];
+		"lxml" -> "lxml.usedoctest" [style="dotted"];
+	}
+	subgraph "cluster_lxml.includes" {
+		label="lxml.includes";
+	}
+	subgraph "cluster_requests" {
+		label="requests";
+		"requests" -> "requests.exceptions" [style="dotted"];
+		"requests" -> "requests.packages" [style="dotted"];
+		"requests" -> "requests.certs" [style="dotted"];
+		"requests" -> "requests.utils" [style="dotted"];
+		"requests" -> "requests.__version__" [style="dotted"];
+		"requests" -> "requests.sessions" [style="dotted"];
+		"requests" -> "requests.api" [style="dotted"];
+		"requests" -> "requests.models" [style="dotted"];
+		"requests" -> "requests.status_codes" [style="dotted"];
+		"requests" -> "requests.structures" [style="dotted"];
+		"requests" -> "requests.compat" [style="dotted"];
+		"requests" -> "requests._internal_utils" [style="dotted"];
+		"requests" -> "requests.auth" [style="dotted"];
+		"requests" -> "requests.cookies" [style="dotted"];
+		"requests" -> "requests.hooks" [style="dotted"];
+		"requests" -> "requests.adapters" [style="dotted"];
+	}
+	subgraph "cluster_ctypes" {
+		label="ctypes";
+		"ctypes" -> "ctypes._endian" [style="dotted"];
+	}
+	subgraph "cluster_soupsieve" {
+		label="soupsieve";
+		"soupsieve" -> "soupsieve.__meta__" [style="dotted"];
+		"soupsieve" -> "soupsieve.util" [style="dotted"];
+		"soupsieve" -> "soupsieve.css_types" [style="dotted"];
+		"soupsieve" -> "soupsieve.css_match" [style="dotted"];
+		"soupsieve" -> "soupsieve.css_parser" [style="dotted"];
+		"soupsieve" -> "soupsieve.pretty" [style="dotted"];
+	}
+	subgraph "cluster_qt_material" {
+		label="qt_material";
+		"qt_material" -> "qt_material.resources" [style="dotted"];
 	}
 	subgraph "cluster_encodings" {
 		label="encodings";
@@ -1228,30 +1116,225 @@ charset="UTF-8";
 		"encodings" -> "encodings.uu_codec" [style="dotted"];
 		"encodings" -> "encodings.zlib_codec" [style="dotted"];
 	}
-	subgraph "cluster_logging" {
-		label="logging";
+	subgraph "cluster_urllib" {
+		label="urllib";
+		"urllib" -> "urllib.urlencode" [style="dotted"];
+		"urllib" -> "urllib.urlopen" [style="dotted"];
+		"urllib" -> "urllib.error" [style="dotted"];
+		"urllib" -> "urllib.parse" [style="dotted"];
+		"urllib" -> "urllib.request" [style="dotted"];
+		"urllib" -> "urllib.response" [style="dotted"];
+		"urllib" -> "urllib.robotparser" [style="dotted"];
+		"urllib" -> "urllib2" [style="dotted"];
+		"urllib" -> "urllib3" [style="dotted"];
 	}
-	subgraph "cluster_email" {
-		label="email";
-		"email" -> "email.errors" [style="dotted"];
-		"email" -> "email.charset" [style="dotted"];
-		"email" -> "email.header" [style="dotted"];
-		"email" -> "email._header_value_parser" [style="dotted"];
-		"email" -> "email.parser" [style="dotted"];
-		"email" -> "email.message" [style="dotted"];
-		"email" -> "email.utils" [style="dotted"];
-		"email" -> "email._policybase" [style="dotted"];
-		"email" -> "email._encoded_words" [style="dotted"];
-		"email" -> "email.generator" [style="dotted"];
-		"email" -> "email.iterators" [style="dotted"];
-		"email" -> "email.policy" [style="dotted"];
-		"email" -> "email.headerregistry" [style="dotted"];
-		"email" -> "email.contentmanager" [style="dotted"];
-		"email" -> "email.quoprimime" [style="dotted"];
-		"email" -> "email.base64mime" [style="dotted"];
-		"email" -> "email.encoders" [style="dotted"];
-		"email" -> "email._parseaddr" [style="dotted"];
-		"email" -> "email.feedparser" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.support" {
+		label="selenium.webdriver.support";
+		"selenium.webdriver.support" -> "selenium.webdriver.support.relative_locator" [style="dotted"];
+	}
+	subgraph "cluster_mainwindow" {
+		label="mainwindow";
+	}
+	subgraph "cluster_concurrent.futures" {
+		label="concurrent.futures";
+		"concurrent.futures" -> "concurrent.futures._base" [style="dotted"];
+		"concurrent.futures" -> "concurrent.futures.process" [style="dotted"];
+		"concurrent.futures" -> "concurrent.futures.thread" [style="dotted"];
+	}
+	subgraph "cluster_bs4" {
+		label="bs4";
+		"bs4" -> "bs4.builder" [style="dotted"];
+		"bs4" -> "bs4.dammit" [style="dotted"];
+		"bs4" -> "bs4.element" [style="dotted"];
+		"bs4" -> "bs4.formatter" [style="dotted"];
+	}
+	subgraph "cluster_json" {
+		label="json";
+		"json" -> "json.scanner" [style="dotted"];
+		"json" -> "json.decoder" [style="dotted"];
+		"json" -> "json.encoder" [style="dotted"];
+	}
+	subgraph "cluster_selenium.webdriver.common" {
+		label="selenium.webdriver.common";
+		"selenium.webdriver.common" -> "selenium.webdriver.common.utils" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.action_chains" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.desired_capabilities" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.keys" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.proxy" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.service" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.selenium_manager" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.options" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.by" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.print_page_options" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.timeouts" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.virtual_authenticator" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.alert" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.html5" [style="dotted"];
+		"selenium.webdriver.common" -> "selenium.webdriver.common.actions" [style="dotted"];
+	}
+	subgraph "cluster_urllib3.contrib" {
+		label="urllib3.contrib";
+		"urllib3.contrib" -> "urllib3.contrib._appengine_environ" [style="dotted"];
+		"urllib3.contrib" -> "urllib3.contrib.pyopenssl" [style="dotted"];
+		"urllib3.contrib" -> "urllib3.contrib.socks" [style="dotted"];
+	}
+	subgraph "cluster_shiboken6" {
+		label="shiboken6";
+		"shiboken6" -> "shiboken6.Shiboken" [style="dotted"];
+	}
+	subgraph "cluster_charset_normalizer" {
+		label="charset_normalizer";
+		"charset_normalizer" -> "charset_normalizer.api" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.legacy" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.models" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.utils" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.version" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.constant" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.assets" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.md" [style="dotted"];
+		"charset_normalizer" -> "charset_normalizer.cd" [style="dotted"];
+	}
+	subgraph "cluster_xml.dom" {
+		label="xml.dom";
+		"xml.dom" -> "xml.dom.domreg" [style="dotted"];
+		"xml.dom" -> "xml.dom.xmlbuilder" [style="dotted"];
+		"xml.dom" -> "xml.dom.minidom" [style="dotted"];
+		"xml.dom" -> "xml.dom.pulldom" [style="dotted"];
+		"xml.dom" -> "xml.dom.minicompat" [style="dotted"];
+		"xml.dom" -> "xml.dom.expatbuilder" [style="dotted"];
+		"xml.dom" -> "xml.dom.NodeFilter" [style="dotted"];
+	}
+	subgraph "cluster_selenium.webdriver.safari" {
+		label="selenium.webdriver.safari";
+		"selenium.webdriver.safari" -> "selenium.webdriver.safari.webdriver" [style="dotted"];
+		"selenium.webdriver.safari" -> "selenium.webdriver.safari.options" [style="dotted"];
+		"selenium.webdriver.safari" -> "selenium.webdriver.safari.remote_connection" [style="dotted"];
+		"selenium.webdriver.safari" -> "selenium.webdriver.safari.service" [style="dotted"];
+	}
+	subgraph "cluster_re" {
+		label="re";
+		"re" -> "re._parser" [style="dotted"];
+		"re" -> "re._compiler" [style="dotted"];
+		"re" -> "re._constants" [style="dotted"];
+		"re" -> "re._casefix" [style="dotted"];
+	}
+	subgraph "cluster_jinja2" {
+		label="jinja2";
+		"jinja2" -> "jinja2.nodes" [style="dotted"];
+		"jinja2" -> "jinja2.bccache" [style="dotted"];
+		"jinja2" -> "jinja2.environment" [style="dotted"];
+		"jinja2" -> "jinja2.exceptions" [style="dotted"];
+		"jinja2" -> "jinja2.loaders" [style="dotted"];
+		"jinja2" -> "jinja2.runtime" [style="dotted"];
+		"jinja2" -> "jinja2.utils" [style="dotted"];
+		"jinja2" -> "jinja2.ext" [style="dotted"];
+		"jinja2" -> "jinja2.defaults" [style="dotted"];
+		"jinja2" -> "jinja2.lexer" [style="dotted"];
+		"jinja2" -> "jinja2.parser" [style="dotted"];
+		"jinja2" -> "jinja2._identifier" [style="dotted"];
+		"jinja2" -> "jinja2.filters" [style="dotted"];
+		"jinja2" -> "jinja2.tests" [style="dotted"];
+		"jinja2" -> "jinja2.async_utils" [style="dotted"];
+		"jinja2" -> "jinja2.sandbox" [style="dotted"];
+		"jinja2" -> "jinja2.constants" [style="dotted"];
+		"jinja2" -> "jinja2.compiler" [style="dotted"];
+		"jinja2" -> "jinja2.debug" [style="dotted"];
+		"jinja2" -> "jinja2.idtracking" [style="dotted"];
+		"jinja2" -> "jinja2.optimizer" [style="dotted"];
+		"jinja2" -> "jinja2.visitor" [style="dotted"];
+	}
+	subgraph "cluster_selenium.webdriver.common.actions" {
+		label="selenium.webdriver.common.actions";
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.interaction" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.action_builder" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.wheel_input" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.input_device" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.key_actions" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.key_input" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.pointer_actions" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.pointer_input" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.wheel_actions" [style="dotted"];
+		"selenium.webdriver.common.actions" -> "selenium.webdriver.common.actions.mouse_button" [style="dotted"];
+	}
+	subgraph "cluster_xml.sax" {
+		label="xml.sax";
+		"xml.sax" -> "xml.sax.handler" [style="dotted"];
+		"xml.sax" -> "xml.sax.xmlreader" [style="dotted"];
+		"xml.sax" -> "xml.sax.saxutils" [style="dotted"];
+		"xml.sax" -> "xml.sax._exceptions" [style="dotted"];
+		"xml.sax" -> "xml.sax.expatreader" [style="dotted"];
+	}
+	subgraph "cluster_pydoc_data" {
+		label="pydoc_data";
+		"pydoc_data" -> "pydoc_data.topics" [style="dotted"];
+	}
+	subgraph "cluster_idna" {
+		label="idna";
+		"idna" -> "idna.package_data" [style="dotted"];
+		"idna" -> "idna.idnadata" [style="dotted"];
+		"idna" -> "idna.core" [style="dotted"];
+		"idna" -> "idna.intranges" [style="dotted"];
+		"idna" -> "idna.uts46data" [style="dotted"];
+	}
+	subgraph "cluster_urllib3" {
+		label="urllib3";
+		"urllib3" -> "urllib3.exceptions" [style="dotted"];
+		"urllib3" -> "urllib3._version" [style="dotted"];
+		"urllib3" -> "urllib3.connectionpool" [style="dotted"];
+		"urllib3" -> "urllib3.filepost" [style="dotted"];
+		"urllib3" -> "urllib3.poolmanager" [style="dotted"];
+		"urllib3" -> "urllib3.response" [style="dotted"];
+		"urllib3" -> "urllib3.connection" [style="dotted"];
+		"urllib3" -> "urllib3.contrib" [style="dotted"];
+		"urllib3" -> "urllib3.packages" [style="dotted"];
+		"urllib3" -> "urllib3.util" [style="dotted"];
+		"urllib3" -> "urllib3._collections" [style="dotted"];
+		"urllib3" -> "urllib3.request" [style="dotted"];
+		"urllib3" -> "urllib3.fields" [style="dotted"];
+	}
+	subgraph "cluster_http" {
+		label="http";
+		"http" -> "http.client" [style="dotted"];
+		"http" -> "http.server" [style="dotted"];
+		"http" -> "urllib3.packages.six.moves.http_client" [style="dotted"];
+		"http" -> "http.cookiejar" [style="dotted"];
+		"http" -> "http.cookies" [style="dotted"];
+	}
+	subgraph "cluster_xml" {
+		label="xml";
+		"xml" -> "xml.parsers" [style="dotted"];
+		"xml" -> "xml.sax" [style="dotted"];
+		"xml" -> "xml.dom" [style="dotted"];
+	}
+	subgraph "cluster_multiprocessing" {
+		label="multiprocessing";
+		"multiprocessing" -> "multiprocessing.process" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.util" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.AuthenticationError" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.BufferTooShort" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.resource_sharer" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.connection" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.get_start_method" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.set_start_method" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.resource_tracker" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.spawn" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.forkserver" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.reduction" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.get_context" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.TimeoutError" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.pool" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.shared_memory" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.context" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.popen_spawn_win32" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.popen_fork" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.popen_spawn_posix" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.managers" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.synchronize" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.queues" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.sharedctypes" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.popen_forkserver" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.heap" [style="dotted"];
+		"multiprocessing" -> "multiprocessing.dummy" [style="dotted"];
 	}
 	subgraph "cluster_chardet" {
 		label="chardet";
@@ -1295,71 +1378,56 @@ charset="UTF-8";
 		"chardet" -> "chardet.johabfreq" [style="dotted"];
 		"chardet" -> "chardet.escsm" [style="dotted"];
 	}
-	subgraph "cluster_selenium.webdriver.safari" {
-		label="selenium.webdriver.safari";
-		"selenium.webdriver.safari" -> "selenium.webdriver.safari.webdriver" [style="dotted"];
-		"selenium.webdriver.safari" -> "selenium.webdriver.safari.options" [style="dotted"];
-		"selenium.webdriver.safari" -> "selenium.webdriver.safari.remote_connection" [style="dotted"];
-		"selenium.webdriver.safari" -> "selenium.webdriver.safari.service" [style="dotted"];
-	}
-	subgraph "cluster_qt_material.resources" {
-		label="qt_material.resources";
-		"qt_material.resources" -> "qt_material.resources.generate" [style="dotted"];
-	}
-	subgraph "cluster_urllib3.packages.six.moves" {
-		label="urllib3.packages.six.moves";
-	}
-	subgraph "cluster_markupsafe" {
-		label="markupsafe";
-		"markupsafe" -> "markupsafe._speedups" [style="dotted"];
-		"markupsafe" -> "markupsafe._native" [style="dotted"];
-	}
-	subgraph "cluster_xml.parsers" {
-		label="xml.parsers";
-		"xml.parsers" -> "xml.parsers.expat" [style="dotted"];
-	}
-	subgraph "cluster_urllib3.util" {
-		label="urllib3.util";
-		"urllib3.util" -> "urllib3.util.connection" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.request" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.response" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.retry" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.ssl_" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.timeout" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.url" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.wait" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.ssltransport" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.proxy" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.queue" [style="dotted"];
-		"urllib3.util" -> "urllib3.util.ssl_match_hostname" [style="dotted"];
+	subgraph "cluster_importlib.metadata" {
+		label="importlib.metadata";
+		"importlib.metadata" -> "importlib.metadata._adapters" [style="dotted"];
+		"importlib.metadata" -> "importlib.metadata._meta" [style="dotted"];
+		"importlib.metadata" -> "importlib.metadata._collections" [style="dotted"];
+		"importlib.metadata" -> "importlib.metadata._functools" [style="dotted"];
+		"importlib.metadata" -> "importlib.metadata._itertools" [style="dotted"];
+		"importlib.metadata" -> "importlib.metadata._text" [style="dotted"];
 	}
 	subgraph "cluster_xmlrpc" {
 		label="xmlrpc";
 		"xmlrpc" -> "xmlrpc.client" [style="dotted"];
 	}
-	subgraph "cluster_mainwindow" {
-		label="mainwindow";
+	subgraph "cluster_xml.parsers" {
+		label="xml.parsers";
+		"xml.parsers" -> "xml.parsers.expat" [style="dotted"];
 	}
-	subgraph "cluster_lxml.includes" {
-		label="lxml.includes";
+	subgraph "cluster_selenium.webdriver.common.html5" {
+		label="selenium.webdriver.common.html5";
+		"selenium.webdriver.common.html5" -> "selenium.webdriver.common.html5.application_cache" [style="dotted"];
 	}
-	subgraph "cluster_soupsieve" {
-		label="soupsieve";
-		"soupsieve" -> "soupsieve.__meta__" [style="dotted"];
-		"soupsieve" -> "soupsieve.util" [style="dotted"];
-		"soupsieve" -> "soupsieve.css_types" [style="dotted"];
-		"soupsieve" -> "soupsieve.css_match" [style="dotted"];
-		"soupsieve" -> "soupsieve.css_parser" [style="dotted"];
-		"soupsieve" -> "soupsieve.pretty" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.edge" {
+		label="selenium.webdriver.edge";
+		"selenium.webdriver.edge" -> "selenium.webdriver.edge.options" [style="dotted"];
+		"selenium.webdriver.edge" -> "selenium.webdriver.edge.webdriver" [style="dotted"];
+		"selenium.webdriver.edge" -> "selenium.webdriver.edge.service" [style="dotted"];
 	}
-	subgraph "cluster_selenium.webdriver.webkitgtk" {
-		label="selenium.webdriver.webkitgtk";
-		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.options" [style="dotted"];
-		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.webdriver" [style="dotted"];
-		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.service" [style="dotted"];
+	subgraph "cluster_lxml.isoschematron" {
+		label="lxml.isoschematron";
 	}
-	subgraph "cluster_charset_normalizer.assets" {
-		label="charset_normalizer.assets";
+	subgraph "cluster_selenium.webdriver" {
+		label="selenium.webdriver";
+		"selenium.webdriver" -> "selenium.webdriver.chrome" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.common" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.edge" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.firefox" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.ie" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.remote" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.safari" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.webkitgtk" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.wpewebkit" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.chromium" [style="dotted"];
+		"selenium.webdriver" -> "selenium.webdriver.support" [style="dotted"];
+	}
+	subgraph "cluster_selenium.webdriver.chromium" {
+		label="selenium.webdriver.chromium";
+		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.service" [style="dotted"];
+		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.remote_connection" [style="dotted"];
+		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.webdriver" [style="dotted"];
+		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.options" [style="dotted"];
 	}
 	subgraph "cluster_selenium.webdriver.remote" {
 		label="selenium.webdriver.remote";
@@ -1376,136 +1444,111 @@ charset="UTF-8";
 		"selenium.webdriver.remote" -> "selenium.webdriver.remote.switch_to" [style="dotted"];
 		"selenium.webdriver.remote" -> "selenium.webdriver.remote.webelement" [style="dotted"];
 	}
-	subgraph "cluster_importlib" {
-		label="importlib";
-		"importlib" -> "importlib._bootstrap" [style="dotted"];
-		"importlib" -> "importlib._bootstrap_external" [style="dotted"];
-		"importlib" -> "importlib.machinery" [style="dotted"];
-		"importlib" -> "importlib.readers" [style="dotted"];
-		"importlib" -> "importlib.metadata" [style="dotted"];
-		"importlib" -> "importlib.abc" [style="dotted"];
-		"importlib" -> "importlib._abc" [style="dotted"];
-		"importlib" -> "importlib.resources" [style="dotted"];
-		"importlib" -> "importlib.util" [style="dotted"];
-	}
-	subgraph "cluster_concurrent.futures" {
-		label="concurrent.futures";
-		"concurrent.futures" -> "concurrent.futures._base" [style="dotted"];
-		"concurrent.futures" -> "concurrent.futures.process" [style="dotted"];
-		"concurrent.futures" -> "concurrent.futures.thread" [style="dotted"];
-	}
-	subgraph "cluster_concurrent" {
-		label="concurrent";
-		"concurrent" -> "concurrent.futures" [style="dotted"];
-	}
 	subgraph "cluster_html" {
 		label="html";
 		"html" -> "html.entities" [style="dotted"];
 		"html" -> "html.parser" [style="dotted"];
 	}
-	subgraph "cluster_lxml" {
-		label="lxml";
-		"lxml" -> "lxml.etree" [style="dotted"];
-		"lxml" -> "lxml.ElementInclude" [style="dotted"];
-		"lxml" -> "lxml._elementpath" [style="dotted"];
-		"lxml" -> "lxml.builder" [style="dotted"];
-		"lxml" -> "lxml.cssselect" [style="dotted"];
-		"lxml" -> "lxml.doctestcompare" [style="dotted"];
-		"lxml" -> "lxml.html" [style="dotted"];
-		"lxml" -> "lxml.includes" [style="dotted"];
-		"lxml" -> "lxml.isoschematron" [style="dotted"];
-		"lxml" -> "lxml.objectify" [style="dotted"];
-		"lxml" -> "lxml.pyclasslookup" [style="dotted"];
-		"lxml" -> "lxml.sax" [style="dotted"];
-		"lxml" -> "lxml.usedoctest" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.chrome" {
+		label="selenium.webdriver.chrome";
+		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.options" [style="dotted"];
+		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.webdriver" [style="dotted"];
+		"selenium.webdriver.chrome" -> "selenium.webdriver.chrome.service" [style="dotted"];
 	}
-	subgraph "cluster_urllib3.contrib" {
-		label="urllib3.contrib";
-		"urllib3.contrib" -> "urllib3.contrib._appengine_environ" [style="dotted"];
-		"urllib3.contrib" -> "urllib3.contrib.pyopenssl" [style="dotted"];
-		"urllib3.contrib" -> "urllib3.contrib.socks" [style="dotted"];
+	subgraph "cluster_selenium" {
+		label="selenium";
+		"selenium" -> "selenium.webdriver" [style="dotted"];
+		"selenium" -> "selenium.types" [style="dotted"];
+		"selenium" -> "selenium.common" [style="dotted"];
 	}
-	subgraph "cluster_urllib3" {
-		label="urllib3";
-		"urllib3" -> "urllib3.exceptions" [style="dotted"];
-		"urllib3" -> "urllib3._version" [style="dotted"];
-		"urllib3" -> "urllib3.connectionpool" [style="dotted"];
-		"urllib3" -> "urllib3.filepost" [style="dotted"];
-		"urllib3" -> "urllib3.poolmanager" [style="dotted"];
-		"urllib3" -> "urllib3.response" [style="dotted"];
-		"urllib3" -> "urllib3.connection" [style="dotted"];
-		"urllib3" -> "urllib3.contrib" [style="dotted"];
-		"urllib3" -> "urllib3.packages" [style="dotted"];
-		"urllib3" -> "urllib3.util" [style="dotted"];
-		"urllib3" -> "urllib3._collections" [style="dotted"];
-		"urllib3" -> "urllib3.request" [style="dotted"];
-		"urllib3" -> "urllib3.fields" [style="dotted"];
+	subgraph "cluster_charset_normalizer.assets" {
+		label="charset_normalizer.assets";
 	}
-	subgraph "cluster_re" {
-		label="re";
-		"re" -> "re._parser" [style="dotted"];
-		"re" -> "re._compiler" [style="dotted"];
-		"re" -> "re._constants" [style="dotted"];
-		"re" -> "re._casefix" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.ie" {
+		label="selenium.webdriver.ie";
+		"selenium.webdriver.ie" -> "selenium.webdriver.ie.options" [style="dotted"];
+		"selenium.webdriver.ie" -> "selenium.webdriver.ie.webdriver" [style="dotted"];
+		"selenium.webdriver.ie" -> "selenium.webdriver.ie.service" [style="dotted"];
 	}
-	subgraph "cluster_importlib.metadata" {
-		label="importlib.metadata";
-		"importlib.metadata" -> "importlib.metadata._adapters" [style="dotted"];
-		"importlib.metadata" -> "importlib.metadata._meta" [style="dotted"];
-		"importlib.metadata" -> "importlib.metadata._collections" [style="dotted"];
-		"importlib.metadata" -> "importlib.metadata._functools" [style="dotted"];
-		"importlib.metadata" -> "importlib.metadata._itertools" [style="dotted"];
-		"importlib.metadata" -> "importlib.metadata._text" [style="dotted"];
-	}
-	subgraph "cluster_multiprocessing.dummy" {
-		label="multiprocessing.dummy";
-		"multiprocessing.dummy" -> "multiprocessing.dummy.connection" [style="dotted"];
-	}
-	subgraph "cluster_xml" {
-		label="xml";
-		"xml" -> "xml.parsers" [style="dotted"];
-		"xml" -> "xml.sax" [style="dotted"];
-		"xml" -> "xml.dom" [style="dotted"];
-	}
-	subgraph "cluster_lxml.html" {
-		label="lxml.html";
-		"lxml.html" -> "lxml.html.defs" [style="dotted"];
-		"lxml.html" -> "lxml.html._setmixin" [style="dotted"];
-		"lxml.html" -> "lxml.html.ElementSoup" [style="dotted"];
-		"lxml.html" -> "lxml.html._diffcommand" [style="dotted"];
-		"lxml.html" -> "lxml.html._html5builder" [style="dotted"];
-		"lxml.html" -> "lxml.html.builder" [style="dotted"];
-		"lxml.html" -> "lxml.html.clean" [style="dotted"];
-		"lxml.html" -> "lxml.html.diff" [style="dotted"];
-		"lxml.html" -> "lxml.html.formfill" [style="dotted"];
-		"lxml.html" -> "lxml.html.html5parser" [style="dotted"];
-		"lxml.html" -> "lxml.html.soupparser" [style="dotted"];
-		"lxml.html" -> "lxml.html.usedoctest" [style="dotted"];
-	}
-	subgraph "cluster_selenium.webdriver.wpewebkit" {
-		label="selenium.webdriver.wpewebkit";
-		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.options" [style="dotted"];
-		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.webdriver" [style="dotted"];
-		"selenium.webdriver.wpewebkit" -> "selenium.webdriver.wpewebkit.service" [style="dotted"];
+	subgraph "cluster_selenium.webdriver.firefox" {
+		label="selenium.webdriver.firefox";
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.firefox_profile" [style="dotted"];
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.options" [style="dotted"];
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.webdriver" [style="dotted"];
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.remote_connection" [style="dotted"];
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.firefox_binary" [style="dotted"];
+		"selenium.webdriver.firefox" -> "selenium.webdriver.firefox.service" [style="dotted"];
 	}
 	subgraph "cluster_urllib3.packages.backports" {
 		label="urllib3.packages.backports";
 		"urllib3.packages.backports" -> "urllib3.packages.backports.makefile" [style="dotted"];
 	}
-	subgraph "cluster_selenium.webdriver.chromium" {
-		label="selenium.webdriver.chromium";
-		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.service" [style="dotted"];
-		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.remote_connection" [style="dotted"];
-		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.webdriver" [style="dotted"];
-		"selenium.webdriver.chromium" -> "selenium.webdriver.chromium.options" [style="dotted"];
+	subgraph "cluster_urllib3.util" {
+		label="urllib3.util";
+		"urllib3.util" -> "urllib3.util.connection" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.request" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.response" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.retry" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.ssl_" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.timeout" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.url" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.wait" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.ssltransport" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.proxy" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.queue" [style="dotted"];
+		"urllib3.util" -> "urllib3.util.ssl_match_hostname" [style="dotted"];
 	}
-	subgraph "cluster_http" {
-		label="http";
-		"http" -> "http.client" [style="dotted"];
-		"http" -> "http.server" [style="dotted"];
-		"http" -> "urllib3.packages.six.moves.http_client" [style="dotted"];
-		"http" -> "http.cookiejar" [style="dotted"];
-		"http" -> "http.cookies" [style="dotted"];
+	subgraph "cluster_logging" {
+		label="logging";
+	}
+	subgraph "cluster_selenium.webdriver.webkitgtk" {
+		label="selenium.webdriver.webkitgtk";
+		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.options" [style="dotted"];
+		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.webdriver" [style="dotted"];
+		"selenium.webdriver.webkitgtk" -> "selenium.webdriver.webkitgtk.service" [style="dotted"];
+	}
+	subgraph "cluster_collections" {
+		label="collections";
+		"collections" -> "collections.Mapping" [style="dotted"];
+		"collections" -> "collections.MutableMapping" [style="dotted"];
+		"collections" -> "collections.Callable" [style="dotted"];
+		"collections" -> "collections.MutableSet" [style="dotted"];
+		"collections" -> "collections.abc" [style="dotted"];
+	}
+	subgraph "cluster_unittest" {
+		label="unittest";
+		"unittest" -> "unittest.util" [style="dotted"];
+		"unittest" -> "unittest.result" [style="dotted"];
+		"unittest" -> "unittest.case" [style="dotted"];
+		"unittest" -> "unittest.suite" [style="dotted"];
+		"unittest" -> "unittest.loader" [style="dotted"];
+		"unittest" -> "unittest.runner" [style="dotted"];
+		"unittest" -> "unittest.main" [style="dotted"];
+		"unittest" -> "unittest.signals" [style="dotted"];
+		"unittest" -> "unittest.async_case" [style="dotted"];
+		"unittest" -> "unittest._log" [style="dotted"];
+	}
+	subgraph "cluster_email" {
+		label="email";
+		"email" -> "email.errors" [style="dotted"];
+		"email" -> "email.charset" [style="dotted"];
+		"email" -> "email.header" [style="dotted"];
+		"email" -> "email._header_value_parser" [style="dotted"];
+		"email" -> "email.parser" [style="dotted"];
+		"email" -> "email.message" [style="dotted"];
+		"email" -> "email.utils" [style="dotted"];
+		"email" -> "email._policybase" [style="dotted"];
+		"email" -> "email._encoded_words" [style="dotted"];
+		"email" -> "email.generator" [style="dotted"];
+		"email" -> "email.iterators" [style="dotted"];
+		"email" -> "email.policy" [style="dotted"];
+		"email" -> "email.headerregistry" [style="dotted"];
+		"email" -> "email.contentmanager" [style="dotted"];
+		"email" -> "email.quoprimime" [style="dotted"];
+		"email" -> "email.base64mime" [style="dotted"];
+		"email" -> "email.encoders" [style="dotted"];
+		"email" -> "email._parseaddr" [style="dotted"];
+		"email" -> "email.feedparser" [style="dotted"];
 	}
 	subgraph "cluster_asyncio" {
 		label="asyncio";
@@ -1542,119 +1585,77 @@ charset="UTF-8";
 		"asyncio" -> "asyncio.unix_events" [style="dotted"];
 		"asyncio" -> "asyncio.log" [style="dotted"];
 	}
-	subgraph "cluster_charset_normalizer" {
-		label="charset_normalizer";
-		"charset_normalizer" -> "charset_normalizer.api" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.legacy" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.models" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.utils" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.version" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.constant" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.assets" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.md" [style="dotted"];
-		"charset_normalizer" -> "charset_normalizer.cd" [style="dotted"];
+	subgraph "cluster_lxml.html" {
+		label="lxml.html";
+		"lxml.html" -> "lxml.html.defs" [style="dotted"];
+		"lxml.html" -> "lxml.html._setmixin" [style="dotted"];
+		"lxml.html" -> "lxml.html.ElementSoup" [style="dotted"];
+		"lxml.html" -> "lxml.html._diffcommand" [style="dotted"];
+		"lxml.html" -> "lxml.html._html5builder" [style="dotted"];
+		"lxml.html" -> "lxml.html.builder" [style="dotted"];
+		"lxml.html" -> "lxml.html.clean" [style="dotted"];
+		"lxml.html" -> "lxml.html.diff" [style="dotted"];
+		"lxml.html" -> "lxml.html.formfill" [style="dotted"];
+		"lxml.html" -> "lxml.html.html5parser" [style="dotted"];
+		"lxml.html" -> "lxml.html.soupparser" [style="dotted"];
+		"lxml.html" -> "lxml.html.usedoctest" [style="dotted"];
+	}
+	subgraph "cluster_importlib.resources" {
+		label="importlib.resources";
+		"importlib.resources" -> "importlib.resources._common" [style="dotted"];
+		"importlib.resources" -> "importlib.resources._legacy" [style="dotted"];
+		"importlib.resources" -> "importlib.resources.abc" [style="dotted"];
+		"importlib.resources" -> "importlib.resources.readers" [style="dotted"];
+		"importlib.resources" -> "importlib.resources._adapters" [style="dotted"];
+		"importlib.resources" -> "importlib.resources._itertools" [style="dotted"];
 	}
 	subgraph "cluster_selenium.common" {
 		label="selenium.common";
 		"selenium.common" -> "selenium.common.exceptions" [style="dotted"];
-	}
-	subgraph "cluster_requests" {
-		label="requests";
-		"requests" -> "requests.exceptions" [style="dotted"];
-		"requests" -> "requests.packages" [style="dotted"];
-		"requests" -> "requests.certs" [style="dotted"];
-		"requests" -> "requests.utils" [style="dotted"];
-		"requests" -> "requests.__version__" [style="dotted"];
-		"requests" -> "requests.sessions" [style="dotted"];
-		"requests" -> "requests.api" [style="dotted"];
-		"requests" -> "requests.models" [style="dotted"];
-		"requests" -> "requests.status_codes" [style="dotted"];
-		"requests" -> "requests.structures" [style="dotted"];
-		"requests" -> "requests.compat" [style="dotted"];
-		"requests" -> "requests._internal_utils" [style="dotted"];
-		"requests" -> "requests.auth" [style="dotted"];
-		"requests" -> "requests.cookies" [style="dotted"];
-		"requests" -> "requests.hooks" [style="dotted"];
-		"requests" -> "requests.adapters" [style="dotted"];
-	}
-	subgraph "cluster_json" {
-		label="json";
-		"json" -> "json.scanner" [style="dotted"];
-		"json" -> "json.decoder" [style="dotted"];
-		"json" -> "json.encoder" [style="dotted"];
-	}
-	subgraph "cluster_jinja2" {
-		label="jinja2";
-		"jinja2" -> "jinja2.nodes" [style="dotted"];
-		"jinja2" -> "jinja2.bccache" [style="dotted"];
-		"jinja2" -> "jinja2.environment" [style="dotted"];
-		"jinja2" -> "jinja2.exceptions" [style="dotted"];
-		"jinja2" -> "jinja2.loaders" [style="dotted"];
-		"jinja2" -> "jinja2.runtime" [style="dotted"];
-		"jinja2" -> "jinja2.utils" [style="dotted"];
-		"jinja2" -> "jinja2.ext" [style="dotted"];
-		"jinja2" -> "jinja2.defaults" [style="dotted"];
-		"jinja2" -> "jinja2.lexer" [style="dotted"];
-		"jinja2" -> "jinja2.parser" [style="dotted"];
-		"jinja2" -> "jinja2._identifier" [style="dotted"];
-		"jinja2" -> "jinja2.filters" [style="dotted"];
-		"jinja2" -> "jinja2.tests" [style="dotted"];
-		"jinja2" -> "jinja2.async_utils" [style="dotted"];
-		"jinja2" -> "jinja2.sandbox" [style="dotted"];
-		"jinja2" -> "jinja2.constants" [style="dotted"];
-		"jinja2" -> "jinja2.compiler" [style="dotted"];
-		"jinja2" -> "jinja2.debug" [style="dotted"];
-		"jinja2" -> "jinja2.idtracking" [style="dotted"];
-		"jinja2" -> "jinja2.optimizer" [style="dotted"];
-		"jinja2" -> "jinja2.visitor" [style="dotted"];
-	}
-	subgraph "cluster_qt_material" {
-		label="qt_material";
-		"qt_material" -> "qt_material.resources" [style="dotted"];
 	}
 	"<PyiModuleGraph>" -> "gc" [];
 	"<PyiModuleGraph>" -> "time" [];
 	"<PyiModuleGraph>" -> "codecs" [];
 	"<PyiModuleGraph>" -> "posix" [];
 	"<PyiModuleGraph>" -> "posixpath" [];
+	"<PyiModuleGraph>" -> "_posixsubprocess" [];
 	"<PyiModuleGraph>" -> "_pickle" [];
 	"<PyiModuleGraph>" -> "_datetime" [];
 	"<PyiModuleGraph>" -> "datetime" [];
-	"<PyiModuleGraph>" -> "_posixsubprocess" [];
 	"<PyiModuleGraph>" -> "_sre" [];
-	"<PyiModuleGraph>" -> "operator" [];
-	"<PyiModuleGraph>" -> "_collections_abc" [];
+	"<PyiModuleGraph>" -> "traceback" [];
+	"<PyiModuleGraph>" -> "heapq" [];
 	"<PyiModuleGraph>" -> "enum" [];
+	"<PyiModuleGraph>" -> "sre_constants" [];
+	"<PyiModuleGraph>" -> "operator" [];
+	"<PyiModuleGraph>" -> "encodings" [];
+	"<PyiModuleGraph>" -> "stat" [];
+	"<PyiModuleGraph>" -> "token" [];
 	"<PyiModuleGraph>" -> "urllib" [];
 	"<PyiModuleGraph>" -> "_ssl" [];
-	"<PyiModuleGraph>" -> "types" [];
-	"<PyiModuleGraph>" -> "pathlib" [];
-	"<PyiModuleGraph>" -> "heapq" [];
-	"<PyiModuleGraph>" -> "weakref" [];
 	"<PyiModuleGraph>" -> "copyreg" [];
+	"<PyiModuleGraph>" -> "pathlib" [];
+	"<PyiModuleGraph>" -> "fnmatch" [];
+	"<PyiModuleGraph>" -> "re" [];
+	"<PyiModuleGraph>" -> "_collections_abc" [];
+	"<PyiModuleGraph>" -> "locale" [];
+	"<PyiModuleGraph>" -> "weakref" [];
+	"<PyiModuleGraph>" -> "functools" [];
+	"<PyiModuleGraph>" -> "abc" [];
 	"<PyiModuleGraph>" -> "sre_parse" [];
 	"<PyiModuleGraph>" -> "sre_compile" [];
-	"<PyiModuleGraph>" -> "warnings" [];
-	"<PyiModuleGraph>" -> "token" [];
-	"<PyiModuleGraph>" -> "ntpath" [];
 	"<PyiModuleGraph>" -> "keyword" [];
-	"<PyiModuleGraph>" -> "io" [];
-	"<PyiModuleGraph>" -> "tokenize" [];
-	"<PyiModuleGraph>" -> "abc" [];
-	"<PyiModuleGraph>" -> "traceback" [];
 	"<PyiModuleGraph>" -> "reprlib" [];
-	"<PyiModuleGraph>" -> "linecache" [];
-	"<PyiModuleGraph>" -> "encodings" [];
-	"<PyiModuleGraph>" -> "fnmatch" [];
 	"<PyiModuleGraph>" -> "genericpath" [];
-	"<PyiModuleGraph>" -> "os" [];
-	"<PyiModuleGraph>" -> "locale" [];
-	"<PyiModuleGraph>" -> "functools" [];
-	"<PyiModuleGraph>" -> "sre_constants" [];
-	"<PyiModuleGraph>" -> "stat" [];
-	"<PyiModuleGraph>" -> "collections" [];
-	"<PyiModuleGraph>" -> "re" [];
 	"<PyiModuleGraph>" -> "_weakrefset" [];
+	"<PyiModuleGraph>" -> "linecache" [];
+	"<PyiModuleGraph>" -> "types" [];
+	"<PyiModuleGraph>" -> "collections" [];
+	"<PyiModuleGraph>" -> "tokenize" [];
+	"<PyiModuleGraph>" -> "warnings" [];
+	"<PyiModuleGraph>" -> "io" [];
+	"<PyiModuleGraph>" -> "ntpath" [];
+	"<PyiModuleGraph>" -> "os" [];
 	"<PyiModuleGraph>" -> "/Users/meizhenchen/Desktop/Project/Fish/main.py" [];
 	"<PyiModuleGraph>" -> "queue" [];
 	"<PyiModuleGraph>" -> "'urllib3.packages.six.moves.urllib'" [];
@@ -1820,7 +1821,7 @@ charset="UTF-8";
 	"pickle" -> "codecs" [];
 	"pickle" -> "_compat_pickle" [];
 	"pickle" -> "_pickle" [];
-	"pickle" -> "org" [];
+	"pickle" -> "'org.python'" [];
 	"pickle" -> "pprint" [];
 	"pprint" -> "collections" [];
 	"pprint" -> "dataclasses" [];
@@ -1894,7 +1895,7 @@ charset="UTF-8";
 	"copy" -> "types" [];
 	"copy" -> "weakref" [];
 	"copy" -> "copyreg" [];
-	"copy" -> "'org.python'" [];
+	"copy" -> "org" [];
 	"struct" -> "_struct" [];
 	"threading" -> "os" [];
 	"threading" -> "sys" [];
@@ -2154,40 +2155,40 @@ charset="UTF-8";
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "bs4" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "qt_material" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "mainwindow" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "operator" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "_collections_abc" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "codecs" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "enum" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "urllib" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "types" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "posixpath" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "pathlib" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "traceback" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "heapq" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "weakref" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "enum" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "sre_constants" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "operator" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "encodings" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "stat" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "posixpath" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "token" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "urllib" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "copyreg" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "pathlib" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "fnmatch" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "re" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "_collections_abc" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "locale" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "codecs" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "weakref" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "functools" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "abc" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "sre_parse" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "sre_compile" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "warnings" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "token" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "ntpath" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "keyword" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "io" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "tokenize" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "abc" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "traceback" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "reprlib" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "linecache" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "encodings" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "fnmatch" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "genericpath" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "os" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "locale" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "functools" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "sre_constants" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "stat" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "collections" [];
-	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "re" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "_weakrefset" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "linecache" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "types" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "collections" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "tokenize" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "warnings" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "io" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "ntpath" [];
+	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "os" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_subprocess.py" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_inspect.py" [];
 	"/Users/meizhenchen/Desktop/Project/Fish/main.py" -> "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pyside6.py" [];
@@ -3538,48 +3539,6 @@ charset="UTF-8";
 	"plistlib" -> "os" [];
 	"plistlib" -> "re" [];
 	"plistlib" -> "struct" [];
-	"_weakrefset" -> "_weakref" [];
-	"_weakrefset" -> "types" [];
-	"re._parser" -> "warnings" [];
-	"re._parser" -> "unicodedata" [];
-	"re._constants" -> "_sre" [];
-	"re._compiler" -> "_sre" [];
-	"re._compiler" -> "sys" [];
-	"re" -> "enum" [];
-	"re" -> "functools" [];
-	"re" -> "warnings" [];
-	"re" -> "copyreg" [];
-	"collections.abc" -> "_collections_abc" [];
-	"collections" -> "_collections_abc" [];
-	"collections" -> "sys" [];
-	"collections" -> "itertools" [];
-	"collections" -> "keyword" [];
-	"collections" -> "operator" [];
-	"collections" -> "reprlib" [];
-	"collections" -> "_weakref" [];
-	"collections" -> "_collections" [];
-	"collections" -> "heapq" [];
-	"collections" -> "copy" [];
-	"stat" -> "_stat" [];
-	"sre_constants" -> "warnings" [];
-	"sre_constants" -> "re" [];
-	"functools" -> "abc" [];
-	"functools" -> "collections" [];
-	"functools" -> "reprlib" [];
-	"functools" -> "_thread" [];
-	"functools" -> "types" [];
-	"functools" -> "_functools" [];
-	"functools" -> "weakref" [];
-	"functools" -> "typing" [];
-	"locale" -> "sys" [];
-	"locale" -> "encodings" [];
-	"locale" -> "re" [];
-	"locale" -> "_collections_abc" [];
-	"locale" -> "builtins" [];
-	"locale" -> "functools" [];
-	"locale" -> "_locale" [];
-	"locale" -> "warnings" [];
-	"locale" -> "os" [];
 	"os" -> "abc" [];
 	"os" -> "sys" [];
 	"os" -> "stat" [];
@@ -3592,12 +3551,179 @@ charset="UTF-8";
 	"os" -> "warnings" [];
 	"os" -> "subprocess" [];
 	"os" -> "io" [];
+	"ntpath" -> "os" [];
+	"ntpath" -> "sys" [];
+	"ntpath" -> "stat" [];
+	"ntpath" -> "genericpath" [];
+	"ntpath" -> "_winapi" [];
+	"ntpath" -> "nt" [];
+	"ntpath" -> "string" [];
+	"io" -> "_io" [];
+	"io" -> "abc" [];
+	"io" -> "warnings" [];
+	"warnings" -> "sys" [];
+	"warnings" -> "linecache" [];
+	"warnings" -> "tracemalloc" [];
+	"warnings" -> "re" [];
+	"warnings" -> "builtins" [];
+	"warnings" -> "traceback" [];
+	"warnings" -> "_warnings" [];
+	"tracemalloc" -> "functools" [];
+	"tracemalloc" -> "fnmatch" [];
+	"tracemalloc" -> "linecache" [];
+	"tracemalloc" -> "os.path" [];
+	"tracemalloc" -> "pickle" [];
+	"tracemalloc" -> "_tracemalloc" [];
+	"tokenize" -> "builtins" [];
+	"tokenize" -> "codecs" [];
+	"tokenize" -> "collections" [];
+	"tokenize" -> "functools" [];
+	"tokenize" -> "io" [];
+	"tokenize" -> "itertools" [];
+	"tokenize" -> "re" [];
+	"tokenize" -> "sys" [];
+	"tokenize" -> "token" [];
+	"tokenize" -> "argparse" [];
+	"tokenize" -> "_tokenize" [];
+	"collections.abc" -> "_collections_abc" [];
+	"collections" -> "_collections_abc" [];
+	"collections" -> "sys" [];
+	"collections" -> "itertools" [];
+	"collections" -> "keyword" [];
+	"collections" -> "operator" [];
+	"collections" -> "reprlib" [];
+	"collections" -> "_weakref" [];
+	"collections" -> "_collections" [];
+	"collections" -> "heapq" [];
+	"collections" -> "copy" [];
+	"types" -> "sys" [];
+	"types" -> "functools" [];
+	"types" -> "_collections_abc" [];
+	"linecache" -> "functools" [];
+	"linecache" -> "sys" [];
+	"linecache" -> "os" [];
+	"linecache" -> "tokenize" [];
+	"_weakrefset" -> "_weakref" [];
+	"_weakrefset" -> "types" [];
 	"genericpath" -> "os" [];
 	"genericpath" -> "stat" [];
+	"reprlib" -> "builtins" [];
+	"reprlib" -> "itertools" [];
+	"reprlib" -> "_thread" [];
+	"sre_compile" -> "warnings" [];
+	"sre_compile" -> "re" [];
+	"sre_parse" -> "warnings" [];
+	"sre_parse" -> "re" [];
+	"abc" -> "_abc" [];
+	"abc" -> "_py_abc" [];
+	"_py_abc" -> "_weakrefset" [];
+	"functools" -> "abc" [];
+	"functools" -> "collections" [];
+	"functools" -> "reprlib" [];
+	"functools" -> "_thread" [];
+	"functools" -> "types" [];
+	"functools" -> "_functools" [];
+	"functools" -> "weakref" [];
+	"functools" -> "typing" [];
+	"weakref" -> "_weakref" [];
+	"weakref" -> "_weakrefset" [];
+	"weakref" -> "_collections_abc" [];
+	"weakref" -> "sys" [];
+	"weakref" -> "itertools" [];
+	"weakref" -> "copy" [];
+	"weakref" -> "atexit" [];
+	"weakref" -> "gc" [];
+	"locale" -> "sys" [];
+	"locale" -> "encodings" [];
+	"locale" -> "re" [];
+	"locale" -> "_collections_abc" [];
+	"locale" -> "builtins" [];
+	"locale" -> "functools" [];
+	"locale" -> "_locale" [];
+	"locale" -> "warnings" [];
+	"locale" -> "os" [];
+	"_collections_abc" -> "abc" [];
+	"_collections_abc" -> "sys" [];
+	"re._parser" -> "warnings" [];
+	"re._parser" -> "unicodedata" [];
+	"re._constants" -> "_sre" [];
+	"re._compiler" -> "_sre" [];
+	"re._compiler" -> "sys" [];
+	"re" -> "enum" [];
+	"re" -> "functools" [];
+	"re" -> "warnings" [];
+	"re" -> "copyreg" [];
 	"fnmatch" -> "os" [];
 	"fnmatch" -> "posixpath" [];
 	"fnmatch" -> "re" [];
 	"fnmatch" -> "functools" [];
+	"pathlib" -> "fnmatch" [];
+	"pathlib" -> "functools" [];
+	"pathlib" -> "io" [];
+	"pathlib" -> "ntpath" [];
+	"pathlib" -> "os" [];
+	"pathlib" -> "posixpath" [];
+	"pathlib" -> "re" [];
+	"pathlib" -> "sys" [];
+	"pathlib" -> "warnings" [];
+	"pathlib" -> "_collections_abc" [];
+	"pathlib" -> "errno" [];
+	"pathlib" -> "operator" [];
+	"pathlib" -> "stat" [];
+	"pathlib" -> "pwd" [];
+	"pathlib" -> "grp" [];
+	"copyreg" -> "functools" [];
+	"copyreg" -> "operator" [];
+	"urllib.robotparser" -> "collections" [];
+	"urllib.robotparser" -> "time" [];
+	"urllib.response" -> "tempfile" [];
+	"urllib.request" -> "base64" [];
+	"urllib.request" -> "bisect" [];
+	"urllib.request" -> "email" [];
+	"urllib.request" -> "hashlib" [];
+	"urllib.request" -> "io" [];
+	"urllib.request" -> "os" [];
+	"urllib.request" -> "posixpath" [];
+	"urllib.request" -> "re" [];
+	"urllib.request" -> "socket" [];
+	"urllib.request" -> "string" [];
+	"urllib.request" -> "sys" [];
+	"urllib.request" -> "time" [];
+	"urllib.request" -> "tempfile" [];
+	"urllib.request" -> "contextlib" [];
+	"urllib.request" -> "warnings" [];
+	"urllib.request" -> "ssl" [];
+	"urllib.request" -> "mimetypes" [];
+	"urllib.request" -> "ftplib" [];
+	"urllib.request" -> "nturl2path" [];
+	"urllib.request" -> "getpass" [];
+	"urllib.request" -> "fnmatch" [];
+	"urllib.request" -> "_scproxy" [];
+	"urllib.request" -> "winreg" [];
+	"getpass" -> "contextlib" [];
+	"getpass" -> "io" [];
+	"getpass" -> "os" [];
+	"getpass" -> "sys" [];
+	"getpass" -> "warnings" [];
+	"getpass" -> "pwd" [];
+	"getpass" -> "termios" [];
+	"getpass" -> "msvcrt" [];
+	"nturl2path" -> "string" [];
+	"ftplib" -> "sys" [];
+	"ftplib" -> "socket" [];
+	"ftplib" -> "ssl" [];
+	"ftplib" -> "warnings" [];
+	"ftplib" -> "re" [];
+	"ftplib" -> "netrc" [];
+	"_ssl" -> "socket" [];
+	"urllib.parse" -> "collections" [];
+	"urllib.parse" -> "functools" [];
+	"urllib.parse" -> "re" [];
+	"urllib.parse" -> "sys" [];
+	"urllib.parse" -> "types" [];
+	"urllib.parse" -> "warnings" [];
+	"urllib.parse" -> "unicodedata" [];
+	"stat" -> "_stat" [];
 	"encodings.zlib_codec" -> "codecs" [];
 	"encodings.zlib_codec" -> "zlib" [];
 	"encodings.uu_codec" -> "codecs" [];
@@ -3784,152 +3910,26 @@ charset="UTF-8";
 	"encodings" -> "codecs" [];
 	"encodings" -> "sys" [];
 	"encodings" -> "_winapi" [];
-	"linecache" -> "functools" [];
-	"linecache" -> "sys" [];
-	"linecache" -> "os" [];
-	"linecache" -> "tokenize" [];
-	"reprlib" -> "builtins" [];
-	"reprlib" -> "itertools" [];
-	"reprlib" -> "_thread" [];
-	"traceback" -> "itertools" [];
-	"traceback" -> "linecache" [];
-	"traceback" -> "sys" [];
-	"traceback" -> "textwrap" [];
-	"traceback" -> "contextlib" [];
-	"traceback" -> "ast" [];
-	"abc" -> "_abc" [];
-	"abc" -> "_py_abc" [];
-	"_py_abc" -> "_weakrefset" [];
-	"tokenize" -> "builtins" [];
-	"tokenize" -> "codecs" [];
-	"tokenize" -> "collections" [];
-	"tokenize" -> "functools" [];
-	"tokenize" -> "io" [];
-	"tokenize" -> "itertools" [];
-	"tokenize" -> "re" [];
-	"tokenize" -> "sys" [];
-	"tokenize" -> "token" [];
-	"tokenize" -> "argparse" [];
-	"tokenize" -> "_tokenize" [];
-	"io" -> "_io" [];
-	"io" -> "abc" [];
-	"io" -> "warnings" [];
-	"ntpath" -> "os" [];
-	"ntpath" -> "sys" [];
-	"ntpath" -> "stat" [];
-	"ntpath" -> "genericpath" [];
-	"ntpath" -> "_winapi" [];
-	"ntpath" -> "nt" [];
-	"ntpath" -> "string" [];
-	"warnings" -> "sys" [];
-	"warnings" -> "linecache" [];
-	"warnings" -> "tracemalloc" [];
-	"warnings" -> "re" [];
-	"warnings" -> "builtins" [];
-	"warnings" -> "traceback" [];
-	"warnings" -> "_warnings" [];
-	"tracemalloc" -> "functools" [];
-	"tracemalloc" -> "fnmatch" [];
-	"tracemalloc" -> "linecache" [];
-	"tracemalloc" -> "os.path" [];
-	"tracemalloc" -> "pickle" [];
-	"tracemalloc" -> "_tracemalloc" [];
-	"sre_compile" -> "warnings" [];
-	"sre_compile" -> "re" [];
-	"sre_parse" -> "warnings" [];
-	"sre_parse" -> "re" [];
-	"copyreg" -> "functools" [];
-	"copyreg" -> "operator" [];
-	"weakref" -> "_weakref" [];
-	"weakref" -> "_weakrefset" [];
-	"weakref" -> "_collections_abc" [];
-	"weakref" -> "sys" [];
-	"weakref" -> "itertools" [];
-	"weakref" -> "copy" [];
-	"weakref" -> "atexit" [];
-	"weakref" -> "gc" [];
-	"heapq" -> "_heapq" [];
-	"pathlib" -> "fnmatch" [];
-	"pathlib" -> "functools" [];
-	"pathlib" -> "io" [];
-	"pathlib" -> "ntpath" [];
-	"pathlib" -> "os" [];
-	"pathlib" -> "posixpath" [];
-	"pathlib" -> "re" [];
-	"pathlib" -> "sys" [];
-	"pathlib" -> "warnings" [];
-	"pathlib" -> "_collections_abc" [];
-	"pathlib" -> "errno" [];
-	"pathlib" -> "operator" [];
-	"pathlib" -> "stat" [];
-	"pathlib" -> "pwd" [];
-	"pathlib" -> "grp" [];
-	"types" -> "sys" [];
-	"types" -> "functools" [];
-	"types" -> "_collections_abc" [];
-	"urllib.robotparser" -> "collections" [];
-	"urllib.robotparser" -> "time" [];
-	"urllib.response" -> "tempfile" [];
-	"urllib.request" -> "base64" [];
-	"urllib.request" -> "bisect" [];
-	"urllib.request" -> "email" [];
-	"urllib.request" -> "hashlib" [];
-	"urllib.request" -> "io" [];
-	"urllib.request" -> "os" [];
-	"urllib.request" -> "posixpath" [];
-	"urllib.request" -> "re" [];
-	"urllib.request" -> "socket" [];
-	"urllib.request" -> "string" [];
-	"urllib.request" -> "sys" [];
-	"urllib.request" -> "time" [];
-	"urllib.request" -> "tempfile" [];
-	"urllib.request" -> "contextlib" [];
-	"urllib.request" -> "warnings" [];
-	"urllib.request" -> "ssl" [];
-	"urllib.request" -> "mimetypes" [];
-	"urllib.request" -> "ftplib" [];
-	"urllib.request" -> "nturl2path" [];
-	"urllib.request" -> "getpass" [];
-	"urllib.request" -> "fnmatch" [];
-	"urllib.request" -> "_scproxy" [];
-	"urllib.request" -> "winreg" [];
-	"getpass" -> "contextlib" [];
-	"getpass" -> "io" [];
-	"getpass" -> "os" [];
-	"getpass" -> "sys" [];
-	"getpass" -> "warnings" [];
-	"getpass" -> "pwd" [];
-	"getpass" -> "termios" [];
-	"getpass" -> "msvcrt" [];
-	"nturl2path" -> "string" [];
-	"ftplib" -> "sys" [];
-	"ftplib" -> "socket" [];
-	"ftplib" -> "ssl" [];
-	"ftplib" -> "warnings" [];
-	"ftplib" -> "re" [];
-	"ftplib" -> "netrc" [];
-	"_ssl" -> "socket" [];
-	"urllib.parse" -> "collections" [];
-	"urllib.parse" -> "functools" [];
-	"urllib.parse" -> "re" [];
-	"urllib.parse" -> "sys" [];
-	"urllib.parse" -> "types" [];
-	"urllib.parse" -> "warnings" [];
-	"urllib.parse" -> "unicodedata" [];
+	"operator" -> "builtins" [];
+	"operator" -> "functools" [];
+	"operator" -> "_operator" [];
+	"sre_constants" -> "warnings" [];
+	"sre_constants" -> "re" [];
 	"enum" -> "sys" [];
 	"enum" -> "builtins" [];
 	"enum" -> "types" [];
 	"enum" -> "operator" [];
 	"enum" -> "functools" [];
 	"enum" -> "warnings" [];
-	"_collections_abc" -> "abc" [];
-	"_collections_abc" -> "sys" [];
-	"operator" -> "builtins" [];
-	"operator" -> "functools" [];
-	"operator" -> "_operator" [];
+	"heapq" -> "_heapq" [];
+	"traceback" -> "itertools" [];
+	"traceback" -> "linecache" [];
+	"traceback" -> "sys" [];
+	"traceback" -> "textwrap" [];
+	"traceback" -> "contextlib" [];
+	"traceback" -> "ast" [];
 	"_sre" -> "copy" [];
 	"_sre" -> "re" [];
-	"_posixsubprocess" -> "gc" [];
 	"datetime" -> "time" [];
 	"datetime" -> "math" [];
 	"datetime" -> "sys" [];
@@ -3947,6 +3947,7 @@ charset="UTF-8";
 	"_pickle" -> "codecs" [];
 	"_pickle" -> "copyreg" [];
 	"_pickle" -> "_compat_pickle" [];
+	"_posixsubprocess" -> "gc" [];
 	"posixpath" -> "os" [];
 	"posixpath" -> "sys" [];
 	"posixpath" -> "stat" [];
@@ -4034,11 +4035,11 @@ charset="UTF-8";
 	"requests.compat" -> "urllib" [];
 	"http.cookiejar" -> "urllib" [];
 	"requests.models" -> "encodings" [];
-	"traceback" -> "collections" [];
 	"tracemalloc" -> "collections" [];
 	"pathlib" -> "urllib" [];
 	"urllib.request" -> "http" [];
 	"nturl2path" -> "urllib" [];
+	"traceback" -> "collections" [];
 	"qt_material" -> "xml" [];
 	"selenium.webdriver.wpewebkit.service" -> "selenium" [];
 	"selenium.webdriver.common.selenium_manager" -> "selenium" [];

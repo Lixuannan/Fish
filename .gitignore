@@ -1,0 +1,5 @@
+/build/
+/dist/
+/mac-dmg/
+/test/
+chromedriver
