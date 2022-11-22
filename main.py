@@ -23,6 +23,12 @@ PYTHONFAULTHANDLER = 1
 faulthandler.enable()
 
 
+# 定义测评记录类
+class RecordData:
+    def __init__(self, pName: str, url: str):
+        self.pName = pName
+        self.url = url
+
 # 定义一个用来存储截取需求的类
 class SnapshotReq:
     def __init__(self, url: str, filename: str):
@@ -74,9 +80,9 @@ class Main(Ui_MainWindow, QObject):
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
         }
-        self.login_session = None
-        self.chrome_option = None
-        self.login_driver = None
+        self.login_session: requests.Session
+        self.chrome_option: selenium.webdriver.ChromeOptions
+        self.login_driver: selenium.webdriver.Chrome
 
     # 将信号连接到槽
     def setupSignal(self):
@@ -263,10 +269,9 @@ class Main(Ui_MainWindow, QObject):
     def get_record(self, pName: str):
         self.progress += 1
         self.update_progress()
-        session = self.login_session
         self.info(f"为 {pName} 获取测评记录")
         # 爬评测记录界面
-        problem_page = session.get(url=f"http://oiclass.com/p/{pName}/").text
+        problem_page = self.login_session.get(url=f"http://oiclass.com/p/{pName}/").text
         self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
                                               f"{self.path}/{pName}.png"))
         soup = BeautifulSoup(features="lxml", markup=problem_page)
@@ -280,7 +285,7 @@ class Main(Ui_MainWindow, QObject):
         record = ""
         # 爬取测评记录
         try:
-            record = session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
+            record = self.login_session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
         except requests.exceptions.ConnectionError:
             self.error(
                 "无法连接到 " + f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1")
@@ -288,45 +293,31 @@ class Main(Ui_MainWindow, QObject):
         a = soup.find_all(name="a", class_="record-status--text pass")
         if a:
             # 保存最近的一次 AC 记录的 URL
-            self.records.append(a[0]["href"])
+            self.records.append(RecordData(pName=pName, url=a[0]["href"]))
             self.info(f"测评记录: http://oiclass.com{a[0]['href']}")
         else:
             self.warning("无法以本模式获得测评记录, 尝试另一种模式")
             self.retry_by_old_way(idx)
 
-    # 从测评记录中获得代码
-    def get_code(self, record):
+    # 从测评记录中获得代码;
+    def get_code(self, record_data: RecordData):
+        print(str(type(record_data)))
         # 更新进度条
         self.progress += 1
         self.update_progress()
-        session = self.login_session
-        self.info(f"正在为测评记录 {record} 生成代码")
+        self.info(f"正在为测评记录 {record_data.url} 生成代码")
         b = []
-        code = ""
-        # 爬页面
-        record_page = session.get(url=record, headers=self.headers).text
-        if not ("Oops" in record_page):
-            # 如果 OJ 报错了，就退出
-            code = BeautifulSoup(record_page, "lxml").find("code").contents[0].text
-        else:
-            self.error("无法访问页面：" + record)
-        if BeautifulSoup(record_page, "lxml"):
-            b = BeautifulSoup(record_page, "lxml").find_all("b")
-        for j in b:
-            if "P" in j.text:
-                b = j.text
-                break
+        code = self.login_session.get(url=record_data.url + "?download=true", headers=self.headers).content.decode("utf-8")
         if code:
-            with open(self.path + "/" + b + ".cpp", "wt") as file:
+            with open(self.path + "/" + record_data.pName + ".cpp", "wt") as file:
                 file.write(f"// Created in {time.asctime(time.localtime(time.time()))}\n"
                            f"// System: {platform.platform()}\n// Python Version: {platform.python_version()}\n{code}")
         return code
 
     # 老方法：用题目页面显示出的记录进行代码的保存，这种方法可能导致存储的是你的一次提交时抄的题解（doge）
     def retry_by_old_way(self, pName):
-        session = self.login_session
         driver = self.login_driver
-        record = BeautifulSoup(markup=session.get("http://oiclass.com/p/" + str(pName)).text,
+        record = BeautifulSoup(markup=self.login_session.get("http://oiclass.com/p/" + str(pName)).text,
                                features="lxml").find_all(name="a", class_="")
         for j in record:
             if "/record/" in j["href"]:
@@ -336,7 +327,7 @@ class Main(Ui_MainWindow, QObject):
             self.error(f"问题 {pName} 从来都没有被提交过，详情: http://oiclass.com/p/{pName}/")
             return 0
         self.info(f"尝试以提交题目： {pName} ")
-        code = self.get_code("http://oiclass.com" + record)
+        code = self.get_code(RecordData(pName=pName, url=self.oj_url.text() + record))
         try:
             driver.get("http://oiclass.com/p/" + pName + "/submit/")
             js = r'var x = document.getElementsByClassNam' \
@@ -349,10 +340,8 @@ class Main(Ui_MainWindow, QObject):
 
     # 获取所有 AC 过的题目
     def get_problems(self):
-        # 复制一份局部的 driver 避免全局变量导致数据错乱
-        session = self.login_session
         # 爬取个人简页页面
-        page = session.get(url=f"http://oiclass.com/user/{self.uid}").text
+        page = self.login_session.get(url=f"http://oiclass.com/user/{self.uid}").text
         soup = BeautifulSoup(markup=page, features="lxml")
         problems = soup.find_all(name="a")  # 筛选所有 a 标签（不知道什么是 a 标签的去学前端）
         # 获得目录下所有保存过的题目
