@@ -29,6 +29,7 @@ class RecordData:
         self.pName = pName
         self.url = url
 
+
 # 定义一个用来存储截取需求的类
 class SnapshotReq:
     def __init__(self, url: str, filename: str):
@@ -42,9 +43,9 @@ class Main(Ui_MainWindow, QObject):
     update_signal = Signal()
     add_log = Signal()
 
-    def __init__(self, Mainwindow):
+    def __init__(self, main_window):
         # 将窗口实现
-        self.setupUi(Mainwindow)
+        self.setupUi(main_window)
         # 实现 QObject 类
         super(Main, self).__init__()
         # 定义一大堆变量，基本顾名思义
@@ -270,7 +271,7 @@ class Main(Ui_MainWindow, QObject):
         self.progress += 1
         self.update_progress()
         self.info(f"为 {pName} 获取测评记录")
-        # 爬评测记录界面
+        # 爬题目页面
         problem_page = self.login_session.get(url=f"http://oiclass.com/p/{pName}/").text
         self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
                                               f"{self.path}/{pName}.png"))
@@ -306,8 +307,8 @@ class Main(Ui_MainWindow, QObject):
         self.progress += 1
         self.update_progress()
         self.info(f"正在为测评记录 {record_data.url} 生成代码")
-        b = []
-        code = self.login_session.get(url=record_data.url + "?download=true", headers=self.headers).content.decode("utf-8")
+        code = self.login_session.get(url=record_data.url + "?download=true", headers=self.headers)\
+            .content.decode("utf-8")
         if code:
             with open(self.path + "/" + record_data.pName + ".cpp", "wt") as file:
                 file.write(f"// Created in {time.asctime(time.localtime(time.time()))}\n"
