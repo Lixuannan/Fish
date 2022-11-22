@@ -166,7 +166,7 @@ class Main(Ui_MainWindow, QObject):
         self.info("正在从所有测评记录中提取AC代码")
 
         for i in self.records:
-            self.get_code("http://oiclass.com" + i)
+            self.get_code(i)
 
         if not self.do_not_save_snapshots.isChecked():
             self.info("正在获得题目的截图")
@@ -210,7 +210,7 @@ class Main(Ui_MainWindow, QObject):
     def cancel(self):
         self.start_button.setText("开始")
         self.start_button.clicked.connect(self.create_main)
-        sys.exit(0)
+        os._exit(0)
 
     # 推送到远程代码仓库，还没实现
     def push2remote(self):
@@ -293,15 +293,15 @@ class Main(Ui_MainWindow, QObject):
         a = soup.find_all(name="a", class_="record-status--text pass")
         if a:
             # 保存最近的一次 AC 记录的 URL
-            self.records.append(RecordData(pName=pName, url=a[0]["href"]))
+            self.records.append(RecordData(pName=pName, url=self.oj_url.text() + a[0]["href"]))
             self.info(f"测评记录: http://oiclass.com{a[0]['href']}")
         else:
             self.warning("无法以本模式获得测评记录, 尝试另一种模式")
-            self.retry_by_old_way(idx)
+            self.retry_by_old_way(pName)
 
     # 从测评记录中获得代码;
     def get_code(self, record_data: RecordData):
-        print(str(type(record_data)))
+        # print(str(type(record_data)))
         # 更新进度条
         self.progress += 1
         self.update_progress()
