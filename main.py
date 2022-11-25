@@ -24,6 +24,9 @@ from mainwindow import Ui_MainWindow
 PYTHONFAULTHANDLER = 1
 faulthandler.enable()
 
+# const
+VERSION = "0.1.0"
+
 
 # 定义测评记录类
 class RecordData:
@@ -309,7 +312,9 @@ class Main(Ui_MainWindow, QObject):
         if code:
             with open(self.path + "/" + record_data.pName + ".cpp", "wt") as file:
                 file.write(f"// Created in {time.asctime(time.localtime(time.time()))}\n"
-                           f"// System: {platform.platform()}\n// Python Version: {platform.python_version()}\n{code}")
+                           f"// System: {platform.platform()}\n"
+                           f"// Python Version: {platform.python_version()}\n"
+                           f"// Fish Version: {VERSION}\n{code}")
         return code
 
     # 老方法：用题目页面显示出的记录进行代码的保存，这种方法可能导致存储的是你的一次提交时抄的题解（doge）
