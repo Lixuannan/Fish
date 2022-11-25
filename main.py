@@ -248,7 +248,7 @@ class Main(Ui_MainWindow, QObject):
                     self.info(f"Reading file {j}")
                     # file.write(f"## {str(j).split('.')[0]}:\n![](https://github.com/Lixuannan/oiclass-answers/"
                     #            f"raw/main/{str(j).split('.')[0]}.png)\n```cpp\n\n{fi.read()}\n```\n")
-                    file.write(f"## {str(j).split('.')[0]}:\n![]({self.path}/{j})\n```cpp\n\n{fi.read()}\n```\n")
+                    file.write(f"## {str(j).split('.')[0]}:\n![]({str(j).split('.')[0]}.png)\n```cpp\n\n{fi.read()}\n```\n")
 
         file.close()
         self.info("完成 README.md 文件生成")
