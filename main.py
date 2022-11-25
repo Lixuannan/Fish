@@ -5,12 +5,14 @@ import os.path
 import platform
 import time
 import sys
+import queue
 
 import requests
 import pygit2
 import _cffi_backend
 import selenium.webdriver
 from PySide6.QtCore import Signal, QObject
+from selenium.webdriver.chrome.service import Service
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from bs4 import BeautifulSoup
 from qt_material import apply_stylesheet
@@ -49,6 +51,7 @@ class Main(Ui_MainWindow, QObject):
         # 实现 QObject 类
         super(Main, self).__init__()
         # 定义一大堆变量，基本顾名思义
+        self.log_queue = queue.Queue(1)
         self.git_config = None
         self.main_thr = None
         self.git_obj = None
@@ -60,7 +63,6 @@ class Main(Ui_MainWindow, QObject):
         self.start = 0.0
         self.end = 0.0
         self.uid = 8241
-        self.log_str = ""
         self.git_url = ""
         self.git_username = ""
         self.git_password = ""
@@ -91,7 +93,7 @@ class Main(Ui_MainWindow, QObject):
         self.start_button.clicked.connect(self.create_main)
         self.push_to_remote.stateChanged.connect(self.set_state)
         self.update_signal.connect(lambda: self.progressBar.setValue(self.progress * 100 // self.total_progress))
-        self.add_log.connect(lambda: self.log.append(self.log_str))
+        self.add_log.connect(lambda: self.log.append(self.log_queue.get()))
 
     # 创建主算法线程
     def create_main(self):
@@ -135,7 +137,7 @@ class Main(Ui_MainWindow, QObject):
         self.chrome_option.page_load_strategy = "eager"  # 将加载模式设置为"能用就好"而不是要等到加载完所有资源后才进行操作，节省时间
         self.chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])  # 不告诉网站"我是模拟器"
         self.login_driver = selenium.webdriver\
-            .Chrome(options=self.chrome_option)
+            .Chrome(options=self.chrome_option, service=Service(executable_path="./chromedriver"))
         self.login_session = requests.sessions.Session()
         # 简单登陆一下 session 和 driver
         self.login_session.post("http://oiclass.com/login", headers=self.headers, data=self.data)
@@ -163,7 +165,6 @@ class Main(Ui_MainWindow, QObject):
         for i in self.ac_problems:
             self.get_record(pName=i)
 
-        self.info(f"所有测评记录： {self.records}\nTotal: {len(self.records)}")
         self.info("正在从所有测评记录中提取AC代码")
 
         for i in self.records:
@@ -271,22 +272,10 @@ class Main(Ui_MainWindow, QObject):
         self.progress += 1
         self.update_progress()
         self.info(f"为 {pName} 获取测评记录")
-        # 爬题目页面
-        problem_page = self.login_session.get(url=f"http://oiclass.com/p/{pName}/").text
-        self.snapshot_reqs.append(SnapshotReq(f"http://oiclass.com/p/{pName}/",
-                                              f"{self.path}/{pName}.png"))
-        soup = BeautifulSoup(features="lxml", markup=problem_page)
-        idx = soup.find_all(name="span", class_="bp4-tag bp4-large bp4-minimal problem__tag-item")
-        for j in idx:
-            if "ID" in j.text:
-                # 获取题目的 PID （PID：详见 Hydro 官方的描述）
-                idx = j.text.split(" ")[1]
-                break
-        self.info(f"题目PID: {idx}")
         record = ""
         # 爬取测评记录
         try:
-            record = self.login_session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1").text
+            record = self.login_session.get(url=f"http://oiclass.com/record?uidOrName=8241&pid={pName}&status=1").text
         except requests.exceptions.ConnectionError:
             self.error(
                 "无法连接到 " + f"http://oiclass.com/record?uidOrName=8241&pid={idx}&status=1")
@@ -307,8 +296,16 @@ class Main(Ui_MainWindow, QObject):
         self.progress += 1
         self.update_progress()
         self.info(f"正在为测评记录 {record_data.url} 生成代码")
-        code = self.login_session.get(url=record_data.url + "?download=true", headers=self.headers)\
-            .content.decode("utf-8")
+        code = ""
+        try:
+            code = self.login_session.get(url=record_data.url + "?download=true", headers=self.headers) \
+                .content.decode("utf-8")
+        except requests.exceptions.ConnectionError:
+            time.sleep(3)
+            return self.get_code(record_data)
+        if "<!DOCTYPE html>" in code:
+            time.sleep(3)
+            return self.get_code(record_data)
         if code:
             with open(self.path + "/" + record_data.pName + ".cpp", "wt") as file:
                 file.write(f"// Created in {time.asctime(time.localtime(time.time()))}\n"
@@ -373,22 +370,22 @@ class Main(Ui_MainWindow, QObject):
     # 一大堆日志，随便写的，请吐槽
     def info(self, msg):
         logging.info(msg)
-        self.log_str = "[信息] " + msg
+        self.log_queue.put("[信息] " + msg)
         self.add_log.emit()
 
     def warning(self, msg):
         logging.warning(msg)
-        self.log_str = "[警告] " + msg
+        self.log_queue.put("[警告] " + msg)
         self.add_log.emit()
 
     def error(self, msg):
         logging.error(msg)
-        self.log_str = "[错误] " + msg
+        self.log_queue.put("[错误] " + msg)
         self.add_log.emit()
 
     def critical(self, msg):
         logging.critical(msg)
-        self.log_str = "[最重要信息] " + msg
+        self.log_queue.put("[最重要信息] " + msg)
         self.add_log.emit()
 
 
